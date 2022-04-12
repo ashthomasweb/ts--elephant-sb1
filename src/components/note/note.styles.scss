@@ -1,0 +1,31 @@
+// new-note-styles.scss
+
+// .new-note {
+//     width: 450px;
+//     height: 300px;
+//     position: absolute;
+//     /* border-radius: 0.5rem; */
+//     /* box-shadow: 0 0 0 50px rgba(0, 0, 0, 0.5); */
+//     background-color: rgba(0, 0, 0, 0.5);
+//     opacity: 1;
+//     cursor: grab;
+// }
+
+
+.draggable-overlay {
+    width: 20%;
+    height: 20%;
+    padding: 15px;
+    // aspect-ratio: 1 / 1.42;
+    position: absolute;
+    border-radius: 0.5rem;
+    // box-shadow: 5px 5px 10px 50px rgba(0, 0, 0, 0.1);
+    // background-color: rgba(0, 0, 0, 0.5);
+    background-color: lightblue;
+
+    opacity: 1;
+    // transition: opacity 200ms ease;
+    cursor: grab;
+  }
+
+  

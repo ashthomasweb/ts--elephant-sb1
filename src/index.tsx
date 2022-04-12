@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import MainState from './context/main/MainState';
 
 const rootElement = document.getElementById('root')
 document.addEventListener('dragover', (e) => {
@@ -12,7 +13,9 @@ document.addEventListener('dragover', (e) => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MainState>
+      <App />
+    </MainState>
   </React.StrictMode>,
   rootElement
 );

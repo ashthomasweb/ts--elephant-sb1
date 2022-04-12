@@ -3,33 +3,23 @@
   text-align: center;
 }
 
-.img-preview {
+.board {
   position: relative;
   height: fit-content;
   width: fit-content;
-  /* height: 200px; */
-  /* width: 300px; */
+  height: 2000px;
+  width: 3000px;
 }
 
-.image__wrapper {
+.board__backing {
+  height: 2000px;
+  width: 3000px;
   position: relative;
   display: flex;
   overflow: hidden;
+  background-image: url(https://picsum.photos/1000/600);
 }
 
-.image__wrapper img {
+.board__backing img {
   object-position: center;
-}
-
-.draggable-overlay {
-  max-width: 40%;
-  height: 30%;
-  aspect-ratio: 1 / 1.42;
-  position: absolute;
-  /* border-radius: 0.5rem; */
-  /* box-shadow: 0 0 0 50px rgba(0, 0, 0, 0.5); */
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  transition: opacity 200ms ease;
-  cursor: grab;
 }
