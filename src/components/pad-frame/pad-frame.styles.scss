@@ -1,0 +1,38 @@
+
+.pad-frame {
+    left: 573px;
+    top: 10px;
+    height: 124px;
+    position: fixed;
+    background-size: cover;
+    resize: both !important;
+    outline: 1px solid black;
+    overflow: hidden;
+    padding: 10px;
+    display: table;
+    box-shadow: 3px 3px 3px #4a4a4a, -3px -3px 55px -35px #4a4a4a;
+    z-index: 1000000000;
+  
+    #input-text {
+      box-sizing: content-box;
+      width: 140px;
+      text-align: center;
+      font-size: 22px;
+      line-height: 1.4;
+      color: darkred !important;
+      font-weight: 900;
+      align-items: center;
+      background-color: rgba(255, 255, 255, .5);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      resize: both !important;
+      display: table-cell;
+      vertical-align: middle;
+    }
+  
+    #input-text:empty {
+      caret-color: transparent;
+    }
+  
+  }
+
+  // END of document

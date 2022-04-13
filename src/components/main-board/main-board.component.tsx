@@ -1,10 +1,9 @@
-// App.ts
+// main-board.component.tsx
 
 import { useContext } from "react";
 import { MainContext } from '../../context/main/MainState'
 import Note from '../../components/note/note.component'
-import UserOptions from "../../components/user-options/user-options.component";
-
+import UserInterface from '../../components/user-interface/user-interface.component'
 import '../main-board/main-board.styles.scss'
 
 type Props = {
@@ -37,7 +36,7 @@ const MainBoard = (props: Props): JSX.Element => {
   return (
     <div className="board">
       {/* Interface Components */}
-      <UserOptions currentUser={props.currentUser}/>
+      <UserInterface currentUser={props.currentUser}/>
       {/* Board and notes */}
       <div className="board__backing">
         <Note
@@ -53,3 +52,4 @@ const MainBoard = (props: Props): JSX.Element => {
 export default MainBoard
 
 // END of document
+

@@ -17,6 +17,7 @@ const Note = (props) => {
       style={props.notePosition}
       onDrag={props.dragNote}
       onMouseDown={props.getMousePos}
+      onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), -9000, -9000)}
       draggable>
       <button type='button' onClick={() => dispatch({ type: 'TOG_USER' })}>
         Name
@@ -27,9 +28,5 @@ const Note = (props) => {
 }
 
 export default Note
-
-// SCRATCH
-// supposed solution for skateboard 1, now not necessary
-// onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), -9000, -9000)}
 
 // END of document

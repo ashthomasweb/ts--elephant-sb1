@@ -4,7 +4,6 @@ import { auth, createNewUserProfile, getUserRef, /* getUserBoards */ } from './f
 import './App.css'
 import MainBoard from './components/main-board/main-board.component'
 
-
 interface MyProps {
   currentUser: null
 }
@@ -28,7 +27,6 @@ class App extends Component<MyProps, MyState> {
         createNewUserProfile(userAuth)
         const userRef: any = await getUserRef(userAuth)
         userRef.onSnapshot((snapShot: any) => {
-          
           this.setState(
             {
               currentUser: {
@@ -40,7 +38,6 @@ class App extends Component<MyProps, MyState> {
           )
         })
       } else if (userAuth == null) {
-
         this.setState({ currentUser: userAuth })
       }
       // getUserBoards(userAuth)
@@ -75,3 +72,5 @@ class App extends Component<MyProps, MyState> {
 }
 
 export default App
+
+// END of document
