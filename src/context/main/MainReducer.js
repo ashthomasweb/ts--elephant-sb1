@@ -1,3 +1,5 @@
+// MainReducer.js
+
 export const mainReducer = (state, action) => {
     switch (action.type) {
         case "TOG_USER":

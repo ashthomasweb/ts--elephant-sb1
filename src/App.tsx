@@ -1,26 +1,23 @@
 import React, { Component } from 'react'
-import { auth, createNewUserProfile, getUserRef, getUserBoards } from './firebase/firebase.utils'
+import { auth, createNewUserProfile, getUserRef, /* getUserBoards */ } from './firebase/firebase.utils'
 
 import './App.css'
 import MainBoard from './components/main-board/main-board.component'
 
 
-interface MyProps  {
+interface MyProps {
   currentUser: null
 }
 
-interface MyState  {
+interface MyState {
   [currentUser: string]: any
 }
 
 class App extends Component<MyProps, MyState> {
-
   constructor(props: MyProps) {
     super(props);
-    
     this.state = {
     }
-
   }
 
   unsubscribeFromAuth: any = null
@@ -29,10 +26,9 @@ class App extends Component<MyProps, MyState> {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         createNewUserProfile(userAuth)
-
         const userRef: any = await getUserRef(userAuth)
-
         userRef.onSnapshot((snapShot: any) => {
+          
           this.setState(
             {
               currentUser: {
@@ -44,7 +40,7 @@ class App extends Component<MyProps, MyState> {
           )
         })
       } else if (userAuth == null) {
-        
+
         this.setState({ currentUser: userAuth })
       }
       // getUserBoards(userAuth)

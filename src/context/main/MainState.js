@@ -6,7 +6,6 @@ export const MainContext = createContext()
 const MainState = (props) => {
   const initialState = {
     user: 'Ash',
-    currentUser: null,
     mouseOffset: {
       left: 0,
       top: 0,

@@ -41,83 +41,83 @@ export const createNewUserProfile = async (userAuth, additionalData) => {
   }
 }
 
-export const saveUserBoard = async (userAuth, boardObj) => {
-  if (boardObj.name === '') return
+// export const saveUserBoard = async (userAuth, boardObj) => {
+//   if (boardObj.name === '') return
 
-  const boardRef = firestore.doc(
-    `users/${userAuth.uid}/boards/${boardObj.name}`
-  )
+//   const boardRef = firestore.doc(
+//     `users/${userAuth.uid}/boards/${boardObj.name}`
+//   )
 
-  const snapShot = await boardRef.get()
+//   const snapShot = await boardRef.get()
 
-  if (!snapShot.exists) {
-    const { name, notes, backgroundColor } = boardObj
-    try {
-      await boardRef.set({
-        name,
-        notes,
-        backgroundColor
-      })
-    } catch (error) {
-      console.log('error creating board', error.message)
-    }
-  } else if (snapShot.exists) {
-    const { notes, backgroundColor } = boardObj
-    try {
-      await boardRef.update({
-        notes,
-        backgroundColor
-      })
-    } catch (error) {
-      console.log('error creating board', error.message)
-    }
-  }
+//   if (!snapShot.exists) {
+//     const { name, notes, backgroundColor } = boardObj
+//     try {
+//       await boardRef.set({
+//         name,
+//         notes,
+//         backgroundColor
+//       })
+//     } catch (error) {
+//       console.log('error creating board', error.message)
+//     }
+//   } else if (snapShot.exists) {
+//     const { notes, backgroundColor } = boardObj
+//     try {
+//       await boardRef.update({
+//         notes,
+//         backgroundColor
+//       })
+//     } catch (error) {
+//       console.log('error creating board', error.message)
+//     }
+//   }
 
-  getUserBoards(userAuth)
-}
+//   getUserBoards(userAuth)
+// }
 
-export const deleteUserBoard = async (userAuth, boardName) => {
-  const boardRef = firestore.doc(
-    `users/${userAuth.uid}/boards/${boardName}`
-  )
+// export const deleteUserBoard = async (userAuth, boardName) => {
+//   const boardRef = firestore.doc(
+//     `users/${userAuth.uid}/boards/${boardName}`
+//   )
 
-  const snapShot = await boardRef.get()
+//   const snapShot = await boardRef.get()
 
  
-  if (snapShot.exists) {
-    try {
-      await boardRef.delete()
-    } catch (error) {
-      console.log('error deleting board', error.message)
-    }
-  }
+//   if (snapShot.exists) {
+//     try {
+//       await boardRef.delete()
+//     } catch (error) {
+//       console.log('error deleting board', error.message)
+//     }
+//   }
 
-  getUserBoards(userAuth)
-}
+//   getUserBoards(userAuth)
+// }
 
 
-// retrieves saves user boards from firestore db
-// called when App.js mounts and when user saves a board
-// userboard obj gets passed back to Board Component
-export const getUserBoards = (userAuth) => {
-  if (!userAuth) return
-  userBoards = []
-  firestore
-    .collection('users')
-    .doc(`${userAuth.uid}`)
-    .collection('boards')
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        userBoards.push(doc.data())
-      })
-    })
-}
+// // retrieves saves user boards from firestore db
+// // called when App.js mounts and when user saves a board
+// // userboard obj gets passed back to Board Component
+// export const getUserBoards = (userAuth) => {
+//   if (!userAuth) return
+//   userBoards = []
+//   firestore
+//     .collection('users')
+//     .doc(`${userAuth.uid}`)
+//     .collection('boards')
+//     .get()
+//     .then((querySnapshot) => {
+//       querySnapshot.forEach((doc) => {
+//         userBoards.push(doc.data())
+//       })
+//     })
+// }
 
-export const clearBoards = () => {
-  userBoards = []
-}
-export var userBoards = []
+// export const clearBoards = () => {
+//   userBoards = []
+// }
+// export var userBoards = []
 
 firebase.initializeApp(config)
 export const auth = firebase.auth()

@@ -1,13 +1,11 @@
 // App.ts
 
-
 import { useContext } from "react";
 import { MainContext } from '../../context/main/MainState'
 import Note from '../../components/note/note.component'
 import UserOptions from "../../components/user-options/user-options.component";
 
-// import "./App.css";
-
+import '../main-board/main-board.styles.scss'
 
 type Props = {
   currentUser: any
@@ -20,7 +18,7 @@ const MainBoard = (props: Props): JSX.Element => {
   const getPosition = (parent: any, position: string, mouse: number) : number => {
     let newPos: number = mouse - parent[position] - mouseOffset[position];
     return newPos;
-  };
+  }
 
   const dragNote = (e: any) : void => {
     const parent: object = e.currentTarget.parentElement.getBoundingClientRect();
@@ -28,7 +26,7 @@ const MainBoard = (props: Props): JSX.Element => {
     let newTop: number = getPosition(parent, "top", e.pageY);
     let notePosition: {[key: string]: string} = { left: `${newLeft}px`, top: `${newTop}px`}
     dispatch({ type: 'SET_NOTE_POSITION', payload: notePosition})
-  };
+  }
 
   const getMousePos = (e: any) : void => {
     const rect: any = e.target.getBoundingClientRect();
@@ -37,10 +35,10 @@ const MainBoard = (props: Props): JSX.Element => {
   }
 
   return (
-    <div
-      className="board"
-    >
-        <UserOptions />
+    <div className="board">
+      {/* Interface Components */}
+      <UserOptions currentUser={props.currentUser}/>
+      {/* Board and notes */}
       <div className="board__backing">
         <Note
         notePosition={notePosition}
@@ -49,9 +47,9 @@ const MainBoard = (props: Props): JSX.Element => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MainBoard;
+export default MainBoard
 
 // END of document

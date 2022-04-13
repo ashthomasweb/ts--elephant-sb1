@@ -5,43 +5,48 @@ import React from 'react'
 import { useContext } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import SignInUpModal from '../signinupmodal/signinupmodal.component'
+import { auth } from '../../firebase/firebase.utils'
 
 import logo from '../../assets/elephant-logo.png'
 
 import './user-options.styles.scss'
 
 
-const UserOptions = (props) => {
+type Props = {
+  currentUser: any
+}
+
+const UserOptions = (props: Props) => {
   const {
     state: { user },
     dispatch,
   } = useContext(MainContext)
-
   
-    const modalToggle = () => {
-    let el = document.querySelector('.sign-modal').style
+  
+  const modalToggle = () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    let el: any = document.querySelector('.sign-modal').style
     el.display === 'block' ? (el.display = 'none') : (el.display = 'block')
   }
 
   return (
     <div className='header'>
-        
         <div className='user-options'>
-          {!user ? (
+          {props.currentUser ? (
             <div>
               <div className='welcome'>
-                {/* {this.props.currentUser.displayName} */}
+                {props.currentUser.displayName}
               </div>
               <div className='logo-container' >
                 <img src={logo} className='logo' alt='elephant-logo'/>
               <button
                 className='option'
-                // onLoad={this.closeSignIn()}
-                // onClick={() => {
-                //   clearBoards()
-                //   this.props.reset()
-                //   auth.signOut()
-                // }}
+                onClick={() => {
+                  // clearBoards()
+                  // this.props.reset()
+                  auth.signOut()
+                }}
                 >
                 SIGN OUT
               </button>
