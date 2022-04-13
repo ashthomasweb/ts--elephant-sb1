@@ -1,48 +1,81 @@
-// App.ts
+import React, { Component } from 'react'
+import { auth, createNewUserProfile, getUserRef, getUserBoards } from './firebase/firebase.utils'
 
-import { useContext } from "react";
-import { MainContext } from './context/main/MainState'
-import Note from './components/note/note.component'
+import './App.css'
+import MainBoard from './components/main-board/main-board.component'
 
-import "./App.css";
 
-const App = () => {
-  const { state: { mouseOffset, notePosition }, dispatch } = useContext(MainContext)
+interface MyProps  {
+  currentUser: null
+}
 
-  const getPosition = (parent: any, position: string, mouse: number) : number => {
-    let newPos: number = mouse - parent[position] - mouseOffset[position];
-    return newPos;
-  };
+interface MyState  {
+  [currentUser: string]: any
+}
 
-  const dragNote = (e: any) => {
-    const parent: object = e.currentTarget.parentElement.getBoundingClientRect();
-    let newLeft: number = getPosition(parent, "left", e.pageX);
-    let newTop: number = getPosition(parent, "top", e.pageY);
-    let notePosition: {[key: string]: string} = { left: `${newLeft}px`, top: `${newTop}px`}
-    dispatch({ type: 'SET_NOTE_POSITION', payload: notePosition})
-  };
+class App extends Component<MyProps, MyState> {
 
-  const getMousePos = (e: any) => {
-    const rect: any = e.target.getBoundingClientRect();
-    const mouseOffset: object = {left: e.pageX - rect.left, top: e.pageY - rect.top}
-    dispatch({ type: 'SET_MOUSE_OFFSET', payload: mouseOffset })
-  };
+  constructor(props: MyProps) {
+    super(props);
+    
+    this.state = {
+    }
 
-  return (
-    <div
-      className="board"
-    >
-      <div className="board__backing">
-        <Note
-        notePosition={notePosition}
-        dragNote={dragNote}
-        getMousePos={getMousePos}
-        />
+  }
+
+  unsubscribeFromAuth: any = null
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        createNewUserProfile(userAuth)
+
+        const userRef: any = await getUserRef(userAuth)
+
+        userRef.onSnapshot((snapShot: any) => {
+          this.setState(
+            {
+              currentUser: {
+                auth: userAuth,
+                id: snapShot.id,
+                ...snapShot.data(),
+              },
+            }
+          )
+        })
+      } else if (userAuth == null) {
+        
+        this.setState({ currentUser: userAuth })
+      }
+      // getUserBoards(userAuth)
+    })
+
+    // function setZoom() {
+    //   let zoom = window.devicePixelRatio * 1.1
+    //   let ui = ['.options-frame', '.header', '.pad-frame', '.update-frame', '.trash-frame']
+    //   ui.forEach((item) => {
+    //     document.querySelector(item).style.zoom = `calc(100% / ${zoom})`
+    //   })
+    //   document.querySelector('#backing').scrollTo(3460, 1211)
+      
+    // }
+    // // partially handles bad clientX value on fast note clicking
+    // window.addEventListener('dragover', (e) => e.preventDefault(), false)
+    // window.addEventListener('dragend', (e) => e.preventDefault(), false)
+    // window.addEventListener('DOMContentLoaded', () => setZoom() )
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth()
+  }
+
+  render() {
+    return (
+      <div>
+        <MainBoard currentUser={this.state?.currentUser}/>
       </div>
-    </div>
-  );
-};
+    )
+  }
+}
 
-export default App;
-
-// END of document
+export default App

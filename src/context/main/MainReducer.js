@@ -24,6 +24,12 @@ export const mainReducer = (state, action) => {
                 ...state,
                 notePosition: notePosition
             }
+        case "SET_CURRENT_USER":
+            let currentUser = action.payload
+            return {
+                ...state,
+                currentUser: currentUser
+            }   
         default:
             return state
     }

@@ -11,10 +11,14 @@ document.addEventListener('dragover', (e) => {
   e.preventDefault()
 })
 
+// interface MyState  {
+//   [currentUser: string]: any
+// }
+
 ReactDOM.render(
   <React.StrictMode>
     <MainState>
-      <App />
+      <App currentUser={null}/>
     </MainState>
   </React.StrictMode>,
   rootElement
