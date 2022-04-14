@@ -14,6 +14,7 @@ const Note = (props) => {
   return (
     <div
       className='note-base'
+      id={props.id}
       style={props.notePosition}
       onDrag={props.dragNote}
       onMouseDown={props.getMousePos}

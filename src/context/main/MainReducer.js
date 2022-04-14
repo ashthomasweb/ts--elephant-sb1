@@ -18,6 +18,9 @@ export const mainReducer = (state, action) => {
                 mouseOffset: mouseOffset
             }
         case "SET_NOTE_POSITION":
+            console.log(action.payload.id)
+            let note = state.notes.filter((item) => item.id === Number(action.payload.id))
+            console.log(note)
             let notePosition = {
                 left: action.payload.left,
                 top: action.payload.top
