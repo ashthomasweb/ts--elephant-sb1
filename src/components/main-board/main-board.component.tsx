@@ -6,15 +6,16 @@ import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
 import '../main-board/main-board.styles.scss'
 
+
 type Props = {
   currentUser: any
 }
 
-type State = {
-  mouseOffset: {},
-  notePosition: {},
-  notes: []
-}
+// type State = {
+//   mouseOffset: {},
+//   notePosition: {},
+//   notes: []
+// }
 
 
 
@@ -22,13 +23,13 @@ const MainBoard = (props: Props): JSX.Element => {
 
   const { state: { mouseOffset, notePosition, notes }, dispatch } = useContext(MainContext)
 
+  
   const getPosition = (parent: any, position: string, mouse: number) : number => {
     let newPos: number = mouse - parent[position] - mouseOffset[position];
     return newPos;
   }
 
   const dragNote = (e: any) : void => {
-    console.log(e.target.id)
     const parent: object = e.currentTarget.parentElement.getBoundingClientRect();
     let newLeft: number = getPosition(parent, "left", e.pageX);
     let newTop: number = getPosition(parent, "top", e.pageY);
@@ -49,13 +50,13 @@ const MainBoard = (props: Props): JSX.Element => {
       {/* Board and notes */}
       <div className="board__backing">
       {notes.map(({ id, ...noteProps }: {id: number; noteProps: []}) => (
-
+        
         <Note
         id={id}
-        notePosition={notePosition}
+        // notePosition={notePosition}
         dragNote={dragNote}
         getMousePos={getMousePos}
-        props={noteProps}
+        noteData={noteProps}
         />
       ))}
       </div>

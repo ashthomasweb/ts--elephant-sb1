@@ -11,11 +11,16 @@ const Note = (props) => {
     dispatch,
   } = useContext(MainContext)
 
+  let notePosition = {
+    left: props.noteData.left,
+    top: props.noteData.top
+  }
+
   return (
     <div
       className='note-base'
       id={props.id}
-      style={props.notePosition}
+      style={notePosition}
       onDrag={props.dragNote}
       onMouseDown={props.getMousePos}
       onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), -9000, -9000)}

@@ -1,5 +1,7 @@
 // MainReducer.js
 
+import { indexFinder } from '../../methods/finders/num-finders.tsx'
+
 export const mainReducer = (state, action) => {
     switch (action.type) {
         case "TOG_USER":
@@ -18,16 +20,17 @@ export const mainReducer = (state, action) => {
                 mouseOffset: mouseOffset
             }
         case "SET_NOTE_POSITION":
-            console.log(action.payload.id)
-            let note = state.notes.filter((item) => item.id === Number(action.payload.id))
-            console.log(note)
-            let notePosition = {
+            let note = state.notes.filter((item) => item.id === Number(action.payload.id))[0]
+            let notes = [ ...state.notes]
+            note = {
+                ...note,
                 left: action.payload.left,
                 top: action.payload.top
             }
+            notes[indexFinder(notes, note.id)] = note
             return {
                 ...state,
-                notePosition: notePosition
+                notes
             }
         case "SET_CURRENT_USER":
             let currentUser = action.payload

@@ -12,19 +12,13 @@ const MainState = (props) => {
       left: 0,
       top: 0,
     },
-    notePosition: {
-      left: 0,
-      top: 0
-    },
     newNote: {
       id: 1,
+      left: '',
+      top: '',
       // width: '',
       // height: '',
-      top: '',
-      left: '',
       // zIndex: 0,
-      mouseOffsetX: 0,
-      mouseOffsetY: 0,
       // noteText: '',
       // trayText: '',
       // isTrayDisplay: false,
