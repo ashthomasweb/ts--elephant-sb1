@@ -39,7 +39,7 @@ export const newIdFinder = (notesObj: any) : number => {
 //     return Math.max.apply(null, zList) + 1
 // }
 
-export const indexFinder = (notesObj: any, id: any) => {
+export const indexFinder = (notesObj: any, id: any) : any => {
     let newIndex
     notesObj.forEach((note: any) => {
         if (note.id === Number(id)) {

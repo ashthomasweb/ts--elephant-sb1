@@ -7,13 +7,14 @@ import './note.styles.scss'
 
 const Note = (props) => {
   const {
-    state: { user },
-    dispatch,
+    dispatch
   } = useContext(MainContext)
 
-  let notePosition = {
-    left: props.noteData.left,
-    top: props.noteData.top
+  let noteData = props.noteData
+
+  let notePosition = { // package position coordinates for easy CSS assignment
+    left: noteData.left,
+    top: noteData.top
   }
 
   return (
@@ -29,8 +30,7 @@ const Note = (props) => {
       <button type='button' onClick={() => dispatch({ type: 'TOG_USER' })}>
         Name
       </button>
-      {props.noteData.noteText}
-      <div id='input-text' contentEditable='true'></div>
+      {noteData.noteText}
     </div>
   )
 }
