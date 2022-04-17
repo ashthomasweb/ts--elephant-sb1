@@ -1,13 +1,13 @@
-// export const newIdFinder = (stateObj) => {
-//     let idList = [0]
-//     if (stateObj.notes.length !== 0) {
-//         stateObj.notes.forEach((note) => {
-//             idList.push(note.id)
-//         })
-//     }
+export const newIdFinder = (notesObj: any) : number => {
+    let idList = [0]
+    if (notesObj.length !== 0) {
+        notesObj.forEach((note: any) => {
+            idList.push(note.id)
+        })
+    }
 
-//     return Math.max.apply(null, idList) + 1
-// }
+    return Math.max.apply(null, idList) + 1
+}
 
 // export const zIndexDrag = (notes, isMat, isGroup) => {
 //     if (isMat) {

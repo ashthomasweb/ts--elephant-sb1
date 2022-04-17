@@ -11,22 +11,12 @@ type Props = {
   currentUser: any
 }
 
-// type State = {
-//   mouseOffset: {},
-//   notePosition: {},
-//   notes: []
-// }
-
-
-
 const MainBoard = (props: Props): JSX.Element => {
 
-  const { state: { mouseOffset, notePosition, notes }, dispatch } = useContext(MainContext)
-
+  const { state: { mouseOffset, notes }, dispatch } = useContext(MainContext)
   
   const getPosition = (parent: any, position: string, mouse: number) : number => {
-    let newPos: number = mouse - parent[position] - mouseOffset[position];
-    return newPos;
+    return mouse - parent[position] - mouseOffset[position]
   }
 
   const dragNote = (e: any) : void => {
@@ -50,10 +40,9 @@ const MainBoard = (props: Props): JSX.Element => {
       {/* Board and notes */}
       <div className="board__backing">
       {notes.map(({ id, ...noteProps }: {id: number; noteProps: []}) => (
-        
         <Note
         id={id}
-        // notePosition={notePosition}
+        key={id}
         dragNote={dragNote}
         getMousePos={getMousePos}
         noteData={noteProps}

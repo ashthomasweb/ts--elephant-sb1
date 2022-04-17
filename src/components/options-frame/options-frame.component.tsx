@@ -2,12 +2,18 @@
 
 import { useContext } from "react";
 import { MainContext } from '../../context/main/MainState'
+import { newNoteGenerator } from "../../methods/new-note"
 
 import './options-frame.styles.scss'
 
 const OptionsFrame = (): JSX.Element => {
 
-  const { state: { mouseOffset, notePosition }, dispatch } = useContext(MainContext)
+  const { state: { notes, newNote }, dispatch } = useContext(MainContext)
+
+  function newNoteHandler(notesObj: any, newNote: any, isMat=false) {
+      let notes = newNoteGenerator(notesObj, newNote, isMat)
+      dispatch({ type: 'SET_ALL_NOTES', payload: notes })
+  }
 
   return (
     <div className='options-frame'>
@@ -63,7 +69,7 @@ const OptionsFrame = (): JSX.Element => {
           <button
             className='place-btn'
             type='button'
-            // onClick={() => this.newNoteHandler()}
+            onClick={() => newNoteHandler(notes, newNote)}
             >
             Place on Board
           </button>

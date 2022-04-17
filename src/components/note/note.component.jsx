@@ -24,11 +24,13 @@ const Note = (props) => {
       onDrag={props.dragNote}
       onMouseDown={props.getMousePos}
       onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), -9000, -9000)}
-      draggable>
+      draggable
+      >
       <button type='button' onClick={() => dispatch({ type: 'TOG_USER' })}>
         Name
       </button>
-      {user}
+      {props.noteData.noteText}
+      <div id='input-text' contentEditable='true'></div>
     </div>
   )
 }

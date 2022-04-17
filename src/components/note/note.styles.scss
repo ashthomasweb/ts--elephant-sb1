@@ -18,14 +18,16 @@
     padding: 15px;
     // aspect-ratio: 1 / 1.42;
     position: absolute;
-    border-radius: 0.5rem;
+    // border-radius: 0.5rem;
     // box-shadow: 5px 5px 10px 50px rgba(0, 0, 0, 0.1);
     // background-color: rgba(0, 0, 0, 0.5);
     background-color: lightblue;
 
     opacity: 1;
     // transition: opacity 200ms ease;
-    cursor: grab;
-  }
+    // cursor: grab;
+    resize: both;
+}
 
-  
+
+

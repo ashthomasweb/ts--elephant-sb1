@@ -1,6 +1,6 @@
 // MainReducer.js
 
-import { indexFinder } from '../../methods/finders/num-finders.tsx'
+import { indexFinder } from '../../methods/num-finders.tsx'
 
 export const mainReducer = (state, action) => {
     switch (action.type) {
@@ -38,6 +38,14 @@ export const mainReducer = (state, action) => {
                 ...state,
                 currentUser: currentUser
             }   
+        case "SET_ALL_NOTES":
+            {
+            let notes = [...action.payload]
+            return {
+                ...state,
+                notes: notes
+            }
+        }
         default:
             return state
     }
