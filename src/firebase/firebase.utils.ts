@@ -12,13 +12,13 @@ let config = {
 }
 
 // returns reference object for user login
-export const getUserRef = async (userAuth) => {
+export const getUserRef = async (userAuth: any) => {
   if (!userAuth) return
   const userRef = firestore.doc(`users/${userAuth.uid}`)
   return userRef
 }
 
-export const createNewUserProfile = async (userAuth, additionalData) => {
+export const createNewUserProfile = async (userAuth: any, additionalData: any) => {
   if (!userAuth) return
 
   const userRef = firestore.doc(`users/${userAuth.uid}`)
@@ -35,7 +35,7 @@ export const createNewUserProfile = async (userAuth, additionalData) => {
         createdAt,
         ...additionalData,
       })
-    } catch (error) {
+    } catch (error: any) {
       console.log('error creating user', error.message)
     }
   }

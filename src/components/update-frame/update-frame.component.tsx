@@ -5,7 +5,7 @@
 
 import '../update-frame/update-frame.styles.scss'
 
-const TrashFrame = (): JSX.Element => {
+const TrashFrame = () : JSX.Element => {
   // const {
   //   state: { mouseOffset, notePosition },
   //   dispatch,

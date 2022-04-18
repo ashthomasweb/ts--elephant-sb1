@@ -4,17 +4,17 @@ import { auth, createNewUserProfile, getUserRef, /* getUserBoards */ } from './f
 import './App.css'
 import MainBoard from './components/main-board/main-board.component'
 
-interface MyProps {
+type MyProps = {
   currentUser: null
 }
 
-interface MyState {
+type MyState = {
   [currentUser: string]: any
 }
 
 class App extends Component<MyProps, MyState> {
   constructor(props: MyProps) {
-    super(props);
+    super(props)
     this.state = {
     }
   }
@@ -24,7 +24,7 @@ class App extends Component<MyProps, MyState> {
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
-        createNewUserProfile(userAuth)
+        createNewUserProfile(userAuth, null)
         const userRef: any = await getUserRef(userAuth)
         userRef.onSnapshot((snapShot: any) => {
           this.setState(

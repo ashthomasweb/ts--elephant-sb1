@@ -6,7 +6,7 @@ import trashTop from '../../assets/trash-top.png'
 import trashBottom from '../../assets/trash-bottom.png'
 import '../trash-frame/trash-frame.styles.scss'
 
-const TrashFrame = (): JSX.Element => {
+const TrashFrame = () : JSX.Element => {
   // const {
   //   dispatch,
   // } = useContext(MainContext)
