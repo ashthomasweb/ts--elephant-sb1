@@ -1,7 +1,7 @@
 // user-interface.component.tsx
 
-import { useContext } from "react";
-import { MainContext } from '../../context/main/MainState'
+// import { useContext } from "react";
+// import { MainContext } from '../../context/main/MainState'
 import UserOptions from '../user-options/user-options.component'
 
 import '../user-interface/user-interface.styles.scss'
@@ -15,7 +15,7 @@ type Props = {
 
 const UserInterface = (props: Props): JSX.Element => {
 
-  const { state: { mouseOffset, notePosition }, dispatch } = useContext(MainContext)
+  // const { state: { mouseOffset, notePosition }, dispatch } = useContext(MainContext)
 
   return (
     <div className="interface-wrapper">

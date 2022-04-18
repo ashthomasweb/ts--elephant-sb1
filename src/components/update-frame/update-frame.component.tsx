@@ -1,15 +1,15 @@
 // update-frame.component.tsx
 
-import { useContext } from 'react'
-import { MainContext } from '../../context/main/MainState'
+// import { useContext } from 'react'
+// import { MainContext } from '../../context/main/MainState'
 
 import '../update-frame/update-frame.styles.scss'
 
 const TrashFrame = (): JSX.Element => {
-  const {
-    state: { mouseOffset, notePosition },
-    dispatch,
-  } = useContext(MainContext)
+  // const {
+  //   state: { mouseOffset, notePosition },
+  //   dispatch,
+  // } = useContext(MainContext)
 
   return (
     <div className='update-frame'>

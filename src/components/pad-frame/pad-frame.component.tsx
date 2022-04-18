@@ -6,7 +6,6 @@ import '../pad-frame/pad-frame.styles.scss'
 
 const PadFrame = (): JSX.Element => {
   const {
-    state: { mouseOffset, notePosition },
     dispatch,
   } = useContext(MainContext)
 
