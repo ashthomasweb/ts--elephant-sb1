@@ -1,5 +1,4 @@
-
-import { createContext, useReducer } from 'react'
+import React, { createContext, useReducer } from 'react'
 import { mainReducer } from './MainReducer'
 import { initialArray } from '../../assets/initial-array.js'
 
@@ -7,12 +6,40 @@ import { initialArray } from '../../assets/initial-array.js'
 //   name: string | null
 // }
 
+type defaultStateType = {
+  user: string,
+  mouseOffset: any,
+  newNote: {
+    id: number
+    left: string
+    top: string
+    width: string
+    height: string
+    noteText: string
+    // zIndex: 0,
+    // trayText: '',
+    // isTrayDisplay: false,
+    // trayWidth: '150px',
+    // trayHeight: '200px',
+    // border: 'none',
+    // noteBColor: '#f2ecb3',
+    // isMatBoard: false,
+    // isNew: true,
+    // noteGroup: [],
+    // matOffsetX: 0,
+    // matOffsetY: 0,
+    // isChecked: false,
+    // iframe: false
+  }
+  notes: any
+}
+
 const defaultState = {
-    user: 'Ash',
-    mouseOffset: {
-      left: 0,
-      top: 0,
-    },
+  user: 'Ash',
+  mouseOffset: {
+    left: 0,
+    top: 0,
+  },
   newNote: {
     id: 1,
     left: '',
@@ -35,10 +62,13 @@ const defaultState = {
     // isChecked: false,
     // iframe: false
   },
-  notes: initialArray
+  notes: initialArray,
 }
 
-export const MainContext = createContext(defaultState)
+export const MainContext = createContext<{
+  state: defaultStateType
+  dispatch: React.Dispatch<any>
+}>({ state: defaultState, dispatch: () => null })
 
 const MainState = (props: any) => {
   // const initialState = {
@@ -76,7 +106,7 @@ const MainState = (props: any) => {
   let value = { state, dispatch }
 
   return (
-    <MainContext.Provider value={state, dispatch}>{props.children}</MainContext.Provider>
+    <MainContext.Provider value={value}>{props.children}</MainContext.Provider>
   )
 }
 

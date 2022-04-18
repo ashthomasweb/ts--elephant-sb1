@@ -2,7 +2,7 @@
 
 import { indexFinder } from '../../methods/num-finders'
 
-export const mainReducer = (state, action) => {
+export const mainReducer = (state: any, action: any) => {
     switch (action.type) {
         case "TOG_USER":
             let user = state.user === 'Ash' ? 'Dave' : 'Ash'
@@ -20,7 +20,7 @@ export const mainReducer = (state, action) => {
                 mouseOffset: mouseOffset
             }
         case "SET_NOTE_POSITION":
-            let note = state.notes.filter((item) => item.id === Number(action.payload.id))[0]
+            let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
             let notes = [ ...state.notes]
             note = {
                 ...note,

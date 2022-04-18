@@ -1,16 +1,15 @@
 // user-interface.component.tsx
 
-import { useContext } from 'react'
-import { MainContext } from '../../context/main/MainState'
+// import { useContext } from 'react'
+// import { MainContext } from '../../context/main/MainState'
 import trashTop from '../../assets/trash-top.png'
 import trashBottom from '../../assets/trash-bottom.png'
 import '../trash-frame/trash-frame.styles.scss'
 
 const TrashFrame = (): JSX.Element => {
-  const {
-    state: { mouseOffset, notePosition },
-    dispatch,
-  } = useContext(MainContext)
+  // const {
+  //   dispatch,
+  // } = useContext(MainContext)
 
   return (
     <div className='trash-frame'>
