@@ -7,8 +7,18 @@ import { auth, createNewUserProfile } from '../../firebase/firebase.utils'
 
 import './sign-up.styles.scss'
 
-class SignUp extends Component {
-  constructor(props) {
+interface PropsType {
+}
+
+interface StateType {
+  displayName: string
+  email: string
+  password: string
+  confirmPassword: string
+}
+
+class SignUp extends Component<PropsType, StateType> {
+  constructor(props: PropsType) {
     super(props)
 
     this.state = {
@@ -19,7 +29,7 @@ class SignUp extends Component {
     }
   }
 
-  handleSubmit = async (event) => {
+  handleSubmit = async (event: any) => {
     event.preventDefault()
 
     const { displayName, email, password, confirmPassword } = this.state
@@ -47,9 +57,19 @@ class SignUp extends Component {
 
   }
 
-  handleChange = (event) => {
+  // handleChange = (e: { target: { name: string; value: string }}) => {
+  // handleChange = (name: any, value: any) => {
+
+
+  //   // let key = name
+  //   // let value = value
+  //   console.log(name, value)
+  //   this.setState({...this.state, [name]: value})
+  // }
+
+  handleChange = (event: any) => {
     const { value, name } = event.target
-    this.setState({ [name]: value })
+    this.setState({ ...this.state, [name]: value })
   }
 
   render() {
@@ -65,7 +85,8 @@ class SignUp extends Component {
             name='displayName'
             value={displayName}
             label='Display Name'
-            onChange={this.handleChange}
+            autoComplete='name'
+            handleChange={this.handleChange}
             required
           />
           <FormInput
@@ -74,7 +95,7 @@ class SignUp extends Component {
             value={email}
             label='Email'
             autoComplete='email'
-            onChange={this.handleChange}
+            handleChange={this.handleChange}
             required
           />
           <FormInput
@@ -83,7 +104,7 @@ class SignUp extends Component {
             value={password}
             label='Password'
             autoComplete='new-password'
-            onChange={this.handleChange}
+            handleChange={this.handleChange}
             required
           />
           <FormInput
@@ -92,7 +113,7 @@ class SignUp extends Component {
             value={confirmPassword}
             label='Confirm Password'
             autoComplete='repeat-password'
-            onChange={this.handleChange}
+            handleChange={this.handleChange}
             required
           />
           <div className='buttons'>
@@ -105,3 +126,5 @@ class SignUp extends Component {
 }
 
 export default SignUp
+
+// END of document

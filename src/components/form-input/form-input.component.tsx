@@ -1,8 +1,19 @@
 import React from 'react'
 
-import './form-input.styles.scss'
+import './form-input.styles.scss' 
 
-const FormInput = ({ handleChange, label, ...otherProps }) => (
+interface PropsType {
+  type: string
+  name: string
+  value: string
+  label: string
+  handleChange: any
+  required: any
+  autoComplete: string
+}
+
+
+const FormInput = ({ handleChange, label, ...otherProps }: PropsType) => (
 
   <div className='group'> 
     <input className='form-input' onChange={handleChange} {...otherProps} />

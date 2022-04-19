@@ -7,8 +7,16 @@ import { auth, signInWithGoogle } from '../../firebase/firebase.utils'
 
 import './sign-in.styles.scss'
 
-class SignIn extends Component {
-  constructor(props) {
+interface PropsType {
+}
+
+interface StateType {
+  email: string
+  password: string
+}
+
+class SignIn extends Component<PropsType, StateType> {
+  constructor(props: PropsType) {
     super(props)
 
     this.state = {
@@ -17,7 +25,7 @@ class SignIn extends Component {
     }
   }
 
-  handleSubmit = async (event) => {
+  handleSubmit = async (event: any) => {
     event.preventDefault()
 
     const { email, password } = this.state
@@ -30,9 +38,9 @@ class SignIn extends Component {
     }
   }
 
-  handleChange = (event) => {
+  handleChange = (event: any) => {
     const { value, name } = event.target
-    this.setState({ [name]: value })
+    this.setState({ ...this.state, [name]: value })
   }
 
   render() {
@@ -62,12 +70,12 @@ class SignIn extends Component {
           />
           <div className='buttons'>
             <CustomButton type='submit'> Sign in </CustomButton>
-            <CustomButton
+            <button
               type='button'
               onClick={signInWithGoogle}
-              isGoogleSignIn>
+              className='google-sign-in custom-button'>
               Use Google
-            </CustomButton>
+            </button>
           </div>
         </form>
       </div>
@@ -76,3 +84,5 @@ class SignIn extends Component {
 }
 
 export default SignIn
+
+// END of document
