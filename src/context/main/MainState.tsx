@@ -27,6 +27,7 @@ interface initialStateType {
     // isChecked: false,
     // iframe: false
   }
+  boardObj: any
   notes: any
 }
 
@@ -57,6 +58,11 @@ const initialState = {
     // matOffsetY: 0,
     // isChecked: false,
     // iframe: false
+  },
+  boardObj: {
+    name: '',
+    notes: [],
+    backgroundColor: '#1670d7',
   },
   notes: initialArray,
 }

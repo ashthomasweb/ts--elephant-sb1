@@ -1,7 +1,7 @@
 // user-options.component.jsx
 
-import { useContext } from 'react'
-import { MainContext } from '../../context/main/MainState'
+// import { useContext } from 'react'
+// import { MainContext } from '../../context/main/MainState'
 import SignInUpModal from '../signinupmodal/signinupmodal.component'
 import { auth } from '../../firebase/firebase.utils'
 import logo from '../../assets/elephant-logo.png'
@@ -11,13 +11,13 @@ type Props = {
   currentUser: any
 }
 
-const UserOptions = (props: Props) => {
-  const {
-    state: { user },
-    dispatch,
-  } = useContext(MainContext)
+const UserOptions = (props: Props): JSX.Element => {
+  // const {
+  //   state: { user },
+  //   dispatch,
+  // } = useContext(MainContext)
 
-  const modalToggle = () => {
+  const modalToggle = () => { // NEEDS DISPLAY REDUCER
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     let el: any = document.querySelector('.sign-modal').style

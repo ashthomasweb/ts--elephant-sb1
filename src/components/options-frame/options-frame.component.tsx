@@ -3,16 +3,45 @@
 import { useContext } from "react";
 import { MainContext } from '../../context/main/MainState'
 import { newNoteGenerator } from "../../methods/new-note"
-
+import { saveUserBoard } from '../../firebase/firebase.utils'
 import './options-frame.styles.scss'
 
-const OptionsFrame = (): JSX.Element => {
+type PropsType = {
+  currentUser: any
+}
 
-  const { state: { notes, newNote }, dispatch } = useContext(MainContext)
+const OptionsFrame = (props: PropsType): JSX.Element => {
+
+  const { state: { notes, newNote, boardObj }, dispatch } = useContext(MainContext)
 
   function newNoteHandler(notesObj: any, newNote: any, isMat=false) {
       let notes = newNoteGenerator(notesObj, newNote, isMat)
       dispatch({ type: 'SET_ALL_NOTES', payload: notes })
+  }
+  
+  function saveCurrentBoard() {
+    let newBoardObj: any = {}
+    newBoardObj = {
+      name: boardObj.name,
+      notes: [...notes],
+      backgroundColor: boardObj.backgroundColor,
+    }
+    dispatch({ type: 'SET_BOARDOBJ', payload: newBoardObj})
+    saveBoardToDatabase(newBoardObj)
+  }
+
+  function saveBoardToDatabase(boardObj: {name: any, notes: any[], backgroundColor: string}) {
+    if (props.currentUser === null) {
+      // NEED localhost option
+      console.log('no user')
+    } else {
+      saveUserBoard(props.currentUser.auth, boardObj)
+    }
+  }
+
+  function changeBoardName(e: any) {
+    boardObj.name = e.target.value
+    dispatch({ type: 'ONCHANGE_BOARDNAME', payload: boardObj})
   }
 
   return (
@@ -43,9 +72,11 @@ const OptionsFrame = (): JSX.Element => {
               type='text'
               className='save-board-input'
               placeholder='Enter Board Name'
+              onChange={changeBoardName}
+
             />
             <button type='button'
-            // onClick={() => this.saveCurrentBoard()}
+            onClick={() => saveCurrentBoard()}
             >
               Save
             </button>

@@ -16,6 +16,15 @@ const MainBoard = (props: Props): JSX.Element => {
     dispatch,
   } = useContext(MainContext)
 
+  const getMousePos = (e: any): void => {
+    const rect: any = e.target.getBoundingClientRect()
+    const mouseOffset: object = {
+      left: e.pageX - rect.left,
+      top: e.pageY - rect.top,
+    }
+    dispatch({ type: 'SET_MOUSE_OFFSET', payload: mouseOffset })
+  }
+
   const getPosition = (
     parent: any,
     position: string,
@@ -34,15 +43,6 @@ const MainBoard = (props: Props): JSX.Element => {
       id: e.target.id,
     }
     dispatch({ type: 'SET_NOTE_POSITION', payload: notePosition })
-  }
-
-  const getMousePos = (e: any): void => {
-    const rect: any = e.target.getBoundingClientRect()
-    const mouseOffset: object = {
-      left: e.pageX - rect.left,
-      top: e.pageY - rect.top,
-    }
-    dispatch({ type: 'SET_MOUSE_OFFSET', payload: mouseOffset })
   }
 
   return (

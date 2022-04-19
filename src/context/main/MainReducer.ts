@@ -47,14 +47,24 @@ export const mainReducer = (state: any, action: any) => {
             }
         }
         case "ONCHANGE_TEXT":
-            {
-                let newNote = {...state.newNote}
-                newNote.noteText = action.payload
-                return {
-                    ...state,
-                    newNote: newNote
-                }
+        {
+            let newNote = {...state.newNote}
+            newNote.noteText = action.payload
+            return {
+                ...state,
+                newNote: newNote
             }
+        }
+        case "SET_BOARDOBJ":
+            return {
+                ...state,
+                boardObj: action.payload
+            }
+        case "ONCHANGE_BOARDNAME":
+            return {
+                ...state,
+                boardObj: action.payload
+        }
         default:
             return state
     }

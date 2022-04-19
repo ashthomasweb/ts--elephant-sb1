@@ -19,7 +19,7 @@ const UserInterface = (props: Props): JSX.Element => {
   return (
     <div className='interface-wrapper'>
       <UserOptions currentUser={props.currentUser} />
-      <OptionsFrame />
+      <OptionsFrame currentUser={props.currentUser}/>
       <PadFrame />
       <TrashFrame />
     </div>

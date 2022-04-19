@@ -12,6 +12,7 @@ let config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
 }
+export var userBoards: any[] = []
 
 // returns reference object for user login
 export const getUserRef = async (userAuth: any) => {
@@ -43,83 +44,81 @@ export const createNewUserProfile = async (userAuth: any, additionalData: any) =
   }
 }
 
-// export const saveUserBoard = async (userAuth, boardObj) => {
-//   if (boardObj.name === '') return
+export const saveUserBoard = async (userAuth: any, boardObj: {[key: string]: any}) => {
+  console.log(userAuth, boardObj)
+  if (boardObj.name === '') return
 
-//   const boardRef = firestore.doc(
-//     `users/${userAuth.uid}/boards/${boardObj.name}`
-//   )
+  const boardRef = firestore.doc(
+    `users/${userAuth.uid}/boards/${boardObj.name}`
+  )
 
-//   const snapShot = await boardRef.get()
+  const snapShot = await boardRef.get()
 
-//   if (!snapShot.exists) {
-//     const { name, notes, backgroundColor } = boardObj
-//     try {
-//       await boardRef.set({
-//         name,
-//         notes,
-//         backgroundColor
-//       })
-//     } catch (error) {
-//       console.log('error creating board', error.message)
-//     }
-//   } else if (snapShot.exists) {
-//     const { notes, backgroundColor } = boardObj
-//     try {
-//       await boardRef.update({
-//         notes,
-//         backgroundColor
-//       })
-//     } catch (error) {
-//       console.log('error creating board', error.message)
-//     }
-//   }
+  if (!snapShot.exists) {
+    const { name, notes, backgroundColor } = boardObj
+    try {
+      await boardRef.set({
+        name,
+        notes,
+        backgroundColor
+      })
+    } catch (error: any) {
+      console.log('error creating board', error.message)
+    }
+  } else if (snapShot.exists) {
+    const { notes, backgroundColor } = boardObj
+    try {
+      await boardRef.update({
+        notes,
+        backgroundColor
+      })
+    } catch (error: any) {
+      console.log('error creating board', error.message)
+    }
+  }
 
-//   getUserBoards(userAuth)
-// }
+  getUserBoards(userAuth)
+}
 
-// export const deleteUserBoard = async (userAuth, boardName) => {
-//   const boardRef = firestore.doc(
-//     `users/${userAuth.uid}/boards/${boardName}`
-//   )
+export const deleteUserBoard = async (userAuth: any, boardName: string) => {
+  const boardRef = firestore.doc(
+    `users/${userAuth.uid}/boards/${boardName}`
+  )
 
-//   const snapShot = await boardRef.get()
-
+  const snapShot = await boardRef.get()
  
-//   if (snapShot.exists) {
-//     try {
-//       await boardRef.delete()
-//     } catch (error) {
-//       console.log('error deleting board', error.message)
-//     }
-//   }
+  if (snapShot.exists) {
+    try {
+      await boardRef.delete()
+    } catch (error: any) {
+      console.log('error deleting board', error.message)
+    }
+  }
 
-//   getUserBoards(userAuth)
-// }
-
+  getUserBoards(userAuth)
+}
 
 // // retrieves saves user boards from firestore db
 // // called when App.js mounts and when user saves a board
 // // userboard obj gets passed back to Board Component
-// export const getUserBoards = (userAuth) => {
-//   if (!userAuth) return
-//   userBoards = []
-//   firestore
-//     .collection('users')
-//     .doc(`${userAuth.uid}`)
-//     .collection('boards')
-//     .get()
-//     .then((querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//         userBoards.push(doc.data())
-//       })
-//     })
-// }
+export const getUserBoards = (userAuth: any) => {
+  if (!userAuth) return
+  userBoards = []
+  firestore
+    .collection('users')
+    .doc(`${userAuth.uid}`)
+    .collection('boards')
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        userBoards.push(doc.data())
+      })
+    })
+}
 
-// export const clearBoards = () => {
-//   userBoards = []
-// }
-// export var userBoards = []
+export const clearBoards = () => {
+  userBoards = []
+}
 
 firebase.initializeApp(config)
 export const auth = firebase.auth()
