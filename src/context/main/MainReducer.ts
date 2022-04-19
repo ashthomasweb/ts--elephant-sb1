@@ -1,4 +1,4 @@
-// MainReducer.js
+// MainReducer.ts
 
 import { indexFinder } from '../../methods/num-finders'
 

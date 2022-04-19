@@ -1,4 +1,4 @@
-// user-interface.component.tsx
+// trash-frame.component.tsx
 
 // import { useContext } from 'react'
 // import { MainContext } from '../../context/main/MainState'

@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+// sign-in.component.tsx
+
+import { Component } from 'react'
 
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
@@ -27,9 +29,7 @@ class SignIn extends Component<PropsType, StateType> {
 
   handleSubmit = async (event: any) => {
     event.preventDefault()
-
     const { email, password } = this.state
-
     try {
       await auth.signInWithEmailAndPassword(email, password)
       this.setState({ email: email, password: password })

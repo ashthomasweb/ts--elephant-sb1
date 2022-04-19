@@ -1,11 +1,11 @@
-// new-note.component.jsx
+// note.component.tsx
 
 import { useContext } from 'react'
 import { MainContext } from '../../context/main/MainState'
 
 import './note.styles.scss'
 
-const Note = (props) => {
+const Note = (props: any) => {
   const {
     dispatch
   } = useContext(MainContext)

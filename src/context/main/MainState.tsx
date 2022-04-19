@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react'
 import { mainReducer } from './MainReducer'
-import { initialArray } from '../../assets/initial-array.js'
+import { initialArray } from '../../assets/initial-array'
 
 interface initialStateType {
   user: string

@@ -1,7 +1,5 @@
 // custom-button.component.tsx
 
-import React from 'react'
-
 import './custom-button.styles.scss'
 
 interface PropsType {

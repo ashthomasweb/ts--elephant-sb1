@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+// sign-up.compoenent.tsx
+
+import { Component } from 'react'
 
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
@@ -56,16 +58,6 @@ class SignUp extends Component<PropsType, StateType> {
     }
 
   }
-
-  // handleChange = (e: { target: { name: string; value: string }}) => {
-  // handleChange = (name: any, value: any) => {
-
-
-  //   // let key = name
-  //   // let value = value
-  //   console.log(name, value)
-  //   this.setState({...this.state, [name]: value})
-  // }
 
   handleChange = (event: any) => {
     const { value, name } = event.target

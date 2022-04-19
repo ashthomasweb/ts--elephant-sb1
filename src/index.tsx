@@ -18,6 +18,6 @@ ReactDOM.render(
     </MainState>
   </React.StrictMode>,
   rootElement
-);
+)
 
 // END of document

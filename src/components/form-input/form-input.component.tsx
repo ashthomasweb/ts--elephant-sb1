@@ -1,6 +1,6 @@
-import React from 'react'
+// form-input.component.tsx
 
-import './form-input.styles.scss' 
+import './form-input.styles.scss'
 
 interface PropsType {
   type: string
@@ -29,3 +29,5 @@ const FormInput = ({ handleChange, label, ...otherProps }: PropsType) => (
 )
 
 export default FormInput
+
+// END of document
