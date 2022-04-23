@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { auth, createNewUserProfile, getUserRef, /* getUserBoards */ } from './firebase/firebase.utils'
+import { auth, createNewUserProfile, getUserRef, getUserBoards } from './firebase/firebase.utils'
 
 import './App.css'
 import MainBoard from './components/main-board/main-board.component'
@@ -40,7 +40,7 @@ class App extends Component<MyProps, MyState> {
       } else if (userAuth == null) {
         this.setState({ currentUser: userAuth })
       }
-      // getUserBoards(userAuth)
+      getUserBoards(userAuth)
     })
 
     // function setZoom() {

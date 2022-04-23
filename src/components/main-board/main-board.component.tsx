@@ -6,6 +6,11 @@ import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
 import '../main-board/main-board.styles.scss'
 
+
+
+
+
+
 type Props = {
   currentUser: any
 }
@@ -44,6 +49,7 @@ const MainBoard = (props: Props): JSX.Element => {
     }
     dispatch({ type: 'SET_NOTE_POSITION', payload: notePosition })
   }
+
 
   return (
     <div className='board'>

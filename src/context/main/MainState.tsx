@@ -67,10 +67,7 @@ const initialState = {
   notes: initialArray,
 }
 
-export const MainContext = createContext<{
-  state: initialStateType
-  dispatch: React.Dispatch<any>
-}>({ state: initialState, dispatch: () => null })
+export const MainContext = createContext< {state: initialStateType, dispatch: React.Dispatch<any>} >({ state: initialState, dispatch: () => null })
 
 const MainState = (props: any) => {
   const [state, dispatch] = useReducer(mainReducer, initialState)

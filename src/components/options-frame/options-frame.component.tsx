@@ -3,8 +3,11 @@
 import { useContext } from "react";
 import { MainContext } from '../../context/main/MainState'
 import { newNoteGenerator } from "../../methods/new-note"
-import { saveUserBoard } from '../../firebase/firebase.utils'
+import { saveUserBoard, deleteUserBoard, userBoards } from '../../firebase/firebase.utils'
 import './options-frame.styles.scss'
+
+import { dropHelper } from '../../methods/drop-helper'
+
 
 type PropsType = {
   currentUser: any
@@ -44,6 +47,77 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     dispatch({ type: 'ONCHANGE_BOARDNAME', payload: boardObj})
   }
 
+  
+
+
+  function userBoardDropDown() {
+    let el = document.querySelector('.board-drop').style
+    putBoardsToList()
+    el.display === 'block' ? (el.display = 'none') : (el.display = 'block')
+  }
+
+  function putBoardsToList() {
+    let parentMenuCont = document.querySelector('.board-drop')
+    let newMenu = document.createElement('div')
+    if (parentMenuCont.firstChild)
+      parentMenuCont.removeChild(parentMenuCont.firstChild)
+    userBoards.forEach((boardObj) => {
+      const [cont, button, xButton] = dropHelper(boardObj)
+      buildBoardButton(boardObj, button, xButton)
+      cont.append(xButton, button)
+      newMenu.append(cont)
+    })
+    parentMenuCont.append(newMenu)
+  }
+
+  function buildBoardButton(boardObj: any, button: any, xButton: any) {
+    xButton.addEventListener('click', () =>
+      deleteBoardHandler(boardObj.name)
+    )
+    button.addEventListener('click', async () => {
+      console.log(arguments)
+      let notes: any[] = []
+      await dispatch({ type: 'SET_ALL_NOTES', payload: notes })
+      notes = [...boardObj.notes]
+      boardObj.backgroundColor ?? (boardObj.backgroundColor = '#1670d7')
+      await dispatch({ type: 'SET_ALL_NOTES', payload: notes })
+      await dispatch({ type: 'SET_BOARDOBJ', payload: boardObj })
+
+      displayUpdate()
+      document.querySelector('.save-board-input').value = boardObj.name
+      document.querySelector('.board-drop').style.display = 'none'
+
+      // this.setState({ notes, boardObj }, () => {
+      // })
+    })
+  }
+
+  function displayUpdate() {
+    let bg = boardObj.backgroundColor
+    document.querySelector('#note-color-pick').defaultValue = newNote.noteBColor
+    document.querySelector('#bg-color-pick').defaultValue = bg.length > 7 ? '#1670d7' : bg
+  }
+
+  // confirmation request, then firestore method
+  async function deleteBoardHandler(boardName: string) {
+    let dropMenu = document.querySelector('.board-drop')
+    if (
+      window.confirm(
+        `Are you sure you want to delete the board "${boardName}"? Action is permanent! However, this will NOT delete the notes from the screen, only the board in the database.`
+      )
+    ) {
+      await deleteUserBoard(props.currentUser.auth, boardName)
+      dropMenu.style.display = 'none'
+    }
+  }
+
+  function displayUpdate() {
+    let bg = boardObj.backgroundColor
+    document.querySelector('#note-color-pick').defaultValue = newNote.noteBColor
+    document.querySelector('#bg-color-pick').defaultValue = bg.length > 7 ? '#1670d7' : bg
+  }
+
+
   return (
     <div className='options-frame'>
           <div className='zoom-options'>
@@ -73,7 +147,6 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
               className='save-board-input'
               placeholder='Enter Board Name'
               onChange={changeBoardName}
-
             />
             <button type='button'
             onClick={() => saveCurrentBoard()}
@@ -83,14 +156,14 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
             <button
               type='button'
               className='new-button'
-            //   onClick={() => this.newBoard()}
+              //   onClick={() => this.newBoard()}
               >
               New Board
             </button>
             <button
               type='button'
               style={{ width: '135px' }}
-            //   onClick={() => this.userBoardDropDown()}
+              onClick={() => userBoardDropDown()}
             >
               Your Saved Boards
             </button>

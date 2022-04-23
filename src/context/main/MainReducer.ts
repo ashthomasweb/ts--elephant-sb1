@@ -37,7 +37,7 @@ export const mainReducer = (state: any, action: any) => {
             return {
                 ...state,
                 currentUser: currentUser
-            }   
+            }
         case "SET_ALL_NOTES":
             {
             let notes = [...action.payload]

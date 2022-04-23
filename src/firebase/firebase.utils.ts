@@ -45,7 +45,6 @@ export const createNewUserProfile = async (userAuth: any, additionalData: any) =
 }
 
 export const saveUserBoard = async (userAuth: any, boardObj: {[key: string]: any}) => {
-  console.log(userAuth, boardObj)
   if (boardObj.name === '') return
 
   const boardRef = firestore.doc(
