@@ -30,6 +30,7 @@ interface initialStateType {
   boardObj: any
   boardIsOpen: boolean
   notes: any
+  display: any
 }
 
 const initialState = {
@@ -67,12 +68,17 @@ const initialState = {
   },
   boardIsOpen: false,
   notes: initialArray,
+  display: {
+    noteBColor: '#f2ecb3',
+    bgColor: '#1670d7'
+  }
 }
 
 export const MainContext = createContext< {state: initialStateType, dispatch: React.Dispatch<any>} >({ state: initialState, dispatch: () => null })
 
 const MainState = (props: any) => {
   const [state, dispatch] = useReducer(mainReducer, initialState)
+
   const value = { state, dispatch }
 
   return (

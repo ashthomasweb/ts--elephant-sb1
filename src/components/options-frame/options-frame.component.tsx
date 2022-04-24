@@ -13,14 +13,7 @@ type PropsType = {
 
 const OptionsFrame = (props: PropsType): JSX.Element => {
 
-  const { state: { notes, newNote, boardObj, boardIsOpen }, dispatch } = useContext(MainContext)
-  const boardInput = useRef(null)
-
-  function testRef() {
-    let el: any = boardInput.current
-
-    console.log(el.value)
-  }
+  const { state: { notes, newNote, boardObj, boardIsOpen, display }, dispatch } = useContext(MainContext)
 
   function newNoteHandler(notesObj: any, newNote: any, isMat=false) {
       let notes = newNoteGenerator(notesObj, newNote, isMat)
@@ -50,6 +43,16 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
   function changeBoardName(e: any) {
     boardObj.name = e.target.value
     dispatch({ type: 'ONCHANGE_BOARDNAME', payload: boardObj})
+  }
+
+  function changeBGColor(e: any) {
+    display.bgColor = e.target.value
+    dispatch({ type: 'ONCHANGE_BGCOLOR', payload: display})
+  }
+
+  function changeNoteColor(e: any) {
+    display.noteBColor = e.target.value
+    dispatch({ type: 'ONCHANGE_NOTECOLOR', payload: display})
   }
 
   function userBoardDropDown() {
@@ -82,9 +85,9 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
             <h3>Save Boards</h3>
             <input
               type='text'
-              ref={boardInput} // needs controlled input
               className='save-board-input'
               placeholder='Enter Board Name'
+              value={boardObj.name}
               onChange={changeBoardName}
             />
             <button type='button'
@@ -95,7 +98,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
             <button
               type='button'
               className='new-button'
-                onClick={() => testRef()}
+                // onClick={() => newBoard()}
               >
               New Board
             </button>
@@ -106,8 +109,8 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
             >
               Your Saved Boards
             </button>
-            {isOpen && (
-              <BoardMenu currentUser={pcurrentUser} />
+            {boardIsOpen && (
+              <BoardMenu currentUser={props.currentUser} />
             )}
             
           </div>
@@ -122,7 +125,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
           <button
             className='options-btn mat'
             type='button'
-            // onClick={() => this.newMatHandler()}
+            // onClick={this.newMatHandler}
             >
             Mat
           </button>
@@ -135,7 +138,9 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
           </button>
           <input
             type='color'
+            value={display.bgColor}
             className='color-elements'
+            onChange={changeBGColor}
             id='bg-color-pick'></input>
           <button
             type='button'
@@ -147,7 +152,9 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
           </button>
           <input
             type='color'
+            value={display.noteBColor}
             className='color-elements'
+            onChange={changeNoteColor}
             id='note-color-pick'></input>
           <label className='switch'>
             <label htmlFor='check-toggle' className='check-label'>

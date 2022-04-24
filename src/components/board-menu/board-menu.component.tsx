@@ -11,7 +11,7 @@ type PropsType = {
 }
 
 const BoardMenu = (props: PropsType): JSX.Element => {
-  const { state: {boardObj, newNote, boardIsOpen}, // needs to get input from board save
+  const { state: { boardIsOpen },
     dispatch,
   } = useContext(MainContext)
 
@@ -39,8 +39,6 @@ const BoardMenu = (props: PropsType): JSX.Element => {
   }
 
   function buildBoardButton(boardObj: any, button: any, xButton: any) {
-    let input: any = boardInput.current
-
     xButton.addEventListener('click', () =>
       deleteBoardHandler(boardObj.name)
     )
@@ -51,16 +49,8 @@ const BoardMenu = (props: PropsType): JSX.Element => {
       boardObj.backgroundColor ?? (boardObj.backgroundColor = '#1670d7')
       await dispatch({ type: 'SET_ALL_NOTES', payload: notes })
       await dispatch({ type: 'SET_BOARDOBJ', payload: boardObj })
-      displayUpdate()
-      input.value = boardObj.name // should be controlled input
       dispatch({ type: 'TOG_BOARD_MENU', payload: boardIsOpen})
     })
-  }
-
-  function displayUpdate() { // refs and display reducer
-    let bg = boardObj.backgroundColor
-    document.querySelector('#note-color-pick').defaultValue = newNote.noteBColor
-    document.querySelector('#bg-color-pick').defaultValue = bg.length > 7 ? '#1670d7' : bg
   }
 
   // confirmation request, then firestore method

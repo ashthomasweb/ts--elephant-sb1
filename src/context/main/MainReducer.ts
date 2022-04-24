@@ -71,6 +71,16 @@ export const mainReducer = (state: any, action: any) => {
                 ...state,
                 boardIsOpen: boardIsOpen
         }
+        case "ONCHANGE_BGCOLOR":
+            return {
+                ...state,
+                display: action.payload
+        }
+        case "ONCHANGE_NOTECOLOR":
+            return {
+                ...state,
+                display: action.payload
+        }
         default:
             return state
     }
