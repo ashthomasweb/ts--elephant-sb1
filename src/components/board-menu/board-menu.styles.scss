@@ -1,0 +1,27 @@
+
+    .board-drop {
+        background-color: var(--secondary);
+        padding: 10px 0;
+        position: absolute;
+        top: 114px;
+        width: 200px;
+        display: block;
+    
+        button {
+          float: left;
+          margin: 3px 6px 3px 12px;
+        }
+    
+        .delete {
+          background-color: red;
+          color: white;
+          border-radius: 5px;
+        }
+    
+        .button-cont {
+          position: relative;
+          float: left;
+          width: 100%;
+        }
+    
+      }

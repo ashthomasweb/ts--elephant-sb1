@@ -28,6 +28,7 @@ interface initialStateType {
     // iframe: false
   }
   boardObj: any
+  boardIsOpen: boolean
   notes: any
 }
 
@@ -64,6 +65,7 @@ const initialState = {
     notes: [],
     backgroundColor: '#1670d7',
   },
+  boardIsOpen: false,
   notes: initialArray,
 }
 

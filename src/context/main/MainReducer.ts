@@ -65,6 +65,12 @@ export const mainReducer = (state: any, action: any) => {
                 ...state,
                 boardObj: action.payload
         }
+        case "TOG_BOARD_MENU":
+            let boardIsOpen = !action.payload
+            return {
+                ...state,
+                boardIsOpen: boardIsOpen
+        }
         default:
             return state
     }
