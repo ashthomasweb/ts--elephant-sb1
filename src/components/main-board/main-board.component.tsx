@@ -17,7 +17,7 @@ type Props = {
 
 const MainBoard = (props: Props): JSX.Element => {
   const {
-    state: { mouseOffset, notes },
+    state: { mouseOffset, notes, display },
     dispatch,
   } = useContext(MainContext)
 
@@ -56,7 +56,7 @@ const MainBoard = (props: Props): JSX.Element => {
       {/* Interface Components */}
       <UserInterface currentUser={props.currentUser} />
       {/* Board and notes */}
-      <div className='board__backing'>
+      <div className='board__backing' style={{backgroundColor: display.bgColor}}>
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: [] }) => (
           <Note
             id={id}

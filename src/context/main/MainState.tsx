@@ -12,13 +12,13 @@ interface initialStateType {
     width: string
     height: string
     noteText: string
+    noteBColor: string
     // zIndex: 0,
     // trayText: '',
     // isTrayDisplay: false,
     // trayWidth: '150px',
     // trayHeight: '200px',
     // border: 'none',
-    // noteBColor: '#f2ecb3',
     // isMatBoard: false,
     // isNew: true,
     // noteGroup: [],
@@ -46,13 +46,13 @@ const initialState = {
     width: '120px',
     height: '200px',
     noteText: '',
+    noteBColor: '#f2ecb3',
     // zIndex: 0,
     // trayText: '',
     // isTrayDisplay: false,
     // trayWidth: '150px',
     // trayHeight: '200px',
     // border: 'none',
-    // noteBColor: '#f2ecb3',
     // isMatBoard: false,
     // isNew: true,
     // noteGroup: [],
@@ -69,7 +69,6 @@ const initialState = {
   boardIsOpen: false,
   notes: initialArray,
   display: {
-    noteBColor: '#f2ecb3',
     bgColor: '#1670d7'
   }
 }

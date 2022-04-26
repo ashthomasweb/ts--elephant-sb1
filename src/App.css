@@ -2,24 +2,3 @@
   font-family: sans-serif;
   text-align: center;
 }
-
-.board {
-  position: relative;
-  height: fit-content;
-  width: fit-content;
-  height: 2000px;
-  width: 3000px;
-}
-
-.board__backing {
-  height: 2000px;
-  width: 3000px;
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  background-image: url(https://picsum.photos/1000/600);
-}
-
-.board__backing img {
-  object-position: center;
-}

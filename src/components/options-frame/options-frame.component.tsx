@@ -51,8 +51,8 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
   }
 
   function changeNoteColor(e: any) {
-    display.noteBColor = e.target.value
-    dispatch({ type: 'ONCHANGE_NOTECOLOR', payload: display})
+    newNote.noteBColor = e.target.value
+    dispatch({ type: 'ONCHANGE_NOTECOLOR', payload: newNote})
   }
 
   function userBoardDropDown() {
@@ -151,7 +151,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
           </button>
           <input
             type='color'
-            value={display.noteBColor}
+            value={newNote.noteBColor}
             className='color-elements'
             onChange={changeNoteColor}
             id='note-color-pick'></input>

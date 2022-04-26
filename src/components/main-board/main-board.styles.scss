@@ -1,5 +1,33 @@
 // main-board.styles.scss
 
+
+.board {
+  position: relative;
+  height: fit-content;
+  width: fit-content;
+  height: 2000px;
+  width: 3000px;
+}
+
+.board__backing {
+  height: 2000px;
+  width: 3000px;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  background-image: url(https://picsum.photos/1000/600);
+  background-color: #359b42;
+}
+
+.board__backing img {
+  object-position: center;
+}
+
+
+
+
+
+//  original styles 
 .board-backing {
   width: 100vw;
   height: 100vh;

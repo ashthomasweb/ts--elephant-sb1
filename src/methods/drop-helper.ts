@@ -1,4 +1,4 @@
-export const dropHelper = (boardObj) => {
+export const dropHelper = (boardObj: any) => {
 
     let cont = document.createElement('div')
     let xButton = document.createElement('button')

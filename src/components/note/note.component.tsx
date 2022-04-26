@@ -12,16 +12,17 @@ const Note = (props: any) => {
 
   let noteData = props.noteData
 
-  let notePosition = { // package position coordinates for easy CSS assignment
+  let noteStyle = { // package position coordinates for easy CSS assignment
     left: noteData.left,
-    top: noteData.top
+    top: noteData.top,
+    backgroundColor: noteData.noteBColor
   }
 
   return (
     <div
       className='note-base'
       id={props.id}
-      style={notePosition}
+      style={noteStyle}
       onDrag={props.dragNote}
       onMouseDown={props.getMousePos}
       onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), -9000, -9000)}
