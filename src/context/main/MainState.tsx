@@ -30,7 +30,6 @@ interface initialStateType {
   boardObj: any
   boardIsOpen: boolean
   notes: any
-  display: any
 }
 
 const initialState = {
@@ -68,9 +67,6 @@ const initialState = {
   },
   boardIsOpen: false,
   notes: initialArray,
-  display: {
-    bgColor: '#1670d7'
-  }
 }
 
 export const MainContext = createContext< {state: initialStateType, dispatch: React.Dispatch<any>} >({ state: initialState, dispatch: () => null })

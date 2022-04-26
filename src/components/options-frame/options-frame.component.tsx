@@ -13,7 +13,7 @@ type PropsType = {
 
 const OptionsFrame = (props: PropsType): JSX.Element => {
 
-  const { state: { notes, newNote, boardObj, boardIsOpen, display }, dispatch } = useContext(MainContext)
+  const { state: { notes, newNote, boardObj, boardIsOpen }, dispatch } = useContext(MainContext)
 
   function newNoteHandler(notesObj: any, newNote: any, isMat=false) {
       let notes = newNoteGenerator(notesObj, newNote, isMat)
@@ -46,8 +46,8 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
   }
 
   function changeBGColor(e: any) {
-    display.bgColor = e.target.value
-    dispatch({ type: 'ONCHANGE_BGCOLOR', payload: display})
+    boardObj.backgroundColor = e.target.value
+    dispatch({ type: 'ONCHANGE_BGCOLOR', payload: boardObj})
   }
 
   function changeNoteColor(e: any) {
@@ -137,7 +137,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
           </button>
           <input
             type='color'
-            value={display.bgColor}
+            value={boardObj.backgroundColor}
             className='color-elements'
             onChange={changeBGColor}
             id='bg-color-pick'></input>
