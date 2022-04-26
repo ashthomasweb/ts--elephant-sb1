@@ -1,6 +1,6 @@
 // options-frame.component.tsx
 
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { MainContext } from '../../context/main/MainState'
 import { newNoteGenerator } from "../../methods/new-note"
 import { saveUserBoard } from '../../firebase/firebase.utils'
@@ -112,7 +112,6 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
             {boardIsOpen && (
               <BoardMenu currentUser={props.currentUser} />
             )}
-            
           </div>
 
           <button
@@ -163,11 +162,6 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
             <input id='check-toggle' type='checkbox' />
             <span className='slider round'></span>
           </label>
-          {/* <button
-          type='button'
-          className='embed-btn'
-          onClick={() => this.embedBrowser()}
-          >Embed</button> */}
         </div>
   )
 }
