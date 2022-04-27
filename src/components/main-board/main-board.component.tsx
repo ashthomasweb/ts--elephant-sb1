@@ -49,7 +49,7 @@ const MainBoard = (props: Props): JSX.Element => {
   }
 
   const onDrop = async (e: any) => {
-    let newNotes: any[] = await trashHandler(e, [...notes])
+    let newNotes: any[] = await trashHandler(e, [...notes], dispatch)
     dispatch({ type: 'SET_ALL_NOTES', payload: newNotes})
   }
 

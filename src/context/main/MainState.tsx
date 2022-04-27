@@ -5,7 +5,7 @@ import { initialArray } from '../../assets/initial-array'
 interface initialStateType {
   user: string
   mouseOffset: any
-  // uiZoom: number
+  updateActive: boolean
   newNote: {
     id: number
     left: string
@@ -41,6 +41,7 @@ const initialState = {
     left: 0,
     top: 0,
   },
+  updateActive: false,
   newNote: {
     id: 1,
     left: '',

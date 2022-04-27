@@ -13,7 +13,7 @@ type PropsType = {
 
 const OptionsFrame = (props: PropsType): JSX.Element => {
   const {
-    state: { notes, newNote, boardObj, menuIsOpen, display },
+    state: { notes, newNote, boardObj, menuIsOpen, display, updateActive },
     dispatch,
   } = useContext(MainContext)
 
@@ -57,8 +57,15 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
   }
 
   function changeNoteColor(e: any) {
-    newNote.noteBColor = e.target.value
-    dispatch({ type: 'ONCHANGE_NOTECOLOR', payload: newNote })
+    if (updateActive) {
+      notes.forEach((note: any) => {
+        note.isUpdate === true && (note.noteBColor = e.target.value)
+      })
+      dispatch({ type: 'SET_ALL_NOTES', payload: notes })
+    } else {
+      newNote.noteBColor = e.target.value
+      dispatch({ type: 'ONCHANGE_NOTECOLOR', payload: newNote })
+    }
   }
 
   function userBoardDropDown() {

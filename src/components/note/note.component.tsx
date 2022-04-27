@@ -19,8 +19,7 @@ const Note = (props: any) => {
   }
 
   function toggleUpdateMode(e: any) {
-    console.log(e.target.id)
-    dispatch({ type: 'TOG_UPDATE_BORDER', payload: e.target.id })
+    dispatch({ type: 'TOG_UPDATE_MODE', payload: e.target.id })
   }
 
   // controlled input elements

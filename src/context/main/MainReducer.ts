@@ -1,6 +1,7 @@
 // MainReducer.ts
 
 import { indexFinder } from '../../methods/num-finders'
+import { updateModeCheck } from '../../methods/update-helper'
 
 export const mainReducer = (state: any, action: any) => {
     switch (action.type) {
@@ -81,18 +82,27 @@ export const mainReducer = (state: any, action: any) => {
                 ...state,
                 newNote: action.payload
         }
-        case "TOG_UPDATE_BORDER":
+        case "TOG_UPDATE_MODE":
             {
                 let note = state.notes.filter((item: any) => item.id === Number(action.payload))[0]
                 let notes = [ ...state.notes]
+                // updateActive doesn't have to be set to the state value, 
+                // the handler will return the correct value either way, 
+                // but in this case the variable is being declared so 
+                // that it is hoisted and the handler is run at the 
+                // appropriate place in the stack
+                let updateActive = state.updateActive
                 note = {
                     ...note,
                     isUpdate: !note.isUpdate
                 }
                 notes[indexFinder(notes, note.id)] = note
+                // check if any notes are in update status
+                updateActive = updateModeCheck(notes)
                 return {
                     ...state,
-                    notes
+                    notes,
+                    updateActive
                 }
             }
         case "ONCHANGE_NOTETEXT":
@@ -116,14 +126,11 @@ export const mainReducer = (state: any, action: any) => {
                 ...state,
                 display: display
             }
-        case "SET_DEVICE_RATIO":
-            {
-                let display = {...state.display}
-                display.deviceRatio = action.payload
-                return {
-                    ...state,
-                    display: display
-                }
+        case "DISABLE_UPDATE_MODE":
+            let updateActive = false
+            return {
+                ...state,
+                updateActive: updateActive
             }
         default:
             return state

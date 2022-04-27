@@ -1,5 +1,7 @@
 // trashHandlers.ts
 
+import { updateModeCheck } from "./update-helper"
+
 export const trashBoxDisplay = (e: any) => {
   let xMax = e.view.innerWidth
   let zoomR = 135 / window.devicePixelRatio
@@ -15,7 +17,7 @@ export const trashBoxDisplay = (e: any) => {
   }
 }
 
-export const trashHandler = (e: any, notesObj: any[]): any[] => {
+export const trashHandler = (e: any, notesObj: any[], dispatch: any): any[] => {
   let deleteId = e.target.id
   let xMax = e.view.innerWidth
   let zoomR = 135 / window.devicePixelRatio
@@ -26,6 +28,7 @@ export const trashHandler = (e: any, notesObj: any[]): any[] => {
       }
     }
   }
+  !updateModeCheck(notesObj) && dispatch({ type: 'DISABLE_UPDATE_MODE' })
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   document.querySelector('.trash-frame').classList.remove('hovered')
