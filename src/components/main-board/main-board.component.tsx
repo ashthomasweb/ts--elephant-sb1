@@ -6,11 +6,6 @@ import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
 import '../main-board/main-board.styles.scss'
 
-
-
-
-
-
 type Props = {
   currentUser: any
 }
@@ -50,12 +45,11 @@ const MainBoard = (props: Props): JSX.Element => {
     dispatch({ type: 'SET_NOTE_POSITION', payload: notePosition })
   }
 
-
   return (
     <div className='board'>
       {/* Interface Components */}
       <UserInterface currentUser={props.currentUser} />
-      {/* Board and notes */}
+      {/* background and notes */}
       <div className='board__backing' style={{backgroundColor: boardObj.backgroundColor}}>
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: [] }) => (
           <Note
@@ -64,6 +58,7 @@ const MainBoard = (props: Props): JSX.Element => {
             dragNote={dragNote}
             getMousePos={getMousePos}
             noteData={noteProps}
+            
           />
         ))}
       </div>

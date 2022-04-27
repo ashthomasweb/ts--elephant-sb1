@@ -11,14 +11,14 @@ const PadFrame = (): JSX.Element => {
 
   // controlled input elements
   function changeInput(e: any) {
-    dispatch({ type: 'ONCHANGE_TEXT', payload: e.target.textContent })
+    dispatch({ type: 'ONCHANGE_TEXT', payload: e.target.innerText })
   }
 
   return (
     <div
       className='pad-frame'
       style={{ backgroundColor: newNote.noteBColor }}>
-      <div id='input-text' contentEditable='true' onInput={(e) => changeInput(e)}></div>
+      <div id='input-text' contentEditable='true' onInput={(e) => changeInput(e)} />
     </div>
   )
 }

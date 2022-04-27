@@ -13,13 +13,16 @@
 
 
 .note-base {
+    white-space: pre-line;
+
+    box-sizing: content-box;
     width: 20%;
     height: 20%;
     padding: 15px;
     // aspect-ratio: 1 / 1.42;
     position: absolute;
     // border-radius: 0.5rem;
-    // box-shadow: 5px 5px 10px 50px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 30px 40px rgba(0, 0, 0, 0.1);
     // background-color: rgba(0, 0, 0, 0.5);
     background-color: lightblue;
 
@@ -27,7 +30,6 @@
     // transition: opacity 200ms ease;
     // cursor: grab;
     resize: both;
-    border: 2px solid #444;
 }
 
 

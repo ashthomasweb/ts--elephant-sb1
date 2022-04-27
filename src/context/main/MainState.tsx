@@ -13,12 +13,13 @@ interface initialStateType {
     height: string
     noteText: string
     noteBColor: string
+    border: string
+    isUpdate: boolean
     // zIndex: 0,
     // trayText: '',
     // isTrayDisplay: false,
     // trayWidth: '150px',
     // trayHeight: '200px',
-    // border: 'none',
     // isMatBoard: false,
     // isNew: true,
     // noteGroup: [],
@@ -28,8 +29,9 @@ interface initialStateType {
     // iframe: false
   }
   boardObj: any
-  boardIsOpen: boolean
+  menuIsOpen: boolean
   notes: any
+  // display: any
 }
 
 const initialState = {
@@ -46,12 +48,13 @@ const initialState = {
     height: '200px',
     noteText: '',
     noteBColor: '#f2ecb3',
+    border: 'none',
+    isUpdate: false,
     // zIndex: 0,
     // trayText: '',
     // isTrayDisplay: false,
     // trayWidth: '150px',
     // trayHeight: '200px',
-    // border: 'none',
     // isMatBoard: false,
     // isNew: true,
     // noteGroup: [],
@@ -65,8 +68,10 @@ const initialState = {
     notes: [],
     backgroundColor: '#1670d7',
   },
-  boardIsOpen: false,
+  menuIsOpen: false,
   notes: initialArray,
+  // display: {
+  // }
 }
 
 export const MainContext = createContext< {state: initialStateType, dispatch: React.Dispatch<any>} >({ state: initialState, dispatch: () => null })

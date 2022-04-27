@@ -11,7 +11,7 @@ type PropsType = {
 }
 
 const BoardMenu = (props: PropsType): JSX.Element => {
-  const { state: { boardIsOpen },
+  const { state: { menuIsOpen },
     dispatch,
   } = useContext(MainContext)
 
@@ -49,7 +49,7 @@ const BoardMenu = (props: PropsType): JSX.Element => {
       boardObj.backgroundColor ?? (boardObj.backgroundColor = '#1670d7')
       await dispatch({ type: 'SET_ALL_NOTES', payload: notes })
       await dispatch({ type: 'SET_BOARDOBJ', payload: boardObj })
-      dispatch({ type: 'TOG_BOARD_MENU', payload: boardIsOpen})
+      dispatch({ type: 'TOG_BOARD_MENU', payload: menuIsOpen})
     })
   }
 
@@ -61,12 +61,12 @@ const BoardMenu = (props: PropsType): JSX.Element => {
       )
     ) {
       await deleteUserBoard(props.currentUser.auth, boardName)
-      dispatch({ type: 'TOG_BOARD_MENU', payload: boardIsOpen})
+      dispatch({ type: 'TOG_BOARD_MENU', payload: menuIsOpen})
     }
   }
 
   return (
-    <div className='board-drop' style={ boardIsOpen ? ( {display: 'block'} ) : ( { display: 'none' }) } ref={boardDropMenu}></div>
+    <div className='board-drop' style={ menuIsOpen ? ( {display: 'block'} ) : ( { display: 'none' }) } ref={boardDropMenu}></div>
   )
 }
 

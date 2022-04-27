@@ -66,10 +66,10 @@ export const mainReducer = (state: any, action: any) => {
                 boardObj: action.payload
         }
         case "TOG_BOARD_MENU":
-            let boardIsOpen = !action.payload
+            let menuIsOpen = !action.payload
             return {
                 ...state,
-                boardIsOpen: boardIsOpen
+                menuIsOpen: menuIsOpen
         }
         case "ONCHANGE_BGCOLOR":
             return {
@@ -81,6 +81,34 @@ export const mainReducer = (state: any, action: any) => {
                 ...state,
                 display: action.payload
         }
+        case "TOG_UPDATE_BORDER":
+        {
+            let note = state.notes.filter((item: any) => item.id === Number(action.payload))[0]
+            let notes = [ ...state.notes]
+            note = {
+                ...note,
+                isUpdate: !note.isUpdate
+            }
+            notes[indexFinder(notes, note.id)] = note
+            return {
+                ...state,
+                notes
+            }
+        }
+        case "ONCHANGE_NOTETEXT":
+            {
+                let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
+                let notes = [ ...state.notes]
+                note = {
+                    ...note,
+                    noteText: action.payload.text
+                }
+                notes[indexFinder(notes, note.id)] = note
+                return {
+                    ...state,
+                    notes: notes
+                }
+            }
         default:
             return state
     }

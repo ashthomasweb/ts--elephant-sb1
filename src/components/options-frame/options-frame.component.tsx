@@ -13,7 +13,7 @@ type PropsType = {
 
 const OptionsFrame = (props: PropsType): JSX.Element => {
 
-  const { state: { notes, newNote, boardObj, boardIsOpen }, dispatch } = useContext(MainContext)
+  const { state: { notes, newNote, boardObj, menuIsOpen }, dispatch } = useContext(MainContext)
 
   function newNoteHandler(notesObj: any, newNote: any, isMat=false) {
       let notes = newNoteGenerator(notesObj, newNote, isMat)
@@ -56,7 +56,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
   }
 
   function userBoardDropDown() {
-    dispatch({ type: 'TOG_BOARD_MENU', payload: boardIsOpen}) // display 
+    dispatch({ type: 'TOG_BOARD_MENU', payload: menuIsOpen}) // display 
   }
 
   return (
@@ -109,7 +109,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
             >
               Your Saved Boards
             </button>
-            {boardIsOpen && (
+            {menuIsOpen && (
               <BoardMenu currentUser={props.currentUser} />
             )}
           </div>
