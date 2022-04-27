@@ -65,7 +65,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     dispatch({ type: 'TOG_BOARD_MENU', payload: menuIsOpen })
   }
 
-  // inverse scaling
+  // devicePixelRatio scaling via user zoom
   window.addEventListener('resize', () => {
     let ui = [
       '.options-frame',
@@ -74,11 +74,11 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
       '.trash-frame',
     ]
     ui.forEach((item: any) => {
-      document.querySelector(item).style.zoom = `calc(100% / ${display.uiZoom * window.devicePixelRatio})`
+      document.querySelector(item).style.zoom = `calc(100% / ${ window.devicePixelRatio * display.uiZoom})`
     })
   })
 
-  // interface scaling
+  // interface scaling via state property uiZoom
   function zoomIntDir(directionUp: boolean) {
     let uiZoom = display.uiZoom
     directionUp ? (uiZoom = uiZoom - 0.14) : (uiZoom = uiZoom + 0.14)

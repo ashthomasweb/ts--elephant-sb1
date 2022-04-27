@@ -4,6 +4,8 @@ import { useContext } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
+import { trashBoxDisplay, trashHandler } from '../../methods/trashHandlers'
+
 import '../main-board/main-board.styles.scss'
 
 type Props = {
@@ -43,6 +45,12 @@ const MainBoard = (props: Props): JSX.Element => {
       id: e.target.id,
     }
     dispatch({ type: 'SET_NOTE_POSITION', payload: notePosition })
+    trashBoxDisplay(e)
+  }
+
+  const onDrop = async (e: any) => {
+    let newNotes: any[] = await trashHandler(e, [...notes])
+    dispatch({ type: 'SET_ALL_NOTES', payload: newNotes})
   }
 
   return (
@@ -50,7 +58,11 @@ const MainBoard = (props: Props): JSX.Element => {
       {/* Interface Components */}
       <UserInterface currentUser={props.currentUser} />
       {/* background and notes */}
-      <div className='board__backing' style={{backgroundColor: boardObj.backgroundColor}}>
+      <div 
+      className='board__backing' 
+      style={{backgroundColor: boardObj.backgroundColor}}
+      onDrop={onDrop}
+      >
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: [] }) => (
           <Note
             id={id}
@@ -58,7 +70,6 @@ const MainBoard = (props: Props): JSX.Element => {
             dragNote={dragNote}
             getMousePos={getMousePos}
             noteData={noteProps}
-            
           />
         ))}
       </div>

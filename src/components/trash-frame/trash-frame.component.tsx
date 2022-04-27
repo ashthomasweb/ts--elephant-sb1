@@ -7,13 +7,13 @@ import trashBottom from '../../assets/trash-bottom.png'
 import '../trash-frame/trash-frame.styles.scss'
 
 const TrashFrame = () : JSX.Element => {
-  const { state: { display },
-    dispatch,
+  const { state: { display }
+    // dispatch,
   } = useContext(MainContext)
 
-  function trashHover() {
-    // console.log('hidave')
-  }
+  // function trashHover() {
+  //   // console.log('hidave')
+  // }
 
   return (
     <div 
@@ -21,7 +21,8 @@ const TrashFrame = () : JSX.Element => {
       style={{
         zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})`,
       }}
-      onMouseOver={trashHover}>
+      // onMouseOver={trashHover}
+      >
       <div className='trash-cont'>
         <img src={trashTop} className='trash-top' alt='Lid of recycle can' />
         <img

@@ -4,19 +4,20 @@
     position: fixed;
     text-align: center;
     top: 10px;
-    right: 30px;
+    right: 10px;
     width: 125px;
     height: 124px;
     border-radius: 2px;
     border: 1px solid lightgrey;
     background-color: var(--primary);
     z-index: -2147483646;
-  
+    
     &:hover {
       background-color: var(--tertiary);
     }
-  
+    
     &.hovered {
+      pointer-events: none;
       background-color: var(--tertiary);
     }
   
@@ -28,7 +29,6 @@
       left: 50%;
       top: 50%;
       background-color: var(--primary-dark);
-  
       transform: translateX(-50%) translateY(-50%);
       border: 1px solid lightgrey;
   
@@ -40,7 +40,6 @@
   
       .trash-bottom {
         margin: 0 0 0px 1px;
-  
         display: block;
         width: 40px;
       }
