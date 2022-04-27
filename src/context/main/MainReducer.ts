@@ -74,27 +74,27 @@ export const mainReducer = (state: any, action: any) => {
         case "ONCHANGE_BGCOLOR":
             return {
                 ...state,
-                display: action.payload
+                boardObj: action.payload
         }
         case "ONCHANGE_NOTECOLOR":
             return {
                 ...state,
-                display: action.payload
+                newNote: action.payload
         }
         case "TOG_UPDATE_BORDER":
-        {
-            let note = state.notes.filter((item: any) => item.id === Number(action.payload))[0]
-            let notes = [ ...state.notes]
-            note = {
-                ...note,
-                isUpdate: !note.isUpdate
+            {
+                let note = state.notes.filter((item: any) => item.id === Number(action.payload))[0]
+                let notes = [ ...state.notes]
+                note = {
+                    ...note,
+                    isUpdate: !note.isUpdate
+                }
+                notes[indexFinder(notes, note.id)] = note
+                return {
+                    ...state,
+                    notes
+                }
             }
-            notes[indexFinder(notes, note.id)] = note
-            return {
-                ...state,
-                notes
-            }
-        }
         case "ONCHANGE_NOTETEXT":
             {
                 let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
@@ -107,6 +107,22 @@ export const mainReducer = (state: any, action: any) => {
                 return {
                     ...state,
                     notes: notes
+                }
+            }
+        case "SET_INTERFACE_ZOOM":
+            let display = {...state.display}
+            display.uiZoom = action.payload
+            return {
+                ...state,
+                display: display
+            }
+        case "SET_DEVICE_RATIO":
+            {
+                let display = {...state.display}
+                display.deviceRatio = action.payload
+                return {
+                    ...state,
+                    display: display
                 }
             }
         default:

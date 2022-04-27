@@ -5,7 +5,7 @@ import { MainContext } from '../../context/main/MainState'
 import '../pad-frame/pad-frame.styles.scss'
 
 const PadFrame = (): JSX.Element => {
-  const { state: { newNote },
+  const { state: { newNote, display },
     dispatch,
   } = useContext(MainContext)
 
@@ -17,7 +17,7 @@ const PadFrame = (): JSX.Element => {
   return (
     <div
       className='pad-frame'
-      style={{ backgroundColor: newNote.noteBColor }}>
+      style={{ backgroundColor: newNote.noteBColor, zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})` }}>
       <div id='input-text' contentEditable='true' onInput={(e) => changeInput(e)} />
     </div>
   )

@@ -1,7 +1,7 @@
 // user-options.component.jsx
 
-// import { useContext } from 'react'
-// import { MainContext } from '../../context/main/MainState'
+import { useContext } from 'react'
+import { MainContext } from '../../context/main/MainState'
 import SignInUpModal from '../signinupmodal/signinupmodal.component'
 import { auth } from '../../firebase/firebase.utils'
 import logo from '../../assets/elephant-logo.png'
@@ -12,10 +12,9 @@ type Props = {
 }
 
 const UserOptions = (props: Props): JSX.Element => {
-  // const {
-  //   state: { user },
-  //   dispatch,
-  // } = useContext(MainContext)
+  const {
+    state: { display }
+  } = useContext(MainContext)
 
   const modalToggle = () => { // NEEDS DISPLAY REDUCER
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -25,7 +24,11 @@ const UserOptions = (props: Props): JSX.Element => {
   }
 
   return (
-    <div className='header'>
+    <div className='header'
+    style={{
+      zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})`,
+    }}
+    >
       <div className='user-options'>
         {props.currentUser ? (
           <div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { auth, createNewUserProfile, getUserRef, getUserBoards } from './firebase/firebase.utils'
-
 import './App.css'
 import MainBoard from './components/main-board/main-board.component'
 
@@ -16,7 +15,7 @@ class App extends Component<MyProps, MyState> {
   constructor(props: MyProps) {
     super(props)
     this.state = {
-      uiZoom: 1.1
+      // uiZoom: 1.1
     }
   }
 
@@ -56,21 +55,6 @@ class App extends Component<MyProps, MyState> {
     // window.addEventListener('dragover', (e) => e.preventDefault(), false)
     // window.addEventListener('dragend', (e) => e.preventDefault(), false)
     window.addEventListener('DOMContentLoaded', () => setZoom() )
-
-    window.addEventListener('resize', () => {
-      let ui = [
-        '.options-frame',
-        '.header',
-        '.pad-frame',
-        '.trash-frame',
-      ]
-      ui.forEach((item: any) => {
-        document.querySelector(item).style.zoom = `calc(100% / ${
-          this.state.uiZoom * window.devicePixelRatio
-        })`
-      })
-    })
-
   }
 
   componentWillUnmount() {

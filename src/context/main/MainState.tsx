@@ -5,6 +5,7 @@ import { initialArray } from '../../assets/initial-array'
 interface initialStateType {
   user: string
   mouseOffset: any
+  // uiZoom: number
   newNote: {
     id: number
     left: string
@@ -31,7 +32,7 @@ interface initialStateType {
   boardObj: any
   menuIsOpen: boolean
   notes: any
-  // display: any
+  display: any
 }
 
 const initialState = {
@@ -70,8 +71,9 @@ const initialState = {
   },
   menuIsOpen: false,
   notes: initialArray,
-  // display: {
-  // }
+  display: {
+    uiZoom: 1.1,
+  }
 }
 
 export const MainContext = createContext< {state: initialStateType, dispatch: React.Dispatch<any>} >({ state: initialState, dispatch: () => null })

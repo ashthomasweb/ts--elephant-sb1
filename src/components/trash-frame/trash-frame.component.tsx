@@ -1,23 +1,26 @@
 // trash-frame.component.tsx
 
-// import { useContext } from 'react'
-// import { MainContext } from '../../context/main/MainState'
+import { useContext } from 'react'
+import { MainContext } from '../../context/main/MainState'
 import trashTop from '../../assets/trash-top.png'
 import trashBottom from '../../assets/trash-bottom.png'
 import '../trash-frame/trash-frame.styles.scss'
 
 const TrashFrame = () : JSX.Element => {
-  // const {
-  //   dispatch,
-  // } = useContext(MainContext)
+  const { state: { display },
+    dispatch,
+  } = useContext(MainContext)
 
   function trashHover() {
-    console.log('hidave')
-    
+    // console.log('hidave')
   }
 
   return (
-    <div className='trash-frame'
+    <div 
+      className='trash-frame'
+      style={{
+        zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})`,
+      }}
       onMouseOver={trashHover}>
       <div className='trash-cont'>
         <img src={trashTop} className='trash-top' alt='Lid of recycle can' />
