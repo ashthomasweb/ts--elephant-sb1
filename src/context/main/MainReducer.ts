@@ -20,13 +20,14 @@ export const mainReducer = (state: any, action: any) => {
                 ...state,
                 mouseOffset: mouseOffset
             }
-        case "SET_NOTE_POSITION":
+        case "SET_NOTE_DATA":
             let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
             let notes = [ ...state.notes]
             note = {
                 ...note,
                 left: action.payload.left,
-                top: action.payload.top
+                top: action.payload.top,
+                zIndex: action.payload.zIndex
             }
             notes[indexFinder(notes, note.id)] = note
             return {
@@ -132,6 +133,23 @@ export const mainReducer = (state: any, action: any) => {
                 ...state,
                 updateActive: updateActive
             }
+        case "ONRESIZE_NOTE":
+            {
+                let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
+                let notes = [ ...state.notes]
+                let width = `${action.payload.width}px`
+                let height = `${action.payload.height}px`
+                note = {
+                    ...note,
+                    width: width,
+                    height: height
+                }
+                notes[indexFinder(notes, note.id)] = note
+            return {
+                ...state,
+                notes: notes
+            }
+        }
         default:
             return state
     }

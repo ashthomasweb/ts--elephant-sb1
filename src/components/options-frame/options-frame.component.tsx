@@ -68,6 +68,13 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     }
   }
 
+  function newBoard() {
+    boardObj.name = ''
+    dispatch({ type: 'ONCHANGE_BOARDNAME', payload: boardObj })
+    let notes: any[] = []
+    dispatch({ type: 'SET_ALL_NOTES', payload: notes})
+  }
+
   function userBoardDropDown() {
     dispatch({ type: 'TOG_BOARD_MENU', payload: menuIsOpen })
   }
@@ -133,7 +140,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
         <button
           type='button'
           className='new-button'
-          // onClick={() => newBoard()}
+          onClick={newBoard}
         >
           New Board
         </button>

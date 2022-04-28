@@ -8,20 +8,14 @@ import '../trash-frame/trash-frame.styles.scss'
 
 const TrashFrame = () : JSX.Element => {
   const { state: { display }
-    // dispatch,
   } = useContext(MainContext)
-
-  // function trashHover() {
-  //   // console.log('hidave')
-  // }
 
   return (
     <div 
       className='trash-frame'
       style={{
-        zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})`,
+        zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})`
       }}
-      // onMouseOver={trashHover}
       >
       <div className='trash-cont'>
         <img src={trashTop} className='trash-top' alt='Lid of recycle can' />
@@ -31,23 +25,6 @@ const TrashFrame = () : JSX.Element => {
           alt='Body of recycle can'
         />
       </div>
-
-      {/* <button
-            type='button'
-            style={{
-              position: 'absolute',
-              height: '30px',
-              top: '0',
-              left: '0',
-              zIndex: '9999999999',
-            }}
-            onClick={() => {
-              console.log(this.state.notes)
-              // this.coordFinder()
-            }}
-            >
-            Board Notes
-          </button> */}
     </div>
   )
 }

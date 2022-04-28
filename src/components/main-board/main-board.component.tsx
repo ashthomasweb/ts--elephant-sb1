@@ -5,6 +5,7 @@ import { MainContext } from '../../context/main/MainState'
 import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
 import { trashBoxDisplay, trashHandler } from '../../methods/trashHandlers'
+import { zIndexDrag } from '../../methods/num-finders'
 
 import '../main-board/main-board.styles.scss'
 
@@ -39,12 +40,13 @@ const MainBoard = (props: Props): JSX.Element => {
     const parent: object = e.currentTarget.parentElement.getBoundingClientRect()
     let newLeft: number = getPosition(parent, 'left', e.pageX)
     let newTop: number = getPosition(parent, 'top', e.pageY)
-    let notePosition: { [key: string]: string } = {
+    let noteData: { [key: string]: string | number } = {
       left: `${newLeft}px`,
       top: `${newTop}px`,
       id: e.target.id,
+      zIndex: zIndexDrag(notes)
     }
-    dispatch({ type: 'SET_NOTE_POSITION', payload: notePosition })
+    dispatch({ type: 'SET_NOTE_DATA', payload: noteData })
     trashBoxDisplay(e)
   }
 
@@ -59,7 +61,7 @@ const MainBoard = (props: Props): JSX.Element => {
       <UserInterface currentUser={props.currentUser} />
       {/* background and notes */}
       <div 
-      className='board__backing' 
+      className='board__backing'
       style={{backgroundColor: boardObj.backgroundColor}}
       onDrop={onDrop}
       >

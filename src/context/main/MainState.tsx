@@ -16,7 +16,7 @@ interface initialStateType {
     noteBColor: string
     border: string
     isUpdate: boolean
-    // zIndex: 0,
+    zIndex: number
     // trayText: '',
     // isTrayDisplay: false,
     // trayWidth: '150px',
@@ -52,7 +52,7 @@ const initialState = {
     noteBColor: '#f2ecb3',
     border: 'none',
     isUpdate: false,
-    // zIndex: 0,
+    zIndex: 0,
     // trayText: '',
     // isTrayDisplay: false,
     // trayWidth: '150px',

@@ -1,6 +1,6 @@
 // note.component.tsx
 
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import { MainContext } from '../../context/main/MainState'
 
 import './note.styles.scss'
@@ -8,43 +8,57 @@ import './note.styles.scss'
 const Note = (props: any) => {
   const { dispatch
   } = useContext(MainContext)
-  
+
+  const currentNote: any = useRef(null)
+
   let noteData = props.noteData
 
   let noteStyle = { // package style properties for easy CSS assignment
     left: noteData.left,
     top: noteData.top,
+    width: noteData.width,
+    height: noteData.height,
+    zIndex: noteData.zIndex,
+    outline: noteData.isUpdate ? '5px solid green' : 'none',
     backgroundColor: noteData.noteBColor,
-    outline: noteData.isUpdate ? '5px solid green' : 'none'
   }
 
   function toggleUpdateMode(e: any) {
-    dispatch({ type: 'TOG_UPDATE_MODE', payload: e.target.id })
+    dispatch({ type: 'TOG_UPDATE_MODE', payload: e.currentTarget.parentElement.id })
   }
 
   // controlled input elements
   function updateNote(e: any) {
-    dispatch({ type: 'ONCHANGE_NOTETEXT', payload: { text: e.target.innerText, id: e.target.id } })
+    dispatch({ type: 'ONCHANGE_NOTETEXT', payload: { text: e.target.innerText, id: e.currentTarget.parentElement.id } })
+  }
+
+  function resizeHandler(e: any) {
+    let dimensions = currentNote.current.getBoundingClientRect()
+    console.log(dimensions.width, dimensions.height)
+    dispatch({ type: 'ONRESIZE_NOTE', payload: { id: e.target.id, width: dimensions.width, height: dimensions.height}})
   }
 
   return (
     <div
-      className='note-base'
-      id={props.id}
+      className='note-wrapper'
       style={noteStyle}
-      contentEditable={noteData.isUpdate ? 'true' : 'false'}
-      onBlur={(e) => updateNote(e)}
-      onDrag={props.dragNote}
-      onDoubleClick={toggleUpdateMode}
-      onMouseDown={props.getMousePos}
       onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), -9000, -9000)}
       draggable
-      suppressContentEditableWarning
+      onDrag={props.dragNote}
+      onMouseDown={props.getMousePos}
+      onMouseUp={resizeHandler}
+      id={props.id}
+      ref={currentNote}
       >
-      {/* <button type='button' onClick={() => dispatch({ type: 'TOG_USER' })}>
-        Name
-      </button> */}
-      {noteData.noteText}
+      <div
+        onDoubleClick={toggleUpdateMode}
+        className='note-base'
+        contentEditable={noteData.isUpdate ? 'true' : 'false'}
+        onBlur={(e) => updateNote(e)}
+        suppressContentEditableWarning
+        >
+        {noteData.noteText}
+      </div>
     </div>
   )
 }
