@@ -9,20 +9,38 @@
   width: 3000px;
 }
 
-.board__backing {
-  height: 2000px;
-  width: 3000px;
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  background-image: url(https://picsum.photos/1000/600);
-  background-color: #359b42;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+// .board__backing {
+//   width: 100vw;
+//   height: 100vh;
+//   position: absolute;
+//   display: flex;
+//   overflow: scroll;
+//   background-attachment: local;
 
-.board__backing img {
-  object-position: center;
+//   background-image: url(https://picsum.photos/1000/600);
+//   background-color: #359b42;
+//   background-repeat: no-repeat;
+//   background-position: center;
+// }
+
+// .board__backing img {
+//   object-position: center;
+// }
+.board__backing {
+
+width: 100vw;
+height: 100vh;
+position: absolute;
+left: 0;
+z-index: -2147483647;
+overflow: scroll;
+user-select: none;
+background-image: url(../../assets/graphy-dark.png);
+background-attachment: local;
+top: 0px;
+right: 0px;
+bottom: 0px;
+background-size: repeat;
 }
 
 

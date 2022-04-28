@@ -55,16 +55,35 @@ const MainBoard = (props: Props): JSX.Element => {
     dispatch({ type: 'SET_ALL_NOTES', payload: newNotes})
   }
 
+  window.addEventListener('mousedown', (e: any) => {
+    if (e.target.id === 'backing') {
+      let board = e.target
+      let initialClientX = e.clientX
+      let initialClientY = e.clientY
+      let initialScrollX = board.scrollLeft
+      let initialScrollY = board.scrollTop
+      let logPosition = (e: any) => {
+        let xFromOrigin = e.clientX - initialClientX
+        let yFromOrigin = e.clientY - initialClientY
+        board.scrollTo(
+          initialScrollX - xFromOrigin,
+          initialScrollY - yFromOrigin
+          )
+      }
+      window.addEventListener('mousemove', logPosition)
+      window.addEventListener('mouseup', (e) => {
+        window.removeEventListener('mousemove', logPosition)
+      })
+    }
+  })
+
   return (
-    <div className='board'>
-      {/* Interface Components */}
-      <UserInterface currentUser={props.currentUser} />
-      {/* background and notes */}
-      <div 
+      <div id='backing'
       className='board__backing'
       style={{backgroundColor: boardObj.backgroundColor}}
       onDrop={onDrop}
       >
+      <UserInterface currentUser={props.currentUser} />
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: [] }) => (
           <Note
             id={id}
@@ -75,7 +94,6 @@ const MainBoard = (props: Props): JSX.Element => {
           />
         ))}
       </div>
-    </div>
   )
 }
 

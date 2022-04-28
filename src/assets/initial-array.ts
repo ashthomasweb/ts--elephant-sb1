@@ -479,6 +479,26 @@ export const initialArray = [
         // iframe: false,
         height: "81.5719px",
         id: 1,
+    },
+    {
+        border: "none",
+        // trayHeight: "200px",
+        // isTrayDisplay: false,
+        // noteBColor: "#a3a3a3",
+        noteText: "Anchor",
+        width: "99.9281px",
+        // isNew: false,
+        top: "3000px",
+        // noteGroup: [],
+        // trayWidth: "150px",
+        zIndex: 5889,
+        left: "4000px",
+        // trayText: "",
+        // isMatBoard: false,
+        // isChecked: false,
+        // iframe: false,
+        height: "81.5719px",
+        id: 3,
     }
 ]
 
