@@ -23,8 +23,11 @@ const Note = (props: any) => {
     backgroundColor: noteData.noteBColor,
   }
 
-  function toggleUpdateMode(e: any) {
-    dispatch({ type: 'TOG_UPDATE_MODE', payload: e.currentTarget.parentElement.id })
+  async function toggleUpdateMode(e: any) {
+    let el = e.currentTarget
+    console.log(e.currentTarget)
+    await dispatch({ type: 'TOG_UPDATE_MODE', payload: e.currentTarget.parentElement.id })
+    el.focus()
   }
 
   // controlled input elements
@@ -34,7 +37,6 @@ const Note = (props: any) => {
 
   function resizeHandler(e: any) {
     let dimensions = currentNote.current.getBoundingClientRect()
-    console.log(dimensions.width, dimensions.height)
     dispatch({ type: 'ONRESIZE_NOTE', payload: { id: e.target.id, width: dimensions.width, height: dimensions.height}})
   }
 
