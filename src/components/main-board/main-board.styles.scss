@@ -17,30 +17,30 @@
 //   overflow: scroll;
 //   background-attachment: local;
 
-//   background-image: url(https://picsum.photos/1000/600);
 //   background-color: #359b42;
-//   background-repeat: no-repeat;
-//   background-position: center;
 // }
 
 // .board__backing img {
-//   object-position: center;
+  //   object-position: center;
 // }
 .board__backing {
-
-width: 100vw;
-height: 100vh;
-position: absolute;
-left: 0;
-z-index: -2147483647;
-overflow: scroll;
-user-select: none;
-background-image: url(../../assets/graphy-dark.png);
-background-attachment: local;
-top: 0px;
-right: 0px;
-bottom: 0px;
-background-size: repeat;
+  
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  z-index: -2147483647;
+  overflow: scroll;
+  user-select: none;
+  // background-image: url(https://picsum.photos/1000/600);
+    // background-repeat: no-repeat;
+    // background-position: center;
+  background-image: url(../../assets/graphy-dark.png); // pattern
+  background-attachment: local;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-size: repeat;
 }
 
 

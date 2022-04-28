@@ -18,7 +18,7 @@ export const trashBoxDisplay = (e: any) => {
 }
 
 export const trashHandler = (e: any, notesObj: any[], dispatch: any): any[] => {
-  let deleteId = e.target.id
+  let deleteId = e.target.parentElement.id
   let xMax = e.view.innerWidth
   let zoomR = 135 / window.devicePixelRatio
   if ((e.clientX + 10) > xMax - zoomR && (e.clientY + 17) < zoomR) {
@@ -32,6 +32,7 @@ export const trashHandler = (e: any, notesObj: any[], dispatch: any): any[] => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   document.querySelector('.trash-frame').classList.remove('hovered')
+  console.log(notesObj)
   return notesObj
 }
 

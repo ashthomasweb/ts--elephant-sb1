@@ -20,10 +20,10 @@ const MainBoard = (props: Props): JSX.Element => {
   } = useContext(MainContext)
 
   const getMousePos = (e: any): void => {
-    const rect: any = e.target.getBoundingClientRect()
+    // const rect: any = e.target.getBoundingClientRect()
     const mouseOffset: object = {
-      left: e.pageX - rect.left,
-      top: e.pageY - rect.top,
+      left: e.clientX - parseFloat(getComputedStyle(e.target.parentNode).left),
+      top: e.clientY - parseFloat(getComputedStyle(e.target.parentNode).top),
     }
     dispatch({ type: 'SET_MOUSE_OFFSET', payload: mouseOffset })
   }
@@ -33,13 +33,13 @@ const MainBoard = (props: Props): JSX.Element => {
     position: string,
     mouse: number
   ): number => {
-    return mouse - parent[position] - mouseOffset[position]
+    return mouse - mouseOffset[position]
   }
 
   const dragNote = (e: any): void => {
     const parent: object = e.currentTarget.parentElement.getBoundingClientRect()
-    let newLeft: number = getPosition(parent, 'left', e.pageX)
-    let newTop: number = getPosition(parent, 'top', e.pageY)
+    let newLeft: number = getPosition(parent, 'left', e.clientX)
+    let newTop: number = getPosition(parent, 'top', e.clientY)
     let noteData: { [key: string]: string | number } = {
       left: `${newLeft}px`,
       top: `${newTop}px`,
@@ -55,27 +55,7 @@ const MainBoard = (props: Props): JSX.Element => {
     dispatch({ type: 'SET_ALL_NOTES', payload: newNotes})
   }
 
-  window.addEventListener('mousedown', (e: any) => {
-    if (e.target.id === 'backing') {
-      let board = e.target
-      let initialClientX = e.clientX
-      let initialClientY = e.clientY
-      let initialScrollX = board.scrollLeft
-      let initialScrollY = board.scrollTop
-      let logPosition = (e: any) => {
-        let xFromOrigin = e.clientX - initialClientX
-        let yFromOrigin = e.clientY - initialClientY
-        board.scrollTo(
-          initialScrollX - xFromOrigin,
-          initialScrollY - yFromOrigin
-          )
-      }
-      window.addEventListener('mousemove', logPosition)
-      window.addEventListener('mouseup', (e) => {
-        window.removeEventListener('mousemove', logPosition)
-      })
-    }
-  })
+  
 
   return (
       <div id='backing'

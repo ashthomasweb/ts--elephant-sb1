@@ -43,6 +43,28 @@ class App extends Component<MyProps, MyState> {
       getUserBoards(userAuth)
     })
 
+    window.addEventListener('mousedown', (e: any) => {
+      if (e.target.id === 'backing') {
+        let board = e.target
+        let initialClientX = e.clientX
+        let initialClientY = e.clientY
+        let initialScrollX = board.scrollLeft
+        let initialScrollY = board.scrollTop
+        let logPosition = (e: any) => {
+          let xFromOrigin = e.clientX - initialClientX
+          let yFromOrigin = e.clientY - initialClientY
+          board.scrollTo(
+            initialScrollX - xFromOrigin,
+            initialScrollY - yFromOrigin
+            )
+        }
+        window.addEventListener('mousemove', logPosition)
+        window.addEventListener('mouseup', (e) => {
+          window.removeEventListener('mousemove', logPosition)
+        })
+      }
+    })
+
     function setZoom() {
       let zoom = window.devicePixelRatio * 1.1
       let ui = ['.options-frame', '.header', '.pad-frame', '.trash-frame']
