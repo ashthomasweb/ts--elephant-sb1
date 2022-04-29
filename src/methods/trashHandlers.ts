@@ -32,7 +32,6 @@ export const trashHandler = (e: any, notesObj: any[], dispatch: any): any[] => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   document.querySelector('.trash-frame').classList.remove('hovered')
-  console.log(notesObj)
   return notesObj
 }
 

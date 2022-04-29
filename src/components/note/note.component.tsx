@@ -92,12 +92,7 @@ const Note = (props: any) => {
     <div
       className='note-wrapper'
       style={notePosition}
-      onDragStart={(e) =>
-        e.dataTransfer.setDragImage(new Image(), -9000, -9000)
-      }
-      draggable
-      onDrag={props.dragNote}
-      onMouseDown={props.getMousePos}
+      
       onMouseUp={resizeHandler}
       id={props.id}
       ref={currentNote}>
@@ -119,35 +114,44 @@ const Note = (props: any) => {
         onMouseDown={clickHandler}
       />
       <div
+      onDragStart={(e) =>
+        e.dataTransfer.setDragImage(new Image(), -9000, -9000)
+      }
+      draggable
+      onDrag={props.dragNote}
+      onMouseDown={props.getMousePos}
         onDoubleClick={toggleUpdateMode}
         style={noteStyle}
         className='note-base'
         contentEditable={noteData.isUpdate ? 'true' : 'false'}
         onBlur={(e) => updateNote(e)}
-        suppressContentEditableWarning>
+        suppressContentEditableWarning
+        >
         {noteData.noteText}
       </div>
       <div
+        className={`note-tray ${
+          noteData.isTrayDisplay ? 'slide-out' : 'slide-in'
+        }`}
         style={{
           backgroundColor: `${noteData.noteBColor}`,
           display: `${noteData.isTrayDisplay ? 'block' : 'none'}`,
         }}
+        onDrag={(e) => e.preventDefault()}
         id={`tray-${noteData.id}`}
-        className={`note-tray ${
-          noteData.isTrayDisplay ? 'slide-out' : 'slide-in'
-        }`}
-        data-display={noteData.isTrayDisplay ?? false}>
+        // data-display={noteData.isTrayDisplay ?? false}
+        >
         <textarea
           className={`tray-text ${
             noteData.isTrayDisplay ? 'slide-out' : 'slide-in'
           }`}
           ref={currentTray}
           style={{
-            width: `${noteData.trayWidth ?? '150px'}`,
-            height: `${noteData.trayHeight ?? '200px'}`,
+            width: `${noteData.trayWidth}`,
+            height: `${noteData.trayHeight}`,
             display: `${noteData.isTrayDisplay ? 'block' : 'none'}`,
           }}
-          suppressContentEditableWarning={true}
+          suppressContentEditableWarning
           contentEditable='true'
           onMouseUp={(e) => resizeTray(e)}
           onChange={(e) => updateTray(e)}

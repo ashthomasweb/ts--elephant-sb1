@@ -29,21 +29,19 @@ const MainBoard = (props: Props): JSX.Element => {
   }
 
   const getPosition = (
-    parent: any,
     position: string,
-    mouse: number
+    mousePos: number
   ): number => {
-    return mouse - mouseOffset[position]
+    return mousePos - mouseOffset[position]
   }
 
   const dragNote = (e: any): void => {
-    const parent: object = e.currentTarget.parentElement.getBoundingClientRect()
-    let newLeft: number = getPosition(parent, 'left', e.clientX)
-    let newTop: number = getPosition(parent, 'top', e.clientY)
+    let newLeft: number = getPosition('left', e.clientX)
+    let newTop: number = getPosition('top', e.clientY)
     let noteData: { [key: string]: string | number } = {
       left: `${newLeft}px`,
       top: `${newTop}px`,
-      id: e.target.id,
+      id: e.target.parentElement.id,
       zIndex: zIndexDrag(notes)
     }
     e.clientX !== 0 && dispatch({ type: 'SET_NOTE_DATA', payload: noteData })
