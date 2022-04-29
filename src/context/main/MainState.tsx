@@ -17,6 +17,7 @@ interface initialStateType {
     border: string
     isUpdate: boolean
     zIndex: number
+    isChecked: boolean
     // trayText: '',
     // isTrayDisplay: false,
     // trayWidth: '150px',
@@ -26,7 +27,6 @@ interface initialStateType {
     // noteGroup: [],
     // matOffsetX: 0,
     // matOffsetY: 0,
-    // isChecked: false,
     // iframe: false
   }
   boardObj: any
@@ -53,6 +53,7 @@ const initialState = {
     border: 'none',
     isUpdate: false,
     zIndex: 0,
+    isChecked: false,
     // trayText: '',
     // isTrayDisplay: false,
     // trayWidth: '150px',
@@ -62,7 +63,6 @@ const initialState = {
     // noteGroup: [],
     // matOffsetX: 0,
     // matOffsetY: 0,
-    // isChecked: false,
     // iframe: false
   },
   boardObj: {

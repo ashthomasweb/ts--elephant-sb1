@@ -179,6 +179,17 @@ export const mainReducer = (state: any, action: any) => {
                 notes: newNotes,
                 newNote: newNote
             }
+        case "TOG_NOTE_CHECKED":
+            {
+            let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
+            let notes = [ ...state.notes]
+            note.isChecked = !action.payload.isChecked
+            notes[indexFinder(notes, note.id)] = note
+            return {
+                ...state,
+                notes: notes
+            }
+        }
         default:
             return state
     }

@@ -46,7 +46,7 @@ const MainBoard = (props: Props): JSX.Element => {
       id: e.target.id,
       zIndex: zIndexDrag(notes)
     }
-    dispatch({ type: 'SET_NOTE_DATA', payload: noteData })
+    e.clientX !== 0 && dispatch({ type: 'SET_NOTE_DATA', payload: noteData })
     trashBoxDisplay(e)
   }
 

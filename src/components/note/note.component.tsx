@@ -2,6 +2,7 @@
 
 import { useContext, useRef } from 'react'
 import { MainContext } from '../../context/main/MainState'
+import check from '../../assets/check.png'
 
 import './note.styles.scss'
 
@@ -52,6 +53,13 @@ const Note = (props: any) => {
       id={props.id}
       ref={currentNote}
       >
+        <img
+              src={check}
+              style={{ opacity: `${props.noteData.isChecked ? '1' : '0.1'}` }}
+              className='note-check'
+              alt='checkmark'
+              onClick={() => dispatch({ type: 'TOG_NOTE_CHECKED', payload: { id: props.id, isChecked: props.noteData.isChecked }})}
+            />
       <div
         onDoubleClick={toggleUpdateMode}
         className='note-base'
