@@ -11,6 +11,7 @@ const Note = (props: any) => {
   } = useContext(MainContext)
 
   const currentNote: any = useRef(null)
+  const currentTray: any = useRef(null)
 
   let noteData = props.noteData
 
@@ -41,6 +42,35 @@ const Note = (props: any) => {
     dispatch({ type: 'ONRESIZE_NOTE', payload: { id: e.target.id, width: dimensions.width, height: dimensions.height}})
   }
 
+  function updateTray(e: any) {
+    dispatch({ type: 'ONCHANGE_TRAYTEXT', payload: { text: e.target.value, id: props.id } })
+  }
+
+  function resizeTray(e: any) {
+    let dimensions = currentTray.current.getBoundingClientRect()
+    dispatch({ type: 'ONRESIZE_TRAY', payload: { id: props.id, width: dimensions.width, height: dimensions.height}})
+  }
+
+  // function traySize(id: any) {
+  //   let tray: any = document.querySelector(`#tray-${id} textarea`)
+  //   let trayWidth = getComputedStyle(tray).getPropertyValue('width')
+  //   let trayHeight = getComputedStyle(tray).getPropertyValue('height')
+  //   this.props.traySize(id, trayWidth, trayHeight)
+  // }
+
+  // function saveTray(id) {
+  //   let tray = document.querySelector(`#tray-${id} textarea`)
+  //   let trayText = tray.value
+  //   this.setState({ trayText })
+  //   this.props.passTrayText(id, trayText)
+  // }
+
+  
+  function clickHandler(e: any) {
+      let id = e.target.parentElement.id
+      dispatch({ type: 'TOG_TRAY', payload: { id: id, tray: noteData.isTrayDisplay }})
+  }
+
   return (
     <div
       className='note-wrapper'
@@ -60,8 +90,10 @@ const Note = (props: any) => {
               alt='checkmark'
               onClick={() => dispatch({ type: 'TOG_NOTE_CHECKED', payload: { id: props.id, isChecked: props.noteData.isChecked }})}
             />
+            <div className='note-menu' data-tray={`tray-${noteData.id}`} onMouseDown={clickHandler}/>
       <div
         onDoubleClick={toggleUpdateMode}
+        
         className='note-base'
         contentEditable={noteData.isUpdate ? 'true' : 'false'}
         onBlur={(e) => updateNote(e)}
@@ -69,6 +101,40 @@ const Note = (props: any) => {
         >
         {noteData.noteText}
       </div>
+      <div
+          style={{
+            backgroundColor: `${noteData.noteBColor}`,
+            display: `${noteData.isTrayDisplay ? 'block' : 'none'}`,
+          }}
+          id={`tray-${noteData.id}`}
+          
+          className={`note-tray ${
+            noteData.isTrayDisplay ? 'slide-out' : 'slide-in'
+          }`}
+          data-display={noteData.isTrayDisplay ?? false}>
+          <textarea
+            ref={currentTray}
+            className={`tray-text ${
+              noteData.isTrayDisplay ? 'slide-out' : 'slide-in'
+            }`}
+            style={{
+              width: `${noteData.trayWidth ?? '150px'}`,
+              height: `${noteData.trayHeight ?? '200px'}`,
+              display: `${noteData.isTrayDisplay ? 'block' : 'none'}`,
+            }}
+            suppressContentEditableWarning={true}
+            contentEditable='true'
+            onMouseUp={(e) => resizeTray(e)}
+            onChange={(e) => updateTray(e)}
+            value={noteData.trayText}>sdf</textarea>
+            {/* {!iframe ||
+              <iframe id={`iframe-${id}`} style={{ resize: 'both', width: `${iframeWidth}`, height: `${iframeHeight}` }}
+              src={iframe}
+              title='Barrueco'
+              onMouseUp={() => this.iframeSize(id)}
+              loading='lazy'></iframe>
+            } */}
+        </div>
     </div>
   )
 }

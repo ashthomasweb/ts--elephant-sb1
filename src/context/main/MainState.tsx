@@ -18,10 +18,10 @@ interface initialStateType {
     isUpdate: boolean
     zIndex: number
     isChecked: boolean
-    // trayText: '',
-    // isTrayDisplay: false,
-    // trayWidth: '150px',
-    // trayHeight: '200px',
+    trayText: string
+    isTrayDisplay: boolean
+    trayWidth: string
+    trayHeight: string
     // isMatBoard: false,
     // isNew: true,
     // noteGroup: [],
@@ -54,10 +54,10 @@ const initialState = {
     isUpdate: false,
     zIndex: 0,
     isChecked: false,
-    // trayText: '',
-    // isTrayDisplay: false,
-    // trayWidth: '150px',
-    // trayHeight: '200px',
+    trayText: '',
+    isTrayDisplay: false,
+    trayWidth: '150px',
+    trayHeight: '200px',
     // isMatBoard: false,
     // isNew: true,
     // noteGroup: [],

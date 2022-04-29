@@ -190,6 +190,49 @@ export const mainReducer = (state: any, action: any) => {
                 notes: notes
             }
         }
+        case "TOG_TRAY":
+            {
+            let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
+            let notes = [...state.notes]
+            note.isTrayDisplay = !action.payload.tray
+            notes[indexFinder(notes, note.id)] = note
+            return {
+                ...state,
+                notes: notes
+            }
+        }
+        case "ONRESIZE_TRAY":
+            {
+                let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
+                let notes = [ ...state.notes]
+                let width = `${action.payload.width}px`
+                let height = `${action.payload.height}px`
+                note = {
+                    ...note,
+                    trayWidth: width,
+                    trayHeight: height
+                }
+                notes[indexFinder(notes, note.id)] = note
+            return {
+                ...state,
+                notes: notes
+            }
+        }
+        case "ONCHANGE_TRAYTEXT":
+            {
+                let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
+                let notes = [ ...state.notes]
+                console.log(action.payload)
+                note = {
+                    ...note,
+                    trayText: action.payload.text
+                }
+                notes[indexFinder(notes, note.id)] = note
+                return {
+                    ...state,
+                    notes: notes
+                }
+            }
         default:
             return state
     }
