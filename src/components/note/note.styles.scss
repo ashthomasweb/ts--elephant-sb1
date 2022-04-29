@@ -14,20 +14,19 @@
 .note-wrapper {
     // left: 573px;
     // top: 10px;
-    height: 124px;
     position: absolute;
     // background-size: cover;
     background-color: lightblue;
-    resize: both !important;
+    // resize: both !important;
     outline: 1px solid black;
     // padding: 10px;
     display: table;
     box-shadow: 3px 3px 3px #4a4a4a, -3px -3px 55px -35px #4a4a4a;
     // z-index: 1000000000;
-
-
-
+    
+    
     .note-base {
+        overflow: hidden;
         position: relative;
         white-space: pre-line;
         box-sizing: content-box;

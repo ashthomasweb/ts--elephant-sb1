@@ -222,7 +222,6 @@ export const mainReducer = (state: any, action: any) => {
             {
                 let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
                 let notes = [ ...state.notes]
-                console.log(action.payload)
                 note = {
                     ...note,
                     trayText: action.payload.text
