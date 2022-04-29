@@ -150,6 +150,34 @@ export const mainReducer = (state: any, action: any) => {
                 notes: notes
             }
         }
+        case "ONRESIZE_PAD":
+            {
+                let newNote = {...state.newNote}
+                let width = `${action.payload.width}px`
+                let height = `${action.payload.height}px`
+                newNote.width = width
+                newNote.height = height
+            return {
+                ...state,
+                newNote: newNote
+            }
+        }
+        case "DRAG_NEWNOTE":
+            let latestNote = state.notes[state.notes.length-1]
+            let newNotes = [...state.notes]
+            // let newNote = {...state.newNote}
+            // newNote.noteText = ''
+            latestNote = {
+                ...latestNote,
+                left: action.payload.left-40,
+                top: action.payload.top-40,
+            }
+            newNotes[state.notes.length-1] = latestNote
+            return  {
+                ...state,
+                notes: newNotes,
+                // newNote: newNote
+            }
         default:
             return state
     }
