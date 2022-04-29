@@ -55,8 +55,6 @@ const MainBoard = (props: Props): JSX.Element => {
     dispatch({ type: 'SET_ALL_NOTES', payload: newNotes})
   }
 
-  
-
   return (
       <div id='backing'
       className='board__backing'
@@ -71,6 +69,7 @@ const MainBoard = (props: Props): JSX.Element => {
             dragNote={dragNote}
             getMousePos={getMousePos}
             noteData={noteProps}
+            autofocus='true'
           />
         ))}
       </div>

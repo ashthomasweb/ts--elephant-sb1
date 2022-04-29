@@ -25,6 +25,7 @@ const Note = (props: any) => {
 
   async function toggleUpdateMode(e: any) {
     let el = e.currentTarget
+    console.log(el)
     await dispatch({ type: 'TOG_UPDATE_MODE', payload: e.currentTarget.parentElement.id })
     el.focus()
   }

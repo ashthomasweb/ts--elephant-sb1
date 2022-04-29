@@ -93,6 +93,7 @@ export const mainReducer = (state: any, action: any) => {
                 // that it is hoisted and the handler is run at the 
                 // appropriate place in the stack
                 let updateActive = state.updateActive
+                
                 note = {
                     ...note,
                     isUpdate: !note.isUpdate
@@ -165,8 +166,8 @@ export const mainReducer = (state: any, action: any) => {
         case "DRAG_NEWNOTE":
             let latestNote = state.notes[state.notes.length-1]
             let newNotes = [...state.notes]
-            // let newNote = {...state.newNote}
-            // newNote.noteText = ''
+            let newNote = {...state.newNote}
+            newNote.noteText = ''
             latestNote = {
                 ...latestNote,
                 left: action.payload.left-40,
@@ -176,7 +177,7 @@ export const mainReducer = (state: any, action: any) => {
             return  {
                 ...state,
                 notes: newNotes,
-                // newNote: newNote
+                newNote: newNote
             }
         default:
             return state

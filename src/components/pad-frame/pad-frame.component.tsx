@@ -28,9 +28,10 @@ const PadFrame = (): JSX.Element => {
   }
 
   function newDragHandler(e: any) {
+    console.log(e.target.parentElement.parentElement.scrollTop)
     let noteData: { [key: string]: string | number } = {
-      left: e.clientX,
-      top: e.clientY,
+      left: e.clientX + e.target.parentElement.parentElement.scrollLeft,
+      top: e.clientY + e.target.parentElement.parentElement.scrollTop,
     }
     dispatch({ type: "DRAG_NEWNOTE", payload: noteData })
     padFrameRef.current.textContent = ''

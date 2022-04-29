@@ -1,6 +1,6 @@
 // options-frame.component.tsx
 
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import { newNoteGenerator } from '../../methods/new-note'
 import { saveUserBoard } from '../../firebase/firebase.utils'
@@ -17,8 +17,10 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     dispatch,
   } = useContext(MainContext)
 
+  const optionsRef = useRef(null)
+
   function newNoteHandler(notesObj: any, newNote: any, isMat = false) {
-    let notes = newNoteGenerator(notesObj, newNote, isMat)
+    let notes = newNoteGenerator(notesObj, newNote, isMat, optionsRef)
     dispatch({ type: 'SET_ALL_NOTES', payload: notes })
   }
 
@@ -102,6 +104,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
   return (
     <div
       className='options-frame'
+      ref={optionsRef}
       style={{
         zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})`
       }}
