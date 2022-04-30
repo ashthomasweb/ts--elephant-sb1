@@ -1,32 +1,6 @@
 // main-board.styles.scss
 
-
-.board {
-  position: relative;
-  height: fit-content;
-  width: fit-content;
-  height: 5000px;
-  width: 8000px;
-  z-index: -2147483648;
-
-}
-
-// .board__backing {
-//   width: 100vw;
-//   height: 100vh;
-//   position: absolute;
-//   display: flex;
-//   overflow: scroll;
-//   background-attachment: local;
-
-//   background-color: #359b42;
-// }
-
-// .board__backing img {
-  //   object-position: center;
-// }
-.board__backing {
-  
+.board-backing {
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -43,27 +17,6 @@
   right: 0px;
   bottom: 0px;
   background-size: repeat;
-}
-
-
-
-
-
-//  original styles 
-.board-backing {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  left: 0;
-  z-index: -2147483647;
-  overflow: scroll;
-  user-select: none;
-  background-image: url(../../assets/graphy-dark.png);
-  background-attachment: local;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  background-size: cover;
 }
 
 // END of document

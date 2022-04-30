@@ -1,28 +1,9 @@
 // new-note-styles.scss
 
-// .new-note {
-//     width: 450px;
-//     height: 300px;
-//     position: absolute;
-//     /* border-radius: 0.5rem; */
-//     /* box-shadow: 0 0 0 50px rgba(0, 0, 0, 0.5); */
-//     background-color: rgba(0, 0, 0, 0.5);
-//     opacity: 1;
-//     cursor: grab;
-// }
-
 .note-wrapper {
 
-    // left: 573px;
-    // top: 10px;
     position: absolute;
-    // background-size: cover;
-    // background-color: lightblue;
-    // resize: both !important;
-    // padding: 10px;
     display: table;
-    // z-index: 1000000000;
-        // resize: both !important;
     width: fit-content;
     height: fit-content;
 
@@ -130,7 +111,6 @@
           }
         
         }
-        
 }
 
-
+// END of document

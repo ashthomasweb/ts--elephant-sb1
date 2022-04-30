@@ -49,3 +49,5 @@ export const indexFinder = (notesObj: any, id: any) : any => {
 
     return newIndex
 }
+
+// END of document

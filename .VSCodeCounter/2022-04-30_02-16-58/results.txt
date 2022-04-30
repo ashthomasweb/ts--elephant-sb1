@@ -1,0 +1,98 @@
+Date : 2022-04-30 02:16:58
+Directory : c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src
+Total : 49 files,  2291 codes, 589 comments, 414 blanks, all 3294 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| TypeScript React |         19 |      1,064 |         70 |        203 |      1,337 |
+| SCSS             |         15 |        655 |         16 |        134 |        805 |
+| TypeScript       |         12 |        545 |        503 |         73 |      1,121 |
+| CSS              |          2 |         26 |          0 |          4 |         30 |
+| XML              |          1 |          1 |          0 |          0 |          1 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                             | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                |         49 |      2,291 |        589 |        414 |      3,294 |
+| assets                                                                                                           |          1 |         32 |        468 |          7 |        507 |
+| components                                                                                                       |         30 |      1,535 |         75 |        309 |      1,919 |
+| components\board-menu                                                                                            |          2 |         83 |          3 |         17 |        103 |
+| components\custom-button                                                                                         |          2 |         46 |          2 |         14 |         62 |
+| components\form-input                                                                                            |          2 |         69 |          2 |         18 |         89 |
+| components\main-board                                                                                            |          2 |         81 |          7 |         15 |        103 |
+| components\note                                                                                                  |          2 |        261 |          6 |         39 |        306 |
+| components\options-frame                                                                                         |          2 |        362 |         13 |         59 |        434 |
+| components\pad-frame                                                                                             |          2 |         79 |          4 |         17 |        100 |
+| components\sign-in                                                                                               |          2 |         84 |          2 |         18 |        104 |
+| components\sign-up                                                                                               |          2 |        112 |          2 |         25 |        139 |
+| components\signin-input                                                                                          |          2 |         69 |          0 |         16 |         85 |
+| components\signinupmodal                                                                                         |          2 |         29 |          4 |          8 |         41 |
+| components\trash-frame                                                                                           |          2 |         69 |          3 |         16 |         88 |
+| components\update-frame                                                                                          |          2 |         39 |         12 |         13 |         64 |
+| components\user-interface                                                                                        |          2 |         24 |          7 |         11 |         42 |
+| components\user-options                                                                                          |          2 |        128 |          8 |         23 |        159 |
+| context                                                                                                          |          2 |        324 |         11 |         14 |        349 |
+| context\main                                                                                                     |          2 |        324 |         11 |         14 |        349 |
+| firebase                                                                                                         |          1 |        104 |          5 |         21 |        130 |
+| methods                                                                                                          |          6 |        154 |         17 |         35 |        206 |
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                                         | language         | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\App.css                                                | CSS              |          4 |          0 |          0 |          4 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\App.test.tsx                                           | TypeScript React |          3 |          5 |          2 |         10 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\App.tsx                                                | TypeScript React |         81 |          1 |         12 |         94 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\assets\initial-array.ts                                | TypeScript       |         32 |        468 |          7 |        507 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\board-menu\board-menu.component.tsx         | TypeScript React |         61 |          3 |         12 |         76 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\board-menu\board-menu.styles.scss           | SCSS             |         22 |          0 |          5 |         27 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\custom-button\custom-button.component.tsx   | TypeScript React |         11 |          2 |          7 |         20 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\custom-button\custom-button.styles.scss     | SCSS             |         35 |          0 |          7 |         42 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\form-input\form-input.component.tsx         | TypeScript React |         23 |          2 |          9 |         34 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\form-input\form-input.styles.scss           | SCSS             |         46 |          0 |          9 |         55 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\main-board\main-board.component.tsx         | TypeScript React |         66 |          2 |         12 |         80 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\main-board\main-board.styles.scss           | SCSS             |         15 |          5 |          3 |         23 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\note\note.component.tsx                     | TypeScript React |        165 |          4 |         20 |        189 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\note\note.styles.scss                       | SCSS             |         96 |          2 |         19 |        117 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\options-frame\options-frame.component.tsx   | TypeScript React |        169 |         12 |         23 |        204 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\options-frame\options-frame.styles.scss     | SCSS             |        193 |          1 |         36 |        230 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\pad-frame\pad-frame.component.tsx           | TypeScript React |         46 |          3 |         11 |         60 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\pad-frame\pad-frame.styles.scss             | SCSS             |         33 |          1 |          6 |         40 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\sign-in\sign-in.component.tsx               | TypeScript React |         72 |          2 |         15 |         89 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\sign-in\sign-in.styles.scss                 | SCSS             |         12 |          0 |          3 |         15 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\sign-up\sign-up.component.tsx               | TypeScript React |         99 |          2 |         22 |        123 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\sign-up\sign-up.styles.scss                 | SCSS             |         13 |          0 |          3 |         16 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\signin-input\signin-input.component.tsx     | TypeScript React |         23 |          0 |          7 |         30 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\signin-input\signin-input.styles.scss       | SCSS             |         46 |          0 |          9 |         55 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\signinupmodal\signinupmodal.component.tsx   | TypeScript React |         22 |          4 |          7 |         33 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\signinupmodal\signinupmodal.styles.scss     | SCSS             |          7 |          0 |          1 |          8 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\trash-frame\trash-frame.component.tsx       | TypeScript React |         27 |          2 |          6 |         35 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\trash-frame\trash-frame.styles.scss         | SCSS             |         42 |          1 |         10 |         53 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\update-frame\update-frame.component.tsx     | TypeScript React |         20 |         10 |          7 |         37 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\update-frame\update-frame.styles.scss       | SCSS             |         19 |          2 |          6 |         27 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\user-interface\user-interface.component.tsx | TypeScript React |         19 |          5 |          8 |         32 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\user-interface\user-interface.styles.scss   | SCSS             |          5 |          2 |          3 |         10 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\user-options\user-options.component.tsx     | TypeScript React |         57 |          6 |          9 |         72 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\components\user-options\user-options.styles.scss       | SCSS             |         71 |          2 |         14 |         87 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\context\main\MainReducer.ts                            | TypeScript       |        241 |          8 |          5 |        254 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\context\main\MainState.tsx                             | TypeScript React |         83 |          3 |          9 |         95 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\firebase\firebase.utils.ts                             | TypeScript       |        104 |          5 |         21 |        130 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\index.css                                              | CSS              |         22 |          0 |          4 |         26 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\index.tsx                                              | TypeScript React |         17 |          2 |          5 |         24 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\logo.svg                                               | XML              |          1 |          0 |          0 |          1 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\methods\drop-helper.ts                                 | TypeScript       |         12 |          0 |          2 |         14 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\methods\find-group.ts                                  | TypeScript       |         49 |          2 |         10 |         61 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\methods\new-note.ts                                    | TypeScript       |         18 |          2 |          4 |         24 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\methods\num-finders.ts                                 | TypeScript       |         41 |          3 |         10 |         54 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\methods\trashHandlers.ts                               | TypeScript       |         25 |          8 |          6 |         39 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\methods\update-helper.ts                               | TypeScript       |          9 |          2 |          3 |         14 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\react-app-env.d.ts                                     | TypeScript       |          0 |          1 |          1 |          2 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\reportWebVitals.ts                                     | TypeScript       |         13 |          0 |          3 |         16 |
+| c:\Users\rideo\Dropbox\Code\projects\react\el-chart-2\src\setupTests.ts                                          | TypeScript       |          1 |          4 |          1 |          6 |
+| Total                                                                                                            |                  |      2,291 |        589 |        414 |      3,294 |
++------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

@@ -15,7 +15,6 @@ class App extends Component<MyProps, MyState> {
   constructor(props: MyProps) {
     super(props)
     this.state = {
-      // uiZoom: 1.1
     }
   }
 
@@ -73,9 +72,6 @@ class App extends Component<MyProps, MyState> {
       })
       document.querySelector('#board__backing')?.scrollTo(3460, 1211)
     }
-    // partially handles bad clientX value on fast note clicking
-    // window.addEventListener('dragover', (e) => e.preventDefault(), false)
-    // window.addEventListener('dragend', (e) => e.preventDefault(), false)
     window.addEventListener('DOMContentLoaded', () => setZoom() )
   }
 

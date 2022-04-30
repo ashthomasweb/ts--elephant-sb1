@@ -55,7 +55,7 @@ const MainBoard = (props: Props): JSX.Element => {
   return (
       <div
         id='backing'
-        className='board__backing'
+        className='board-backing'
         style={{ backgroundColor: boardObj.backgroundColor }}
         onDrop={onDrop}
       >
