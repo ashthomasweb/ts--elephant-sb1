@@ -73,6 +73,7 @@ class App extends Component<MyProps, MyState> {
       })
     }
     window.addEventListener('DOMContentLoaded', () => setZoom() )
+    document.querySelector('#backing')?.scrollTo(3500, 1150) // needs ref
   }
 
   componentWillUnmount() {
