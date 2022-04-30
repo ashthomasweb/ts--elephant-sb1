@@ -1,6 +1,6 @@
 // MainReducer.ts
 
-import { indexFinder } from '../../methods/num-finders'
+import { indexFinder, zIndexDrag } from '../../methods/num-finders'
 import { updateModeCheck } from '../../methods/update-helper'
 
 export const mainReducer = (state: any, action: any) => {
@@ -27,13 +27,15 @@ export const mainReducer = (state: any, action: any) => {
                 ...note,
                 left: action.payload.left,
                 top: action.payload.top,
-                zIndex: action.payload.zIndex
+                zIndex: action.payload.zIndex,
+                isNew: false
             }
-            if (action.payload.isMat) {
+            if (action.payload.isMat ) {
                 note.noteGroup.forEach((noteID: any) => {
                     let groupedNote = notes[indexFinder(notes, noteID)]
                     groupedNote.left = parseFloat(note.left) - groupedNote.matOffsetX + 'px'
                     groupedNote.top = parseFloat(note.top) - groupedNote.matOffsetY + 'px'
+                    groupedNote.isMatBoard && (groupedNote.zIndex = zIndexDrag(notes, true, true))
                   })
             }
             notes[indexFinder(notes, note.id)] = note
@@ -49,10 +51,9 @@ export const mainReducer = (state: any, action: any) => {
             }
         case "SET_ALL_NOTES":
             {
-            let notes = [...action.payload]
             return {
                 ...state,
-                notes: notes
+                notes: [...action.payload]
             }
         }
         case "ONCHANGE_TEXT":
@@ -136,10 +137,15 @@ export const mainReducer = (state: any, action: any) => {
                 display: display
             }
         case "DISABLE_UPDATE_MODE":
-            let updateActive = false
-            return {
-                ...state,
-                updateActive: updateActive
+            {
+                let updateActive = false
+                let notes = [...state.notes]
+                notes.forEach((note) => note.isUpdate = false )
+                return {
+                    ...state,
+                    notes: notes,
+                    updateActive: updateActive
+                }
             }
         case "ONRESIZE_NOTE":
             {

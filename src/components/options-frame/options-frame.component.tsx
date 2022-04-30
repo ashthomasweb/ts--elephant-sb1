@@ -23,11 +23,10 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     let notes = newNoteGenerator(notesObj, newNote, isMat, optionsRef)
     dispatch({ type: 'SET_ALL_NOTES', payload: notes })
   }
-  
+
   function newMatHandler() {
     let newNotes = newNoteGenerator(notes, newNote, true, optionsRef)
     dispatch({ type: 'SET_ALL_NOTES', payload: newNotes })
-
   }
 
   function saveCurrentBoard() {
@@ -80,7 +79,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     boardObj.name = ''
     dispatch({ type: 'ONCHANGE_BOARDNAME', payload: boardObj })
     let notes: any[] = []
-    dispatch({ type: 'SET_ALL_NOTES', payload: notes})
+    dispatch({ type: 'SET_ALL_NOTES', payload: notes })
   }
 
   function userBoardDropDown() {
@@ -89,14 +88,11 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
 
   // devicePixelRatio scaling via user zoom
   window.addEventListener('resize', () => {
-    let ui = [
-      '.options-frame',
-      '.header',
-      '.pad-frame',
-      '.trash-frame',
-    ]
+    let ui = ['.options-frame', '.header', '.pad-frame', '.trash-frame']
     ui.forEach((item: any) => {
-      document.querySelector(item).style.zoom = `calc(100% / ${ window.devicePixelRatio * display.uiZoom})`
+      document.querySelector(item).style.zoom = `calc(100% / ${
+        window.devicePixelRatio * display.uiZoom
+      })`
     })
   })
 
@@ -107,15 +103,17 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     dispatch({ type: 'SET_INTERFACE_ZOOM', payload: uiZoom })
   }
 
+  function cancelUpdateMode() {
+    dispatch({ type: 'DISABLE_UPDATE_MODE' })
+  }
 
   return (
     <div
       className='options-frame'
       ref={optionsRef}
       style={{
-        zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})`
-      }}
-      >
+        zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})`,
+      }}>
       <div className='zoom-options'>
         <h3>Zoom</h3>
         <h4>Interface</h4>
@@ -132,10 +130,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
         </p>
       </div>
 
-      <div
-        className='database-options'
-        
-        >
+      <div className='database-options'>
         <h3>Save Boards</h3>
         <input
           type='text'
@@ -147,11 +142,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
         <button type='button' onClick={() => saveCurrentBoard()}>
           Save
         </button>
-        <button
-          type='button'
-          className='new-button'
-          onClick={newBoard}
-        >
+        <button type='button' className='new-button' onClick={newBoard}>
           New Board
         </button>
         <button
@@ -162,54 +153,47 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
         </button>
         {menuIsOpen && <BoardMenu currentUser={props.currentUser} />}
       </div>
-
+      
       <button
         className='place-btn'
         type='button'
         onClick={() => newNoteHandler(notes, newNote)}>
         Place on Board
       </button>
-      <button
-        className='options-btn mat'
-        type='button'
-        onClick={newMatHandler}
-      >
+      <button className='options-btn mat' type='button' onClick={newMatHandler}>
         Mat
       </button>
-      <button
-        type='button'
-        className='color-elements'
-        // onClick={this.setBackgroundColor}
-      >
-        Set Background
-      </button>
+      <label className='color-elements-label'>Set Background</label>
       <input
         type='color'
         value={boardObj.backgroundColor}
         className='color-elements'
         onChange={changeBGColor}
-        id='bg-color-pick'></input>
-      <button
-        type='button'
-        className='color-elements'
-        style={{ width: '110px' }}
-        // onClick={this.setNoteColor}
-      >
-        Set Note Color
-      </button>
+        id='bg-color-pick'
+      />
+      <label className='color-elements-label'>Set Note Color</label>
       <input
         type='color'
         value={newNote.noteBColor}
         className='color-elements'
         onChange={changeNoteColor}
-        id='note-color-pick'></input>
-      <label className='switch'>
+        id='note-color-pick'
+      />
+      <button
+        type='button'
+        style={{ width: '167px' }}
+        className='color-elements'
+        onClick={cancelUpdateMode}>
+        Cancel Update Mode
+      </button>
+
+      {/* <label className='switch'>
         <label htmlFor='check-toggle' className='check-label'>
           Check
         </label>
         <input id='check-toggle' type='checkbox' />
         <span className='slider round'></span>
-      </label>
+      </label> */}
     </div>
   )
 }

@@ -29,7 +29,6 @@ export const zIndexDrag = (notes: any[], isMat: boolean = false, isGroup: boolea
 }
 
 export const zIndexFinderMat = (notes: any[], isGroup: boolean = false) => {
-    console.log('hi')
     let zList = [-2147483645]
     notes.forEach((note) => {
         if (note.isMatBoard === true) {

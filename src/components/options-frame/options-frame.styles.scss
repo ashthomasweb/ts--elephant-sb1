@@ -82,7 +82,7 @@
   position: fixed;
   margin: 0 5px;
   top: 10px;
-  left: 135px;
+  left: 140px;
   padding: 0 0 0 160px;
   background-color: var(--primary);
   display: inline-block;
@@ -108,6 +108,20 @@
     left: 80px;
     position: relative;
     height: 21px;
+  }
+
+  .color-elements-label {
+    display: inline-block;
+    margin: 8px 2px 0px 5px;
+    padding: 0 0 2px 4px;
+    bottom: 0;
+    left: 80px;
+    position: relative;
+    height: 21px;
+    width: 110px;
+    font-size: 14px;
+    border: 1px solid #aaa;
+    background-color: #aaa;
   }
 
   .mat {

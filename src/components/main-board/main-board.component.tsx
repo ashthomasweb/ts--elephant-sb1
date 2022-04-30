@@ -20,7 +20,6 @@ const MainBoard = (props: Props): JSX.Element => {
   } = useContext(MainContext)
 
   const getMousePos = (e: any): void => {
-    // const rect: any = e.target.getBoundingClientRect()
     const mouseOffset: object = {
       left: e.clientX - parseFloat(getComputedStyle(e.target.parentNode).left),
       top: e.clientY - parseFloat(getComputedStyle(e.target.parentNode).top),
@@ -28,18 +27,13 @@ const MainBoard = (props: Props): JSX.Element => {
     dispatch({ type: 'SET_MOUSE_OFFSET', payload: mouseOffset })
   }
 
-  const getPosition = (
-    position: string,
-    mousePos: number
-  ): number => {
+  const getPosition = (position: string, mousePos: number): number => {
     return mousePos - mouseOffset[position]
   }
 
   const dragNote = (e: any): void => {
     let noteId = e.target.parentElement.id
     let isMat = notes[indexFinder(notes, noteId)].isMatBoard
-
-    console.log(notes[indexFinder(notes, noteId)].isMatBoard)
     let newLeft: number = getPosition('left', e.clientX)
     let newTop: number = getPosition('top', e.clientY)
     let noteData: { [key: string]: string | number } = {
@@ -47,38 +41,25 @@ const MainBoard = (props: Props): JSX.Element => {
       top: `${newTop}px`,
       id: noteId,
       zIndex: zIndexDrag(notes, isMat),
-      isMat: isMat
+      isMat: isMat,
     }
     e.clientX !== 0 && dispatch({ type: 'ONDRAG_NOTE_DATA', payload: noteData })
     trashBoxDisplay(e)
   }
 
-  function matGroupPosUpdater(matPack: any[], notes: any[]) {
-    const [matId, noteGroup, e] = matPack
-    let mat = notes[indexFinder(notes, matId)]
-    noteGroup.forEach((item: any) => {
-      let note = notes[indexFinder(notes, item)]
-      if (e.clientX !== 0) {
-        note.left = parseFloat(mat.left) - note.matOffsetX + 'px'
-        note.top = parseFloat(mat.top) - note.matOffsetY + 'px'
-      }
-    })
-    return notes
-  }
-
-
   const onDrop = async (e: any) => {
     let newNotes: any[] = await trashHandler(e, [...notes], dispatch)
-    dispatch({ type: 'SET_ALL_NOTES', payload: newNotes})
+    dispatch({ type: 'SET_ALL_NOTES', payload: newNotes })
   }
 
   return (
-      <div id='backing'
-      className='board__backing'
-      style={{backgroundColor: boardObj.backgroundColor}}
-      onDrop={onDrop}
+      <div
+        id='backing'
+        className='board__backing'
+        style={{ backgroundColor: boardObj.backgroundColor }}
+        onDrop={onDrop}
       >
-      <UserInterface currentUser={props.currentUser} />
+        <UserInterface currentUser={props.currentUser} />
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: [] }) => (
           <Note
             id={id}

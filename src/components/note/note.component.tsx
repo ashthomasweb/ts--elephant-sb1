@@ -2,10 +2,10 @@
 
 import { useContext, useRef } from 'react'
 import { MainContext } from '../../context/main/MainState'
-import check from '../../assets/check.png'
 import { indexFinder } from '../../methods/num-finders'
 import { getGroupIds } from '../../methods/find-group'
 
+import check from '../../assets/check.png'
 import './note.styles.scss'
 
 const Note = (props: any) => {
@@ -20,6 +20,7 @@ const Note = (props: any) => {
     // package style properties for easy CSS assignment
     left: noteData.left,
     top: noteData.top,
+    // width: noteData.width, // this is what needs to be set, currently 'fit-content', which works, but not for IE
     zIndex: noteData.zIndex,
     outline: noteData.isUpdate ? '5px solid green' : 'none',
   }
@@ -31,35 +32,29 @@ const Note = (props: any) => {
   }
 
   function noteClickHandler(e: any) {
-    noteData.isMatBoard && findMatGroup(e.target.parentElement.id)
+    noteData.isMatBoard && !noteData.isNew && findMatGroup(e.target.parentElement.id)
     props.getMousePos(e)
   }
 
   async function findMatGroup(id: any) {
     let noteGroup = await getGroupIds(id, notes)
-    notes[indexFinder(notes, id)].noteGroup = noteGroup
-    await dispatch({ type: 'SET_NOTEGROUP', payload: { id: id, noteGroup: noteGroup }})
-    assignMatOffset(id, noteGroup)
-    console.log(noteGroup)
-    // this.setState({ notes }, () => assignMatOffset(id, noteGroup))
+    let newNotes = [...notes]
+    newNotes[indexFinder(notes, id)].noteGroup = noteGroup
+    assignMatOffset(id, noteGroup, newNotes)
   }
 
-
-  function assignMatOffset(id: any, noteGroup: any[]) {
+  function assignMatOffset(id: any, noteGroup: any[], notes: any[]) {
     let mat = notes[indexFinder(notes, id)]
     noteGroup.forEach((itemID: any) => {
       let note = notes[indexFinder(notes, itemID)]
       note.matOffsetX = parseFloat(mat.left) - parseFloat(note.left)
       note.matOffsetY = parseFloat(mat.top) - parseFloat(note.top)
     })
-    // dispatch
-    // this.setState({ notes })
+    dispatch({ type: 'SET_ALL_NOTES', payload: notes })
   }
-
 
   async function toggleUpdateMode(e: any) {
     let el = e.currentTarget
-    console.log(el)
     await dispatch({
       type: 'TOG_UPDATE_MODE',
       payload: e.currentTarget.parentElement.id,
@@ -67,7 +62,6 @@ const Note = (props: any) => {
     el.focus()
   }
 
-  // controlled input elements
   function updateNote(e: any) {
     dispatch({
       type: 'ONCHANGE_NOTETEXT',
@@ -79,7 +73,6 @@ const Note = (props: any) => {
   }
 
   function resizeHandler(e: any) {
-    console.log(e.target)
     let dimensions = currentNote.current.getBoundingClientRect()
     dispatch({
       type: 'ONRESIZE_NOTE',
@@ -124,7 +117,6 @@ const Note = (props: any) => {
       style={notePosition}
       onMouseUp={resizeHandler}
       id={props.id}
-      ref={currentNote}
       >
       <img
         className='note-check'
@@ -137,22 +129,23 @@ const Note = (props: any) => {
             payload: { id: props.id, isChecked: props.noteData.isChecked },
           })
         }
-      />
+        />
       <div
         className='note-menu'
         data-tray={`tray-${noteData.id}`}
         onMouseDown={clickHandler}
-      />
+        />
       <div
-      onDragStart={(e) =>
-        e.dataTransfer.setDragImage(new Image(), -9000, -9000)
-      }
-      draggable
-      onDrag={props.dragNote}
-      onMouseDown={noteClickHandler}
+        ref={currentNote}
+        className={`note-base isMat-${noteData.isMatBoard}`}
+        onDragStart={(e) =>
+          e.dataTransfer.setDragImage(new Image(), -9000, -9000)
+        }
+        draggable
+        onDrag={props.dragNote}
+        onMouseDown={noteClickHandler}
         onDoubleClick={toggleUpdateMode}
         style={noteStyle}
-        className='note-base'
         contentEditable={noteData.isUpdate ? 'true' : 'false'}
         onBlur={(e) => updateNote(e)}
         suppressContentEditableWarning
@@ -169,7 +162,6 @@ const Note = (props: any) => {
         }}
         onDrag={(e) => e.preventDefault()}
         id={`tray-${noteData.id}`}
-        // data-display={noteData.isTrayDisplay ?? false}
         >
         <textarea
           className={`tray-text ${
