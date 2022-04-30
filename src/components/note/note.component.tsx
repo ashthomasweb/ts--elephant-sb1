@@ -50,11 +50,12 @@ const Note = (props: any) => {
   }
 
   function resizeHandler(e: any) {
+    console.log(e.target)
     let dimensions = currentNote.current.getBoundingClientRect()
     dispatch({
       type: 'ONRESIZE_NOTE',
       payload: {
-        id: e.target.id,
+        id: e.target.parentElement.id,
         width: dimensions.width,
         height: dimensions.height,
       },
@@ -95,7 +96,8 @@ const Note = (props: any) => {
       
       onMouseUp={resizeHandler}
       id={props.id}
-      ref={currentNote}>
+      ref={currentNote}
+      >
       <img
         src={check}
         style={{ opacity: `${props.noteData.isChecked ? '1' : '0.1'}` }}
