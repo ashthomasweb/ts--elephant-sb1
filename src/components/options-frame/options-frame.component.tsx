@@ -23,6 +23,12 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     let notes = newNoteGenerator(notesObj, newNote, isMat, optionsRef)
     dispatch({ type: 'SET_ALL_NOTES', payload: notes })
   }
+  
+  function newMatHandler() {
+    let newNotes = newNoteGenerator(notes, newNote, true, optionsRef)
+    dispatch({ type: 'SET_ALL_NOTES', payload: newNotes })
+
+  }
 
   function saveCurrentBoard() {
     let newBoardObj: any = {}
@@ -101,6 +107,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     dispatch({ type: 'SET_INTERFACE_ZOOM', payload: uiZoom })
   }
 
+
   return (
     <div
       className='options-frame'
@@ -165,7 +172,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
       <button
         className='options-btn mat'
         type='button'
-        // onClick={this.newMatHandler}
+        onClick={newMatHandler}
       >
         Mat
       </button>

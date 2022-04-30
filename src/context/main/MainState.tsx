@@ -22,11 +22,11 @@ interface initialStateType {
     isTrayDisplay: boolean
     trayWidth: string
     trayHeight: string
-    // isMatBoard: false,
-    // isNew: true,
-    // noteGroup: [],
-    // matOffsetX: 0,
-    // matOffsetY: 0,
+    isMatBoard: boolean
+    isNew: boolean
+    noteGroup: any[]
+    matOffsetX: number
+    matOffsetY: number
     // iframe: false
   }
   boardObj: any
@@ -58,11 +58,11 @@ const initialState = {
     isTrayDisplay: false,
     trayWidth: '150px',
     trayHeight: '200px',
-    // isMatBoard: false,
-    // isNew: true,
-    // noteGroup: [],
-    // matOffsetX: 0,
-    // matOffsetY: 0,
+    isMatBoard: false,
+    isNew: true,
+    noteGroup: [],
+    matOffsetX: 0,
+    matOffsetY: 0,
     // iframe: false
   },
   boardObj: {

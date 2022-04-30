@@ -3,11 +3,13 @@
 import { useContext, useRef } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import check from '../../assets/check.png'
+import { indexFinder } from '../../methods/num-finders'
+import { getGroupIds } from '../../methods/find-group'
 
 import './note.styles.scss'
 
 const Note = (props: any) => {
-  const { dispatch } = useContext(MainContext)
+  const { state: { notes }, dispatch } = useContext(MainContext)
 
   const currentNote: any = useRef(null)
   const currentTray: any = useRef(null)
@@ -27,6 +29,33 @@ const Note = (props: any) => {
     height: noteData.height,
     backgroundColor: noteData.noteBColor,
   }
+
+  function noteClickHandler(e: any) {
+    noteData.isMatBoard && findMatGroup(e.target.parentElement.id)
+    props.getMousePos(e)
+  }
+
+  async function findMatGroup(id: any) {
+    let noteGroup = await getGroupIds(id, notes)
+    notes[indexFinder(notes, id)].noteGroup = noteGroup
+    await dispatch({ type: 'SET_NOTEGROUP', payload: { id: id, noteGroup: noteGroup }})
+    assignMatOffset(id, noteGroup)
+    console.log(noteGroup)
+    // this.setState({ notes }, () => assignMatOffset(id, noteGroup))
+  }
+
+
+  function assignMatOffset(id: any, noteGroup: any[]) {
+    let mat = notes[indexFinder(notes, id)]
+    noteGroup.forEach((itemID: any) => {
+      let note = notes[indexFinder(notes, itemID)]
+      note.matOffsetX = parseFloat(mat.left) - parseFloat(note.left)
+      note.matOffsetY = parseFloat(mat.top) - parseFloat(note.top)
+    })
+    // dispatch
+    // this.setState({ notes })
+  }
+
 
   async function toggleUpdateMode(e: any) {
     let el = e.currentTarget
@@ -93,15 +122,14 @@ const Note = (props: any) => {
     <div
       className='note-wrapper'
       style={notePosition}
-      
       onMouseUp={resizeHandler}
       id={props.id}
       ref={currentNote}
       >
       <img
+        className='note-check'
         src={check}
         style={{ opacity: `${props.noteData.isChecked ? '1' : '0.1'}` }}
-        className='note-check'
         alt='checkmark'
         onClick={() =>
           dispatch({
@@ -121,7 +149,7 @@ const Note = (props: any) => {
       }
       draggable
       onDrag={props.dragNote}
-      onMouseDown={props.getMousePos}
+      onMouseDown={noteClickHandler}
         onDoubleClick={toggleUpdateMode}
         style={noteStyle}
         className='note-base'

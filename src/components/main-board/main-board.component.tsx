@@ -5,7 +5,7 @@ import { MainContext } from '../../context/main/MainState'
 import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
 import { trashBoxDisplay, trashHandler } from '../../methods/trashHandlers'
-import { zIndexDrag } from '../../methods/num-finders'
+import { indexFinder, zIndexDrag } from '../../methods/num-finders'
 
 import '../main-board/main-board.styles.scss'
 
@@ -36,17 +36,35 @@ const MainBoard = (props: Props): JSX.Element => {
   }
 
   const dragNote = (e: any): void => {
+    let noteId = e.target.parentElement.id
+    let isMat = notes[indexFinder(notes, noteId)].isMatBoard
+
+    console.log(notes[indexFinder(notes, noteId)].isMatBoard)
     let newLeft: number = getPosition('left', e.clientX)
     let newTop: number = getPosition('top', e.clientY)
     let noteData: { [key: string]: string | number } = {
       left: `${newLeft}px`,
       top: `${newTop}px`,
-      id: e.target.parentElement.id,
-      zIndex: zIndexDrag(notes)
+      id: noteId,
+      zIndex: zIndexDrag(notes, isMat)
     }
     e.clientX !== 0 && dispatch({ type: 'SET_NOTE_DATA', payload: noteData })
     trashBoxDisplay(e)
   }
+
+  function matGroupPosUpdater(matPack: any[], notes: any[]) {
+    const [matId, noteGroup, e] = matPack
+    let mat = notes[indexFinder(notes, matId)]
+    noteGroup.forEach((item: any) => {
+      let note = notes[indexFinder(notes, item)]
+      if (e.clientX !== 0) {
+        note.left = parseFloat(mat.left) - note.matOffsetX + 'px'
+        note.top = parseFloat(mat.top) - note.matOffsetY + 'px'
+      }
+    })
+    return notes
+  }
+
 
   const onDrop = async (e: any) => {
     let newNotes: any[] = await trashHandler(e, [...notes], dispatch)
