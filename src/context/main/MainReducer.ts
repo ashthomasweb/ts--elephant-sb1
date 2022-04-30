@@ -20,7 +20,7 @@ export const mainReducer = (state: any, action: any) => {
                 ...state,
                 mouseOffset: mouseOffset
             }
-        case "SET_NOTE_DATA":
+        case "ONDRAG_NOTE_DATA":
             let note = state.notes.filter((item: any) => item.id === Number(action.payload.id))[0]
             let notes = [ ...state.notes]
             note = {
@@ -28,6 +28,13 @@ export const mainReducer = (state: any, action: any) => {
                 left: action.payload.left,
                 top: action.payload.top,
                 zIndex: action.payload.zIndex
+            }
+            if (action.payload.isMat) {
+                note.noteGroup.forEach((noteID: any) => {
+                    let groupedNote = notes[indexFinder(notes, noteID)]
+                    groupedNote.left = parseFloat(note.left) - groupedNote.matOffsetX + 'px'
+                    groupedNote.top = parseFloat(note.top) - groupedNote.matOffsetY + 'px'
+                  })
             }
             notes[indexFinder(notes, note.id)] = note
             return {

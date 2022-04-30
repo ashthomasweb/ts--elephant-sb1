@@ -46,9 +46,10 @@ const MainBoard = (props: Props): JSX.Element => {
       left: `${newLeft}px`,
       top: `${newTop}px`,
       id: noteId,
-      zIndex: zIndexDrag(notes, isMat)
+      zIndex: zIndexDrag(notes, isMat),
+      isMat: isMat
     }
-    e.clientX !== 0 && dispatch({ type: 'SET_NOTE_DATA', payload: noteData })
+    e.clientX !== 0 && dispatch({ type: 'ONDRAG_NOTE_DATA', payload: noteData })
     trashBoxDisplay(e)
   }
 
