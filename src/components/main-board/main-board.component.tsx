@@ -51,6 +51,7 @@ const MainBoard = (props: Props): JSX.Element => {
     let newNotes: any[] = await trashHandler(e, [...notes], dispatch)
     dispatch({ type: 'SET_ALL_NOTES', payload: newNotes })
   }
+  document.querySelector('#backing')?.scrollTo(3500, 1150) // needs ref
 
   return (
       <div

@@ -65,12 +65,12 @@ class App extends Component<MyProps, MyState> {
     })
 
     function setZoom() {
+      console.log('hi')
       let zoom = window.devicePixelRatio * 1.1
       let ui = ['.options-frame', '.header', '.pad-frame', '.trash-frame']
       ui.forEach((item: any) => {
         document.querySelector(item).style.zoom = `calc(100% / ${zoom})`
       })
-      document.querySelector('#board__backing')?.scrollTo(3460, 1211)
     }
     window.addEventListener('DOMContentLoaded', () => setZoom() )
   }

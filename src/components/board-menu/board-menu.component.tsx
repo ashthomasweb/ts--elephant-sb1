@@ -22,6 +22,11 @@ const BoardMenu = (props: PropsType): JSX.Element => {
           putBoardsToList()
       }
       userBoards.length > 0 && buildMenu()
+      console.log(document.querySelector('#board-backing'))
+      console.log('hey')
+
+    
+
   })
   
   function putBoardsToList() {
