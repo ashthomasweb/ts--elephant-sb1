@@ -55,12 +55,12 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
 
   function changeBoardName(e: any) {
     boardObj.name = e.target.value
-    dispatch({ type: 'ONCHANGE_BOARDNAME', payload: boardObj })
+    dispatch({ type: 'SET_BOARDOBJ', payload: boardObj })
   }
 
   function changeBGColor(e: any) {
     boardObj.backgroundColor = e.target.value
-    dispatch({ type: 'ONCHANGE_BGCOLOR', payload: boardObj })
+    dispatch({ type: 'SET_BOARDOBJ', payload: boardObj })
   }
 
   function changeNoteColor(e: any) {
@@ -77,7 +77,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
 
   function newBoard() {
     boardObj.name = ''
-    dispatch({ type: 'ONCHANGE_BOARDNAME', payload: boardObj })
+    dispatch({ type: 'SET_BOARDOBJ', payload: boardObj })
     let notes: any[] = []
     dispatch({ type: 'SET_ALL_NOTES', payload: notes })
   }
@@ -187,13 +187,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
         Cancel Update Mode
       </button>
 
-      {/* <label className='switch'>
-        <label htmlFor='check-toggle' className='check-label'>
-          Check
-        </label>
-        <input id='check-toggle' type='checkbox' />
-        <span className='slider round'></span>
-      </label> */}
+    
     </div>
   )
 }

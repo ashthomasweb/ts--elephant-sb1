@@ -57,7 +57,7 @@ const Note = (props: any) => {
     let el = e.currentTarget
     await dispatch({
       type: 'TOG_UPDATE_MODE',
-      payload: e.currentTarget.parentElement.id,
+      payload: { id: e.currentTarget.parentElement.id },
     })
     el.focus()
   }
