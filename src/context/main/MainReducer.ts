@@ -22,13 +22,6 @@ export const mainReducer = (state: any, action: any) => {
   }
 
   switch (action.type) {
-    case 'TOG_USER': {
-      let user = state.user === 'Ash' ? 'Dave' : 'Ash'
-      return {
-        ...state,
-        user: user,
-      }
-    }
     case 'SET_MOUSE_OFFSET': {
       let mouseOffset = {
         left: action.payload.left,
