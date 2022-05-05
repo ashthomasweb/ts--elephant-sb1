@@ -173,7 +173,6 @@ export const mainReducer = (state: any, action: any) => {
     case 'ONCHANGE_NOTE_TEXT': {
       let [note, notes] = noteSetup()
       note.noteText = action.payload.text
-
       return setNoteAndReturnState(notes, note.id, note)
     }
 
@@ -184,7 +183,6 @@ export const mainReducer = (state: any, action: any) => {
         width: `${action.payload.width}px`,
         height: `${action.payload.height}px`,
       }
-
       return setNoteAndReturnState(notes, note.id, note)
     }
 

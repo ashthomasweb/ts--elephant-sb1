@@ -17,10 +17,8 @@ const Note = (props: any) => {
   let noteData = props.noteData
 
   let notePosition = {
-    // package style properties for easy CSS assignment
     left: noteData.left,
     top: noteData.top,
-    // width: noteData.width, // this is what needs to be set, currently 'fit-content', which works, but not for IE
     zIndex: noteData.zIndex,
     outline: noteData.isUpdate ? '5px solid green' : 'none',
   }
@@ -41,7 +39,6 @@ const Note = (props: any) => {
     let newNotes = [...notes]
     newNotes[indexFinder(notes, id)].noteGroup = noteGroup
     assignMatOffset(id, noteGroup, newNotes)
-
   }
 
   function assignMatOffset(id: any, noteGroup: number[], notes: any[]) {
@@ -58,7 +55,7 @@ const Note = (props: any) => {
     let el = e.currentTarget
     await dispatch({
       type: 'TOG_UPDATE_MODE',
-      payload: { id: e.currentTarget.parentElement.id },
+      payload: { id: el.parentElement.id },
     })
     el.focus()
   }
@@ -141,9 +138,7 @@ const Note = (props: any) => {
       <div
         ref={currentNote}
         className={`note-base isMat-${noteData.isMatBoard}`}
-        onDragStart={(e) =>
-          e.dataTransfer.setDragImage(new Image(), -9000, -9000)
-        }
+        onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), -9000, -9000)}
         draggable
         onDrag={props.dragNote}
         onMouseDown={noteClickHandler}

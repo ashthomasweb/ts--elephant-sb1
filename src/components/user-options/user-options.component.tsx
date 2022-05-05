@@ -37,11 +37,7 @@ const UserOptions = (props: Props): JSX.Element => {
               <img src={logo} className='logo' alt='elephant-logo' />
               <button
                 className='option'
-                onClick={() => {
-                  // clearBoards()
-                  // this.props.reset()
-                  auth.signOut()
-                }}>
+                onClick={() => auth.signOut()}>
                 SIGN OUT
               </button>
             </div>

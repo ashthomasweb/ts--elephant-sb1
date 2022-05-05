@@ -191,8 +191,6 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
         onClick={cancelUpdateMode}>
         Cancel Update Mode
       </button>
-
-    
     </div>
   )
 }

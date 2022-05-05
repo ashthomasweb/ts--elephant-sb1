@@ -12,10 +12,8 @@ interface PropsType {
   autoComplete: string
 }
 
-
 const FormInput = ({ handleChange, label, ...otherProps }: PropsType) => (
-
-  <div className='group'> 
+  <div className='group'>
     <input className='form-input' onChange={handleChange} {...otherProps} />
     {
         label ?
@@ -25,7 +23,6 @@ const FormInput = ({ handleChange, label, ...otherProps }: PropsType) => (
         : null
     }
   </div>
-
 )
 
 export default FormInput

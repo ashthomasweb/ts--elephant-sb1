@@ -11,7 +11,7 @@ const TrashFrame = () : JSX.Element => {
   } = useContext(MainContext)
 
   return (
-    <div 
+    <div
       className='trash-frame'
       style={{
         zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})`

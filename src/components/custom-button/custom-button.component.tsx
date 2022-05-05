@@ -8,7 +8,6 @@ interface PropsType {
 }
 
 const CustomButton = ({ children }: PropsType) => (
-
   <button className={`custom-button`} >
     {children}
   </button>
