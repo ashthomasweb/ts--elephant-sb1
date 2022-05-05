@@ -11,14 +11,15 @@ const PadFrame = (): JSX.Element => {
   } = useContext(MainContext)
 
   const padFrameRef: any = useRef(null)
+
   // controlled input elements
   function changeInput(e: any) {
-    dispatch({ type: 'ONCHANGE_PAD_TEXT', payload: e.target.innerText })
+    dispatch({ type: 'ONCHANGE_PAD_TEXT', payload: {noteText: e.target.innerText} })
   }
 
   function resizeHandler() {
     let dimensions = padFrameRef.current.getBoundingClientRect()
-    dispatch({ type: 'ONRESIZE_PAD', payload: { width: dimensions.width, height: dimensions.height}})
+    dispatch({ type: 'ONRESIZE_PAD', payload: { dimensions: {width: dimensions.width, height: dimensions.height}}})
   }
 
   function dragHandler(e: any) {

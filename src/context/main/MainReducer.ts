@@ -127,8 +127,8 @@ export const mainReducer = (state: any, action: any) => {
     // PAD ACTIONS AND HANDLING //
 
     case 'ONCHANGE_PAD_TEXT': {
-      let newNote = { ...state.newNote }
-      newNote.noteText = action.payload
+      let data = action.payload.noteText
+      let newNote = { ...state.newNote, noteText: data }
       return {
         ...state,
         newNote: newNote,
@@ -136,7 +136,8 @@ export const mainReducer = (state: any, action: any) => {
     }
 
     case 'ONCHANGE_PAD_NOTECOLOR': {
-      let newNote = action.payload.newNote
+      let data = action.payload.noteBColor
+      let newNote = { ...state.newNote, noteBColor: data }
       return {
         ...state,
         newNote: newNote,
@@ -144,9 +145,12 @@ export const mainReducer = (state: any, action: any) => {
     }
 
     case 'ONRESIZE_PAD': {
-      let newNote = { ...state.newNote }
-      newNote.width = `${action.payload.width}px`
-      newNote.height = `${action.payload.height}px`
+      let data = action.payload.dimensions
+      let newNote = {
+        ...state.newNote,
+        width: data.width,
+        height: data.height
+      }
       return {
         ...state,
         newNote: newNote,
@@ -156,8 +160,7 @@ export const mainReducer = (state: any, action: any) => {
     case 'DRAG_NOTE_FROM_PAD': {
       let data = action.payload.noteData
       let notes = [...state.notes]
-      let newNote = { ...state.newNote }
-      newNote.noteText = ''
+      let newNote = { ...state.newNote, noteText: '' }
       notes[notes.length - 1] = {
         ...notes[notes.length - 1],
         left: data.left - 40,

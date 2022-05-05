@@ -71,8 +71,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
       })
       dispatch({ type: 'SET_ALL_NOTES', payload: {notes: notes} })
     } else {
-      newNote.noteBColor = e.target.value
-      dispatch({ type: 'ONCHANGE_PAD_NOTECOLOR', payload: {newNote: newNote} })
+      dispatch({ type: 'ONCHANGE_PAD_NOTECOLOR', payload: {noteBColor: e.target.value} })
     }
   }
 
