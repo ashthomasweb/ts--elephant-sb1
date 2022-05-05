@@ -3,15 +3,15 @@
 export const initialArray = [
     {
         border: "none",
-        trayHeight: "10px",
+        trayHeight: "0px",
         isTrayDisplay: false,
         noteBColor: "#a3a3a3",
-        noteText: "Anchor",
-        width: "10px",
+        noteText: "",
+        width: "0px",
         isNew: false,
         top: "6035px",
         noteGroup: [],
-        trayWidth: "10px",
+        trayWidth: "0px",
         mouseOffsetX: 28,
         zIndex: 5889,
         left: "10028px",
@@ -20,7 +20,7 @@ export const initialArray = [
         isMatBoard: false,
         isChecked: false,
         iframe: false,
-        height: "10px",
+        height: "0px",
         id: 0,
     },
     {

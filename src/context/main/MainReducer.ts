@@ -24,9 +24,9 @@ export const mainReducer = (state: any, action: any) => {
     // GLOBAL //
 
     case 'SET_INTERFACE_ZOOM': {
+      let data = action.payload.uiZoom
       let display = { ...state.display }
-      let data = action.payload
-      display.uiZoom = data.uiZoom
+      display.uiZoom = data
       return {
         ...state,
         display: display,
@@ -34,7 +34,8 @@ export const mainReducer = (state: any, action: any) => {
     }
 
     case 'SET_ALL_NOTES': {
-      let notes = [...action.payload.notes]
+      let data = [...action.payload.notes]
+      let notes = data
       return {
         ...state,
         notes: notes,
@@ -45,10 +46,7 @@ export const mainReducer = (state: any, action: any) => {
 
     case 'SET_NOTE_MOUSE_OFFSET': {
       let data = action.payload.mouseOffset
-      let mouseOffset = {
-        left: data.left,
-        top: data.top,
-      }
+      let mouseOffset = { ...data }
       return {
         ...state,
         mouseOffset: mouseOffset,
@@ -56,7 +54,7 @@ export const mainReducer = (state: any, action: any) => {
     }
 
     case 'ONDRAG_NOTE_DATA': {
-      let [note, notes] = noteSetup()
+      let [note, notes] = noteSetup() // payload id is present and available to this call
       let data = action.payload.noteData
       note = {
         ...note,
@@ -67,12 +65,10 @@ export const mainReducer = (state: any, action: any) => {
       }
       if (data.isMat) {
         note.noteGroup.forEach((noteID: string) => {
-          let groupedNote = notes[indexFinder(notes, noteID)]
-          groupedNote.left =
-            parseFloat(note.left) - groupedNote.matOffsetX + 'px'
-          groupedNote.top = parseFloat(note.top) - groupedNote.matOffsetY + 'px'
-          groupedNote.isMatBoard &&
-            (groupedNote.zIndex = zIndexDrag(notes, true, true))
+          let gItem = notes[indexFinder(notes, noteID)]
+          gItem.left = parseFloat(note.left) - gItem.matOffsetX + 'px'
+          gItem.top = parseFloat(note.top) - gItem.matOffsetY + 'px'
+          gItem.isMatBoard && (gItem.zIndex = zIndexDrag(notes, true, true))
         })
       }
 
@@ -82,7 +78,8 @@ export const mainReducer = (state: any, action: any) => {
     // DROP MENU AND BOARD OBJECT HANDLER //
 
     case 'TOG_BOARD_MENU': {
-      let menuIsOpen = !action.payload.menuIsOpen
+      let data = action.payload.menuIsOpen
+      let menuIsOpen = !data
       return {
         ...state,
         menuIsOpen: menuIsOpen,
@@ -90,8 +87,8 @@ export const mainReducer = (state: any, action: any) => {
     }
 
     case 'SET_BOARDOBJ': {
-      let data = action.payload
-      let boardObj = data.boardObj
+      let data = action.payload.boardObj
+      let boardObj = data
       return {
         ...state,
         boardObj: boardObj,
@@ -161,8 +158,8 @@ export const mainReducer = (state: any, action: any) => {
       let notes = [...state.notes]
       let newNote = { ...state.newNote }
       newNote.noteText = ''
-      notes[notes.length-1] = {
-        ...notes[notes.length-1],
+      notes[notes.length - 1] = {
+        ...notes[notes.length - 1],
         left: data.left - 40,
         top: data.top - 40,
       }

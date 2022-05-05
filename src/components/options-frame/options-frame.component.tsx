@@ -20,14 +20,14 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
 
   const optionsRef = useRef(null)
 
-  function newNoteHandler(notesObj: any, newNote: any, isMat = false) {
-    let notes = newNoteGenerator(notesObj, newNote, isMat, optionsRef)
-    dispatch({ type: 'SET_ALL_NOTES', payload: {notes: notes} })
+  function newNoteHandler(notesObj: any, newNote: any, isMat = false) { // refactor with below
+    let newNotes = newNoteGenerator(notesObj, newNote, isMat, optionsRef)
+    dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes} })
   }
 
-  function newMatHandler() {
+  function newMatHandler() { // refactor with above
     let newNotes = newNoteGenerator(notes, newNote, true, optionsRef)
-    dispatch({ type: 'SET_ALL_NOTES', payload: newNotes })
+    dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes} })
   }
 
   function saveCurrentBoard() {
