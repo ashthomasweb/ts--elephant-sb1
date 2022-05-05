@@ -1,24 +1,26 @@
+// initial-array.ts
+
 export const initialArray = [
     {
         border: "none",
-        trayHeight: "200px",
+        trayHeight: "10px",
         isTrayDisplay: false,
         noteBColor: "#a3a3a3",
-        noteText: "Corner Anchor",
-        width: "99.9281px",
+        noteText: "Anchor",
+        width: "10px",
         isNew: false,
-        top: "4035px",
+        top: "6035px",
         noteGroup: [],
-        trayWidth: "150px",
+        trayWidth: "10px",
         mouseOffsetX: 28,
         zIndex: 5889,
-        left: "8028px",
+        left: "10028px",
         trayText: "",
         mouseOffsetY: 21,
         isMatBoard: false,
         isChecked: false,
         iframe: false,
-        height: "81.5719px",
+        height: "10px",
         id: 0,
     },
     {
@@ -437,104 +439,29 @@ export const initialArray = [
     }
 ]
 
+export const newBoardArray = [
+    {
+        border: "none",
+        trayHeight: "0px",
+        isTrayDisplay: false,
+        noteBColor: "#a3a3a3",
+        noteText: "",
+        width: "0px",
+        isNew: false,
+        top: "6035px",
+        noteGroup: [],
+        trayWidth: "0px",
+        mouseOffsetX: 28,
+        zIndex: 5889,
+        left: "10028px",
+        trayText: "",
+        mouseOffsetY: 21,
+        isMatBoard: false,
+        isChecked: false,
+        iframe: false,
+        height: "0",
+        id: 0,
+    }
+]
 
-
-// export const initialArray = [
-//     {
-//                 isNew: false,
-//                 mouseOffsetY: -1274.63,
-//                 zIndex: 14816,
-//                 trayHeight: "348.984px",
-//                 width: "223.85px",
-//                 height: "63.9031px",
-//                 matOffsetX: -102.92000000000007,
-//                 matOffsetY: -323.68000000000006,
-//                 border: "none",
-//                 left: "2733.53px",
-//                 isMatBoard: false,
-//                 noteBColor: "#85dbc5",
-//                 id: 18,
-//                 top: "1815.63px",
-//                 mouseOffsetX: -2430.53,
-//                 noteGroup: [],
-//                 iframe: false,
-//                 isChecked: false,
-//                 trayWidth: "382.992px",
-//                 trayText: "12/23/21\nWelcome to version 2.0, and the re-brand to Elephant Chart!\n\nThis version starts the beginning of user convenience features.\n\nThe Interface will no longer scale with the rest of the chart, encouraging use of the zoom function for larger charts.\n\nThe chart can be navigated by dragging the backboard with the mouse.\n\nEach note or mat now has a tray pop-out that can hold additional information.\n\n",
-//                 isTrayDisplay: true,
-//                 noteText: "V 2.0"
-//             },
-//     {
-//         border: "none",
-//         trayHeight: "200px",
-//         isTrayDisplay: false,
-//         noteBColor: "#a3a3a3",
-//         noteText: "Corner Anchor",
-//         width: "140px",
-//         isNew: false,
-//         top: "300px",
-//         noteGroup: [],
-//         trayWidth: "150px",
-//         zIndex: 5889,
-//         left: "300px",
-//         isMatBoard: false,
-//         trayText: "",
-//         isChecked: false,
-//         // iframe: false,
-//         height: "104px",
-//         id: 2,
-//     },
-//     {
-//         border: "none",
-//         trayHeight: "200px",
-//         isTrayDisplay: false,
-//         noteBColor: "#a3a3a3",
-//         noteText: "Note 21",
-//         width: "140px",
-//         isNew: false,
-//         top: "320px",
-//         noteGroup: [],
-//         trayWidth: "150px",
-//         zIndex: 5889,
-//         left: "290px",
-//         trayText: "",
-//         isMatBoard: false,
-//         isChecked: false,
-//         // iframe: false,
-//         height: "104px",
-//         id: 1,
-//     },
-//     {
-//         border: "none",
-//         trayHeight: "200px",
-//         isTrayDisplay: false,
-//         noteBColor: "#a3a3a3",
-//         noteText: "Anchor",
-//         width: "99.9281px",
-//         isNew: false,
-//         top: "6000px",
-//         noteGroup: [],
-//         trayWidth: "150px",
-//         zIndex: 5889,
-//         left: "9000px",
-//         trayText: "",
-//         isMatBoard: false,
-//         isChecked: false,
-//         // iframe: false,
-//         height: "81.5719px",
-//         id: 3,
-//     }
-// ]
-
-
-
-
-
-
-
-
-
-
-
-
-
+// END of document

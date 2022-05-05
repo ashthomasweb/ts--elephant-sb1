@@ -19,7 +19,7 @@
         opacity: 1;
         z-index: 1;
         text-align: center;
-        font-size: 22px;
+        font-size: 18px;
         line-height: 1.4;
         color: darkred !important;
         font-weight: 900;
@@ -28,7 +28,7 @@
         resize: both !important;
         display: table-cell;
         vertical-align: middle;
-
+        padding: 15px;
         
         &.isMat-true {
           align-items: flex-start;

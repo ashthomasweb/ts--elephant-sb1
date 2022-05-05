@@ -5,6 +5,7 @@ import { MainContext } from '../../context/main/MainState'
 import { newNoteGenerator } from '../../methods/new-note'
 import { saveUserBoard } from '../../firebase/firebase.utils'
 import BoardMenu from '../board-menu/board-menu.component'
+import { newBoardArray } from '../../assets/initial-array'
 import './options-frame.styles.scss'
 
 type PropsType = {
@@ -21,7 +22,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
 
   function newNoteHandler(notesObj: any, newNote: any, isMat = false) {
     let notes = newNoteGenerator(notesObj, newNote, isMat, optionsRef)
-    dispatch({ type: 'SET_ALL_NOTES', payload: notes })
+    dispatch({ type: 'SET_ALL_NOTES', payload: {notes: notes} })
   }
 
   function newMatHandler() {
@@ -36,7 +37,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
       notes: [...notes],
       backgroundColor: boardObj.backgroundColor,
     }
-    dispatch({ type: 'SET_BOARDOBJ', payload: newBoardObj })
+    dispatch({ type: 'SET_BOARDOBJ', payload: {boardObj: newBoardObj} })
     saveBoardToDatabase(newBoardObj)
   }
 
@@ -55,12 +56,12 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
 
   function changeBoardName(e: any) {
     boardObj.name = e.target.value
-    dispatch({ type: 'SET_BOARDOBJ', payload: boardObj })
+    dispatch({ type: 'SET_BOARDOBJ', payload: {boardObj: boardObj} })
   }
 
   function changeBGColor(e: any) {
     boardObj.backgroundColor = e.target.value
-    dispatch({ type: 'SET_BOARDOBJ', payload: boardObj })
+    dispatch({ type: 'SET_BOARDOBJ', payload: {boardObj: boardObj} })
   }
 
   function changeNoteColor(e: any) {
@@ -68,22 +69,26 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
       notes.forEach((note: any) => {
         note.isUpdate === true && (note.noteBColor = e.target.value)
       })
-      dispatch({ type: 'SET_ALL_NOTES', payload: notes })
+      dispatch({ type: 'SET_ALL_NOTES', payload: {notes: notes} })
     } else {
       newNote.noteBColor = e.target.value
-      dispatch({ type: 'ONCHANGE_NOTECOLOR', payload: newNote })
+      dispatch({ type: 'ONCHANGE_PAD_NOTECOLOR', payload: {newNote: newNote} })
     }
   }
 
   function newBoard() {
-    boardObj.name = ''
-    dispatch({ type: 'SET_BOARDOBJ', payload: boardObj })
-    let notes: any[] = []
-    dispatch({ type: 'SET_ALL_NOTES', payload: notes })
+    let newNotes: any[] = [...newBoardArray]
+    let newBoardObj = {
+      name: '',
+      notes: newNotes,
+      backgroundColor: '#1670d7'
+    }
+    dispatch({ type: 'SET_BOARDOBJ', payload: {boardObj: newBoardObj} })
+    dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes} })
   }
 
   function userBoardDropDown() {
-    dispatch({ type: 'TOG_BOARD_MENU', payload: menuIsOpen })
+    dispatch({ type: 'TOG_BOARD_MENU', payload: {menuIsOpen: menuIsOpen} })
   }
 
   // devicePixelRatio scaling via user zoom
@@ -100,7 +105,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
   function zoomIntDir(directionUp: boolean) {
     let uiZoom = display.uiZoom
     directionUp ? (uiZoom = uiZoom - 0.14) : (uiZoom = uiZoom + 0.14)
-    dispatch({ type: 'SET_INTERFACE_ZOOM', payload: uiZoom })
+    dispatch({ type: 'SET_INTERFACE_ZOOM', payload: { uiZoom: uiZoom } })
   }
 
   function cancelUpdateMode() {

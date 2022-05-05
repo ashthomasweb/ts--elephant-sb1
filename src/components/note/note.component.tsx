@@ -36,21 +36,22 @@ const Note = (props: any) => {
     props.getMousePos(e)
   }
 
-  async function findMatGroup(id: any) {
+  async function findMatGroup(id: string) {
     let noteGroup = await getGroupIds(id, notes)
     let newNotes = [...notes]
     newNotes[indexFinder(notes, id)].noteGroup = noteGroup
     assignMatOffset(id, noteGroup, newNotes)
+
   }
 
-  function assignMatOffset(id: any, noteGroup: any[], notes: any[]) {
+  function assignMatOffset(id: any, noteGroup: number[], notes: any[]) {
     let mat = notes[indexFinder(notes, id)]
-    noteGroup.forEach((itemID: any) => {
+    noteGroup.forEach((itemID: number) => {
       let note = notes[indexFinder(notes, itemID)]
       note.matOffsetX = parseFloat(mat.left) - parseFloat(note.left)
       note.matOffsetY = parseFloat(mat.top) - parseFloat(note.top)
     })
-    dispatch({ type: 'SET_ALL_NOTES', payload: notes })
+    dispatch({ type: 'SET_ALL_NOTES', payload: {notes: notes} })
   }
 
   async function toggleUpdateMode(e: any) {
@@ -64,7 +65,7 @@ const Note = (props: any) => {
 
   function updateNote(e: any) {
     dispatch({
-      type: 'ONCHANGE_NOTETEXT',
+      type: 'ONCHANGE_NOTE_TEXT',
       payload: {
         text: e.target.innerText,
         id: e.currentTarget.parentElement.id,
@@ -73,6 +74,7 @@ const Note = (props: any) => {
   }
 
   function resizeHandler(e: any) {
+    if (e.target.id !> 0) return
     let dimensions = currentNote.current.getBoundingClientRect()
     dispatch({
       type: 'ONRESIZE_NOTE',
@@ -86,7 +88,7 @@ const Note = (props: any) => {
 
   function updateTray(e: any) {
     dispatch({
-      type: 'ONCHANGE_TRAYTEXT',
+      type: 'ONCHANGE_TRAY_TEXT',
       payload: { text: e.target.value, id: props.id },
     })
   }
@@ -105,6 +107,7 @@ const Note = (props: any) => {
 
   function clickHandler(e: any) {
     let id = e.target.parentElement.id
+    
     dispatch({
       type: 'TOG_TRAY',
       payload: { id: id, tray: noteData.isTrayDisplay },

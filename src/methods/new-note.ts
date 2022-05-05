@@ -2,7 +2,7 @@
 
 import { newIdFinder, zIndexFinder, zIndexFinderMat } from './num-finders'
 
-export const newNoteGenerator = (notesObj: any, newNote: any, isMat=false, ref:any=null) => {
+export const newNoteGenerator = (notesObj: any, newNote: any, isMat: boolean = false, ref: any = null) => {
     let note = { ...newNote }
     let notes = [...notesObj]
     note.id = newIdFinder(notesObj)

@@ -13,7 +13,7 @@ const PadFrame = (): JSX.Element => {
   const padFrameRef: any = useRef(null)
   // controlled input elements
   function changeInput(e: any) {
-    dispatch({ type: 'ONCHANGE_TEXT', payload: e.target.innerText })
+    dispatch({ type: 'ONCHANGE_PAD_TEXT', payload: e.target.innerText })
   }
 
   function resizeHandler() {
@@ -24,7 +24,7 @@ const PadFrame = (): JSX.Element => {
   function dragHandler(e: any) {
     e.dataTransfer.setDragImage(new Image(), -9000, -9000)
     let newNotes = newNoteGenerator(notes, newNote)
-    dispatch({ type: 'SET_ALL_NOTES', payload: newNotes})
+    dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes}})
   }
 
   function newDragHandler(e: any) {
@@ -32,7 +32,7 @@ const PadFrame = (): JSX.Element => {
       left: e.clientX + e.target.parentElement.parentElement.scrollLeft,
       top: e.clientY + e.target.parentElement.parentElement.scrollTop,
     }
-    dispatch({ type: "DRAG_NEWNOTE", payload: noteData })
+    dispatch({ type: "DRAG_NOTE_FROM_PAD", payload: {noteData: noteData} })
     padFrameRef.current.textContent = ''
   }
 
@@ -41,14 +41,13 @@ const PadFrame = (): JSX.Element => {
       className='pad-frame'
       onDrag={newDragHandler}
       onDragStart={dragHandler}
-
       onMouseUp={resizeHandler}
       draggable
       style={{ backgroundColor: newNote.noteBColor, zoom: `calc(100% / ${window.devicePixelRatio * display.uiZoom})` }}>
-      <div id='input-text' 
+      <div id='input-text'
       ref={padFrameRef}
-      contentEditable='true' 
-      onInput={(e) => changeInput(e)} 
+      contentEditable='true'
+      onInput={(e) => changeInput(e)}
       />
     </div>
   )

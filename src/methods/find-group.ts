@@ -2,56 +2,51 @@
 
 import { indexFinder } from "./num-finders"
 
-export const getGroupIds = (id: any, notes: any[]) => {
+export const getGroupIds = (newMatId: string, notes: any[]) : number[] => {
 
-    let newMatId = id
-    let newIndex = indexFinder(notes, newMatId)
-    let mat = notes[newIndex]
-    let groupTop = parseFloat(mat.top)
-    let groupBottom = parseFloat(mat.top) + parseFloat(mat.height)
-    let groupLeft = parseFloat(mat.left)
-    let groupRight = parseFloat(mat.left) + parseFloat(mat.width)
+    // loops through all notes and checks to see if there is an overlap
+    // of given clicked Mat. If there is any overlap with a note, group
+    // given note to mat. If there is overlap of another Mat, perform 
+    // same check with except with small margin
+
     let noteGroup: any[] = []
 
+    function pf(input1: string, input2: string = '0') : number {
+      return parseFloat(input1) + parseFloat(input2)
+    }
+
+    let mat = notes[indexFinder(notes, newMatId)]
+
+    let matTop: number = pf(mat.top)
+    let matBottom: number = pf(mat.top, mat.height)
+    let matLeft: number = pf(mat.left)
+    let matRight: number = pf(mat.left, mat.width)
+
     notes.forEach((note) => {
-      let noteTop: any = parseFloat(note.top)
-      let noteBottom: any = parseFloat(note.top) + parseFloat(note.height)
-      let noteLeft: any = parseFloat(note.left)
-      let noteRight: any = parseFloat(note.left) + parseFloat(note.width)
-      
-      const marginCheck = async () => {
-        if (noteLeft + 75 > groupLeft && noteRight - 75 < groupRight) {
-            await noteGroup.push(note.id)
-            return
-        }
-      }
-      
-      if (note.isMatBoard) {
-        if (noteTop > groupTop && noteBottom - 75 < groupBottom) {
-          marginCheck()
-        }
-      } else {
-        if (noteTop > groupTop && noteTop < groupBottom) {
-          if (noteLeft > groupLeft && noteLeft < groupRight) {
-            noteGroup.push(note.id)
-            return
-          }
-          if (noteRight < groupRight && noteRight > groupLeft ) {
-            noteGroup.push(note.id)
-            return
-          }
-        } else if (noteBottom > groupTop && noteBottom < groupBottom) {
-          if (noteLeft > groupLeft && noteLeft < groupRight) {
-            noteGroup.push(note.id)
-            return
-          }
-          if (noteRight < groupRight && noteRight > groupLeft ) {
+      let noteTop: number = pf(note.top)
+      let noteBottom: number = pf(note.top, note.height)
+      let noteLeft: number = pf(note.left)
+      let noteRight: number = pf(note.left, note.width)
+
+      const marginCheckMat = () : void => {
+        if (noteTop + 75 > matTop && noteBottom - 75 < matBottom) {
+          if (noteLeft + 75 > matLeft && noteRight - 75 < matRight) {
             noteGroup.push(note.id)
             return
           }
         }
       }
 
+      const marginCheckNote = () : void => {
+        if (noteBottom > matTop && noteTop < matBottom) {
+          if (noteRight > matLeft && noteLeft < matRight) {
+            noteGroup.push(note.id)
+            return
+          }
+        }
+      }
+
+      note.isMatBoard ? marginCheckMat() : marginCheckNote()
     })
 
     return noteGroup

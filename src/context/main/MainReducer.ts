@@ -4,7 +4,6 @@ import { indexFinder, zIndexDrag } from '../../methods/num-finders'
 import { updateModeCheck } from '../../methods/update-helper'
 
 export const mainReducer = (state: any, action: any) => {
-
   function noteSetup() {
     let note = state.notes.find(
       (item: any) => item.id === Number(action.payload.id)
@@ -22,27 +21,52 @@ export const mainReducer = (state: any, action: any) => {
   }
 
   switch (action.type) {
-    case 'SET_MOUSE_OFFSET': {
+    // GLOBAL //
+
+    case 'SET_INTERFACE_ZOOM': {
+      let display = { ...state.display }
+      let data = action.payload
+      display.uiZoom = data.uiZoom
+      return {
+        ...state,
+        display: display,
+      }
+    }
+
+    case 'SET_ALL_NOTES': {
+      let notes = [...action.payload.notes]
+      return {
+        ...state,
+        notes: notes,
+      }
+    }
+
+    // DRAG HANDLING //
+
+    case 'SET_NOTE_MOUSE_OFFSET': {
+      let data = action.payload.mouseOffset
       let mouseOffset = {
-        left: action.payload.left,
-        top: action.payload.top,
+        left: data.left,
+        top: data.top,
       }
       return {
         ...state,
         mouseOffset: mouseOffset,
       }
     }
+
     case 'ONDRAG_NOTE_DATA': {
       let [note, notes] = noteSetup()
+      let data = action.payload.noteData
       note = {
         ...note,
-        left: action.payload.left,
-        top: action.payload.top,
-        zIndex: action.payload.zIndex,
+        left: data.left,
+        top: data.top,
+        zIndex: data.zIndex,
         isNew: false,
       }
-      if (action.payload.isMat) {
-        note.noteGroup.forEach((noteID: any) => {
+      if (data.isMat) {
+        note.noteGroup.forEach((noteID: string) => {
           let groupedNote = notes[indexFinder(notes, noteID)]
           groupedNote.left =
             parseFloat(note.left) - groupedNote.matOffsetX + 'px'
@@ -51,59 +75,33 @@ export const mainReducer = (state: any, action: any) => {
             (groupedNote.zIndex = zIndexDrag(notes, true, true))
         })
       }
+
       return setNoteAndReturnState(notes, note.id, note)
     }
-    case 'SET_CURRENT_USER':
-      let currentUser = action.payload
-      return {
-        ...state,
-        currentUser: currentUser,
-      }
-    case 'SET_ALL_NOTES': {
-      let notes = [...action.payload]
-      return {
-        ...state,
-        notes: notes,
-      }
-    }
-    case 'ONCHANGE_TEXT': {
-      let newNote = {
-        ...state.newNote,
-      }
-      newNote.noteText = action.payload
-      return {
-        ...state,
-        newNote: newNote,
-      }
-    }
-    case 'SET_BOARDOBJ': {
-      let boardObj = action.payload
-      return {
-        ...state,
-        boardObj: boardObj,
-      }
-    }
+
+    // DROP MENU AND BOARD OBJECT HANDLER //
+
     case 'TOG_BOARD_MENU': {
-      let menuIsOpen = !action.payload
+      let menuIsOpen = !action.payload.menuIsOpen
       return {
         ...state,
         menuIsOpen: menuIsOpen,
       }
     }
-    case 'ONCHANGE_NOTECOLOR': {
-      let newNote = action.payload
+
+    case 'SET_BOARDOBJ': {
+      let data = action.payload
+      let boardObj = data.boardObj
       return {
         ...state,
-        newNote: newNote,
+        boardObj: boardObj,
       }
     }
+
+    // UPDATE MODE //
+
     case 'TOG_UPDATE_MODE': {
       let [note, notes] = noteSetup()
-      // updateActive doesn't have to be set to the state value,
-      // the handler will return the correct value either way,
-      // but in this case the variable is being declared so
-      // that it is hoisted and the handler is run at the
-      // appropriate place in the stack
       let updateActive = state.updateActive
       note = {
         ...note,
@@ -117,24 +115,7 @@ export const mainReducer = (state: any, action: any) => {
         updateActive,
       }
     }
-    case 'ONCHANGE_NOTETEXT': {
-      let [note, notes] = noteSetup()
-      note = {
-        ...note,
-        noteText: action.payload.text,
-      }
-      return setNoteAndReturnState(notes, note.id, note)
-    }
-    case 'SET_INTERFACE_ZOOM': {
-      let display = {
-        ...state.display,
-      }
-      display.uiZoom = action.payload
-      return {
-        ...state,
-        display: display,
-      }
-    }
+
     case 'DISABLE_UPDATE_MODE': {
       let updateActive = false
       let notes = [...state.notes]
@@ -145,17 +126,28 @@ export const mainReducer = (state: any, action: any) => {
         updateActive: updateActive,
       }
     }
-    case 'ONRESIZE_NOTE': {
-      let [note, notes] = noteSetup()
-      note = {
-        ...note,
-        width: `${action.payload.width}px`,
-        height: `${action.payload.height}px`,
+
+    // PAD ACTIONS AND HANDLING //
+
+    case 'ONCHANGE_PAD_TEXT': {
+      let newNote = { ...state.newNote }
+      newNote.noteText = action.payload
+      return {
+        ...state,
+        newNote: newNote,
       }
-      return setNoteAndReturnState(notes, note.id, note)
     }
+
+    case 'ONCHANGE_PAD_NOTECOLOR': {
+      let newNote = action.payload.newNote
+      return {
+        ...state,
+        newNote: newNote,
+      }
+    }
+
     case 'ONRESIZE_PAD': {
-      let newNote = {...state.newNote}
+      let newNote = { ...state.newNote }
       newNote.width = `${action.payload.width}px`
       newNote.height = `${action.payload.height}px`
       return {
@@ -163,35 +155,56 @@ export const mainReducer = (state: any, action: any) => {
         newNote: newNote,
       }
     }
-    case 'DRAG_NEWNOTE': {
-      let latestNote = state.notes[state.notes.length - 1]
+
+    case 'DRAG_NOTE_FROM_PAD': {
+      let data = action.payload.noteData
       let notes = [...state.notes]
-      let newNote = {
-        ...state.newNote,
-      }
+      let newNote = { ...state.newNote }
       newNote.noteText = ''
-      latestNote = {
-        ...latestNote,
-        left: action.payload.left - 40,
-        top: action.payload.top - 40,
+      notes[notes.length-1] = {
+        ...notes[notes.length-1],
+        left: data.left - 40,
+        top: data.top - 40,
       }
-      notes[state.notes.length - 1] = latestNote
       return {
         ...state,
         notes: notes,
         newNote: newNote,
       }
     }
+
+    case 'ONCHANGE_NOTE_TEXT': {
+      let [note, notes] = noteSetup()
+      note.noteText = action.payload.text
+
+      return setNoteAndReturnState(notes, note.id, note)
+    }
+
+    case 'ONRESIZE_NOTE': {
+      let [note, notes] = noteSetup()
+      note = {
+        ...note,
+        width: `${action.payload.width}px`,
+        height: `${action.payload.height}px`,
+      }
+
+      return setNoteAndReturnState(notes, note.id, note)
+    }
+
+    // TRAY //
+
     case 'TOG_NOTE_CHECKED': {
       let [note, notes] = noteSetup()
       note.isChecked = !action.payload.isChecked
       return setNoteAndReturnState(notes, note.id, note)
     }
+
     case 'TOG_TRAY': {
       let [note, notes] = noteSetup()
       note.isTrayDisplay = !action.payload.tray
       return setNoteAndReturnState(notes, note.id, note)
     }
+
     case 'ONRESIZE_TRAY': {
       let [note, notes] = noteSetup()
       note = {
@@ -201,7 +214,8 @@ export const mainReducer = (state: any, action: any) => {
       }
       return setNoteAndReturnState(notes, note.id, note)
     }
-    case 'ONCHANGE_TRAYTEXT': {
+
+    case 'ONCHANGE_TRAY_TEXT': {
       let [note, notes] = noteSetup()
       note = {
         ...note,
@@ -209,8 +223,10 @@ export const mainReducer = (state: any, action: any) => {
       }
       return setNoteAndReturnState(notes, note.id, note)
     }
-    default:
+
+    default: {
       return state
+    }
   }
 }
 

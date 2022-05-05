@@ -65,7 +65,6 @@ class App extends Component<MyProps, MyState> {
     })
 
     function setZoom() {
-      console.log('hi')
       let zoom = window.devicePixelRatio * 1.1
       let ui = ['.options-frame', '.header', '.pad-frame', '.trash-frame']
       ui.forEach((item: any) => {

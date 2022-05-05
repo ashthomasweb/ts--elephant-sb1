@@ -1,5 +1,7 @@
 // firebase.utils.ts
 
+// requires firebase 9.2 or earlier
+// requires class component, in this case, the App.tsx
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
@@ -97,9 +99,6 @@ export const deleteUserBoard = async (userAuth: any, boardName: string) => {
   getUserBoards(userAuth)
 }
 
-// // retrieves saves user boards from firestore db
-// // called when App.js mounts and when user saves a board
-// // userboard obj gets passed back to Board Component
 export const getUserBoards = (userAuth: any) => {
   if (!userAuth) return
   userBoards = []
@@ -128,3 +127,5 @@ provider.setCustomParameters({ prompt: 'select_account' })
 export const signInWithGoogle = () => auth.signInWithPopup(provider)
 
 export default firebase
+
+// END of document

@@ -24,7 +24,7 @@ const MainBoard = (props: Props): JSX.Element => {
       left: e.clientX - parseFloat(getComputedStyle(e.target.parentNode).left),
       top: e.clientY - parseFloat(getComputedStyle(e.target.parentNode).top),
     }
-    dispatch({ type: 'SET_MOUSE_OFFSET', payload: mouseOffset })
+    dispatch({ type: 'SET_NOTE_MOUSE_OFFSET', payload: {mouseOffset: mouseOffset} })
   }
 
   const getPosition = (position: string, mousePos: number): number => {
@@ -39,17 +39,16 @@ const MainBoard = (props: Props): JSX.Element => {
     let noteData: { [key: string]: string | number } = {
       left: `${newLeft}px`,
       top: `${newTop}px`,
-      id: noteId,
       zIndex: zIndexDrag(notes, isMat),
       isMat: isMat,
     }
-    e.clientX !== 0 && dispatch({ type: 'ONDRAG_NOTE_DATA', payload: noteData })
+    e.clientX !== 0 && dispatch({ type: 'ONDRAG_NOTE_DATA', payload: {noteData: noteData, id: noteId} })
     trashBoxDisplay(e)
   }
 
   const onDrop = async (e: any) => {
     let newNotes: any[] = await trashHandler(e, [...notes], dispatch)
-    dispatch({ type: 'SET_ALL_NOTES', payload: newNotes })
+    dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes} })
   }
 
   return (
@@ -60,7 +59,7 @@ const MainBoard = (props: Props): JSX.Element => {
         onDrop={onDrop}
       >
         <UserInterface currentUser={props.currentUser} />
-        {notes.map(({ id, ...noteProps }: { id: number; noteProps: [] }) => (
+        {notes.map(({ id, ...noteProps }: { id: number; noteProps: any[] }) => (
           <Note
             id={id}
             key={id}
