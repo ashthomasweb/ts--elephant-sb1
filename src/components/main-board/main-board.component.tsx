@@ -8,6 +8,7 @@ import { trashBoxDisplay, trashHandler } from '../../methods/trashHandlers'
 import { indexFinder, zIndexDrag } from '../../methods/num-finders'
 
 import '../main-board/main-board.styles.scss'
+import { firstDragHandler } from '../../methods/new-note'
 
 type Props = {
   currentUser: any
@@ -45,9 +46,10 @@ const MainBoard = (props: Props): JSX.Element => {
     e.clientX !== 0 && dispatch({ type: 'ONDRAG_NOTE_DATA', payload: {noteData: noteData, id: noteId} })
     trashBoxDisplay(e)
   }
-
+  
   const onDrop = async (e: any) => {
     let newNotes: any[] = await trashHandler(e, [...notes], dispatch)
+    newNotes = firstDragHandler(notes)
     dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes} })
   }
 

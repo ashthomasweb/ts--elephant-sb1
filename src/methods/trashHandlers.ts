@@ -2,11 +2,11 @@
 
 import { updateModeCheck } from "./update-helper"
 
-export const trashBoxDisplay = (e: any) => {
+export const trashBoxDisplay = (e: any) => { // NEEDS ATTN *****
   let xMax = e.view.innerWidth
   let zoomR = 135 / window.devicePixelRatio
   
-  if ((e.clientX + 10) > xMax - zoomR && (e.clientY + 17) < zoomR) {
+  if ((e.clientX + 10) > xMax - zoomR && (e.clientY + 17) < zoomR) { 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     document.querySelector('.trash-frame').classList.add('hovered')
@@ -17,15 +17,13 @@ export const trashBoxDisplay = (e: any) => {
   }
 }
 
-export const trashHandler = (e: any, notesObj: any[], dispatch: any): any[] => {
+export const trashHandler = (e: any, notesObj: any[], dispatch: any): any[] => { // NEEDS ATTN *****
   let deleteId = e.target.parentElement.id
   let xMax = e.view.innerWidth
   let zoomR = 135 / window.devicePixelRatio
   if ((e.clientX + 10) > xMax - zoomR && (e.clientY + 17) < zoomR) {
     for (let i = 0; i < notesObj.length; i++) {
-      if (notesObj[i].id === Number(deleteId)) {
-        notesObj.splice(i, 1)
-      }
+      notesObj[i].id === Number(deleteId) && notesObj.splice(i, 1)
     }
   }
   !updateModeCheck(notesObj) && dispatch({ type: 'DISABLE_UPDATE_MODE' })

@@ -52,41 +52,43 @@ const Note = (props: any) => {
   }
 
   async function toggleUpdateMode(e: any) {
-    let el = e.currentTarget
+    let elem = e.currentTarget
     await dispatch({
       type: 'TOG_UPDATE_MODE',
-      payload: { id: el.parentElement.id },
+      payload: { id: elem.parentElement.id }
     })
-    el.focus()
+    elem.focus()
   }
 
   function updateNote(e: any) {
     dispatch({
       type: 'ONCHANGE_NOTE_TEXT',
       payload: {
-        text: e.target.innerText,
+        noteText: e.target.innerText,
         id: e.currentTarget.parentElement.id,
-      },
+      }
     })
   }
 
   function resizeHandler(e: any) {
-    if (e.target.id !> 0) return
+    if (e.target.id !> 0) return // do not continue if event listener originates from tray
     let dimensions = currentNote.current.getBoundingClientRect()
     dispatch({
       type: 'ONRESIZE_NOTE',
       payload: {
         id: e.target.parentElement.id,
-        width: dimensions.width,
-        height: dimensions.height,
-      },
+        dimensions: {
+          width: dimensions.width,
+          height: dimensions.height,
+        }
+      }
     })
   }
 
   function updateTray(e: any) {
     dispatch({
       type: 'ONCHANGE_TRAY_TEXT',
-      payload: { text: e.target.value, id: props.id },
+      payload: { trayText: e.target.value, id: props.id }
     })
   }
 
@@ -96,18 +98,18 @@ const Note = (props: any) => {
       type: 'ONRESIZE_TRAY',
       payload: {
         id: props.id,
-        width: dimensions.width,
-        height: dimensions.height,
-      },
+        dimensions: {
+          width: dimensions.width,
+          height: dimensions.height,
+        }
+      }
     })
   }
 
   function clickHandler(e: any) {
-    let id = e.target.parentElement.id
-    
     dispatch({
       type: 'TOG_TRAY',
-      payload: { id: id, tray: noteData.isTrayDisplay },
+      payload: { id: e.target.parentElement.id, isTrayDisplay: noteData.isTrayDisplay },
     })
   }
 
@@ -167,8 +169,8 @@ const Note = (props: any) => {
           }`}
           ref={currentTray}
           style={{
-            width: `${noteData.trayWidth}`,
-            height: `${noteData.trayHeight}`,
+            width: noteData.trayWidth,
+            height: noteData.trayHeight,
             display: `${noteData.isTrayDisplay ? 'block' : 'none'}`,
           }}
           suppressContentEditableWarning

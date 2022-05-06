@@ -49,7 +49,7 @@ const BoardMenu = (props: PropsType): JSX.Element => {
       boardObj.backgroundColor ?? (boardObj.backgroundColor = '#1670d7')
       await dispatch({ type: 'SET_ALL_NOTES', payload: {notes: notes} })
       await dispatch({ type: 'SET_BOARDOBJ', payload: {boardObj: boardObj} })
-      dispatch({ type: 'TOG_BOARD_MENU', payload: {menuIsOpen: menuIsOpen}})
+      dispatch({ type: 'TOG_BOARD_MENU' })
     })
   }
 
@@ -61,7 +61,7 @@ const BoardMenu = (props: PropsType): JSX.Element => {
       )
     ) {
       await deleteUserBoard(props.currentUser.auth, boardName)
-      dispatch({ type: 'TOG_BOARD_MENU', payload: {menuIsOpen: menuIsOpen}})
+      dispatch({ type: 'TOG_BOARD_MENU' })
     }
   }
 

@@ -87,7 +87,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
   }
 
   function userBoardDropDown() {
-    dispatch({ type: 'TOG_BOARD_MENU', payload: {menuIsOpen: menuIsOpen} })
+    dispatch({ type: 'TOG_BOARD_MENU' })
   }
 
   // devicePixelRatio scaling via user zoom

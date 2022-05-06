@@ -24,6 +24,7 @@ interface initialStateType {
     trayHeight: string
     isMatBoard: boolean
     isNew: boolean
+    isFirstDrag: boolean
     noteGroup: any[]
     matOffsetX: number
     matOffsetY: number
@@ -60,6 +61,7 @@ const initialState = {
     trayHeight: '200px',
     isMatBoard: false,
     isNew: true,
+    isFirstDrag: true,
     noteGroup: [],
     matOffsetX: 0,
     matOffsetY: 0,
