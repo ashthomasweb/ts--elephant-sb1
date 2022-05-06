@@ -14,7 +14,7 @@ type PropsType = {
 
 const OptionsFrame = (props: PropsType): JSX.Element => {
   const {
-    state: { notes, newNote, boardObj, menuIsOpen, display, updateActive },
+    state: { notes, newNote, boardObj, menuIsOpen, display, updateActive, drawModeActive },
     dispatch,
   } = useContext(MainContext)
 
@@ -111,6 +111,10 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     dispatch({ type: 'DISABLE_UPDATE_MODE' })
   }
 
+  function toggleDrawMode() {
+    dispatch({ type: 'TOG_DRAW_MODE' })
+  }
+
   return (
     <div
       className='options-frame'
@@ -185,7 +189,14 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
       />
       <button
         type='button'
-        style={{ width: '167px' }}
+        style={{ width: '80px', marginRight: '7px', backgroundColor: `${drawModeActive ? 'lightgreen' : 'whitesmoke'}` }}
+        className='color-elements'
+        onClick={toggleDrawMode}>
+        Draw Mode
+      </button>
+      <button
+        type='button'
+        style={{ width: '80px', backgroundColor: `${updateActive ? 'lightgreen' : 'whitesmoke'}` }}
         className='color-elements'
         onClick={cancelUpdateMode}>
         Cancel Update Mode

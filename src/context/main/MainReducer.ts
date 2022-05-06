@@ -227,6 +227,16 @@ export const mainReducer = (state: any, action: any) => {
       return setNoteAndReturnState(notes, note.id, note)
     }
 
+    // DRAW MODE
+
+    case 'TOG_DRAW_MODE': {
+      let drawModeActive = !state.drawModeActive
+      return {
+        ...state,
+        drawModeActive: drawModeActive,
+      }
+    }
+
     default: {
       return state
     }

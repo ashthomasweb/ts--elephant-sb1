@@ -1,6 +1,6 @@
 // main-board.component.tsx
 
-import { useContext } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
@@ -16,9 +16,15 @@ type Props = {
 
 const MainBoard = (props: Props): JSX.Element => {
   const {
-    state: { mouseOffset, notes, boardObj },
+    state: { mouseOffset, notes, boardObj, drawModeActive },
     dispatch,
   } = useContext(MainContext)
+
+  const canvasRef: any = useRef(null)
+  const contextRef: any = useRef(null)
+  const [isDrawing, setIsDrawing] = useState(false)
+
+  
 
   const getMousePos = (e: any): void => {
     const mouseOffset: object = {
@@ -54,6 +60,41 @@ const MainBoard = (props: Props): JSX.Element => {
     dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes} })
   }
 
+  useEffect(() => {
+    const canvas: any = canvasRef.current
+    canvas.width = window.innerWidth * 2
+    canvas.height = window.innerHeight * 2
+    canvas.style.width = `${window.innerWidth}px`
+    canvas.style.height = `${window.innerHeight}px`
+
+    const context = canvas.getContext('2d')
+    context.scale(2,2)
+    context.lineCap = 'round'
+    context.strokeStyle = 'black'
+    context.lineWidth = 5
+    contextRef.current = context
+  }, [])
+
+  const startDrawing = ({nativeEvent}: any) => {
+    console.log('hi')
+    const {offsetX, offsetY} = nativeEvent
+    contextRef.current.beginPath()
+    contextRef.current.moveTo(offsetX, offsetY)
+    setIsDrawing(true)
+  }
+
+  const finishDrawing = () => {
+    contextRef.current.closePath()
+    setIsDrawing(false)
+  }
+
+  const draw = ({nativeEvent}: any) => {
+    if (!isDrawing) return
+    const {offsetX, offsetY}= nativeEvent
+    contextRef.current.lineTo(offsetX,offsetY)
+    contextRef.current.stroke()
+  }
+
   return (
       <div
         id='backing'
@@ -61,10 +102,16 @@ const MainBoard = (props: Props): JSX.Element => {
         style={{ backgroundColor: boardObj.backgroundColor }}
         onDrop={onDrop}
       >
+
         <UserInterface currentUser={props.currentUser} />
-        <div
-        className='temp-canvas'
+        <canvas
+          className='canvas'
+          ref={canvasRef}
+          onMouseDown={startDrawing}
+          onMouseUp={finishDrawing}
+          onMouseMove={draw}
         />
+
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: any[] }) => (
           <Note
             id={id}
@@ -75,6 +122,7 @@ const MainBoard = (props: Props): JSX.Element => {
             autofocus='true'
           />
         ))}
+
       </div>
   )
 }

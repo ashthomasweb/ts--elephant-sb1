@@ -32,6 +32,7 @@ interface initialStateType {
   }
   boardObj: any
   menuIsOpen: boolean
+  drawModeActive: boolean
   notes: any
   display: any
 }
@@ -73,6 +74,7 @@ const initialState = {
     backgroundColor: '#1670d7',
   },
   menuIsOpen: false,
+  drawModeActive: true,
   notes: initialArray,
   display: {
     uiZoom: 1.1,
