@@ -3,7 +3,6 @@
 import { useContext, useRef } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import { newNoteGenerator } from '../../methods/new-note'
-import { indexFinder } from '../../methods/num-finders'
 import '../pad-frame/pad-frame.styles.scss'
 
 const PadFrame = (): JSX.Element => {

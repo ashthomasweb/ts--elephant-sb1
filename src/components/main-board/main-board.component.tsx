@@ -48,8 +48,9 @@ const MainBoard = (props: Props): JSX.Element => {
   }
   
   const onDrop = async (e: any) => {
-    let newNotes: any[] = await trashHandler(e, [...notes], dispatch)
-    newNotes = firstDragHandler(notes)
+    let newNotes: any[]
+    newNotes = await firstDragHandler(notes)
+    newNotes = await trashHandler(e, [...newNotes], dispatch)
     dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes} })
   }
 
@@ -61,6 +62,9 @@ const MainBoard = (props: Props): JSX.Element => {
         onDrop={onDrop}
       >
         <UserInterface currentUser={props.currentUser} />
+        <div
+        className='temp-canvas'
+        />
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: any[] }) => (
           <Note
             id={id}
