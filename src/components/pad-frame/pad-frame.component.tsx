@@ -18,7 +18,6 @@ const PadFrame = (): JSX.Element => {
   }
 
   function resizeHandler(e: any) {
-    
     let dimensions = padFrameRef.current.getBoundingClientRect()
     dispatch({ type: 'ONRESIZE_PAD', payload: { dimensions: {width: dimensions.width, height: dimensions.height}}})
   }
@@ -33,9 +32,8 @@ const PadFrame = (): JSX.Element => {
     let noteData: { [key: string]: string | number } = {
       left: e.clientX + e.target.parentElement.parentElement.scrollLeft,
       top: e.clientY + e.target.parentElement.parentElement.scrollTop,
-      zIndex: 2147483647
+      zIndex: 2147483647 // temp set while first drag is active, displays above interface, reset onDrop
     }
-    console.log(noteData.zIndex)
     dispatch({ type: "DRAG_NOTE_FROM_PAD", payload: {noteData: noteData} })
     padFrameRef.current.textContent = ''
   }
@@ -51,7 +49,7 @@ const PadFrame = (): JSX.Element => {
       <div id='input-text'
       ref={padFrameRef}
       contentEditable='true'
-      onInput={(e) => changeInput(e)}
+      onInput={changeInput}
       />
     </div>
   )

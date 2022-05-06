@@ -24,8 +24,8 @@ export const newNoteGenerator = (notesObj: any, newNote: any, isMat: boolean = f
 export const firstDragHandler = (notes: any[]) : any[] => {
     let latest = notes[notes.length-1]
     if (latest.isFirstDrag) {
-        latest.zIndex = 0
-        latest.zIndex = zIndexFinder(notes)
+        latest.zIndex = -2147483647
+        latest.zIndex = latest.isMatBoard ? zIndexFinderMat(notes) : zIndexFinder(notes)
         latest.isFirstDrag = false
       }
     return notes

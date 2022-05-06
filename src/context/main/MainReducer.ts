@@ -193,8 +193,8 @@ export const mainReducer = (state: any, action: any) => {
 
     // TRAY //
 
-    // the following boolean based toggles do not work when value is 
-    // pulled from note object here, needs to be passed
+    // the following boolean-based toggles do NOT work when value is
+    // pulled from note object here, needs to be passed in payload
     case 'TOG_NOTE_CHECKED': {
       let data = action.payload.isChecked
       let [note, notes] = noteSetup()

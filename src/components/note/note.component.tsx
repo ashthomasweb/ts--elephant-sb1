@@ -71,7 +71,7 @@ const Note = (props: any) => {
   }
 
   function resizeHandler(e: any) {
-    if (e.target.id !> 0) return // do not continue if event listener originates from tray
+    if (e.target.id !> 0) return // word clause: do not continue if event listener originates from tray
     let dimensions = currentNote.current.getBoundingClientRect()
     dispatch({
       type: 'ONRESIZE_NOTE',
@@ -116,42 +116,46 @@ const Note = (props: any) => {
   return (
     <div
       className='note-wrapper'
+      id={props.id}
       style={notePosition}
       onMouseUp={resizeHandler}
-      id={props.id}
       >
+
       <img
         className='note-check'
-        src={check}
         style={{ opacity: `${props.noteData.isChecked ? '1' : '0.1'}` }}
-        alt='checkmark'
+        src={check}
         onClick={() =>
           dispatch({
             type: 'TOG_NOTE_CHECKED',
             payload: { id: props.id, isChecked: props.noteData.isChecked },
           })
         }
-        />
+        alt='checkmark'
+      />
+
       <div
         className='note-menu'
         data-tray={`tray-${noteData.id}`}
         onMouseDown={clickHandler}
-        />
+      />
+
       <div
-        ref={currentNote}
         className={`note-base isMat-${noteData.isMatBoard}`}
-        onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), -9000, -9000)}
+        ref={currentNote}
+        style={noteStyle}
         draggable
+        onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), -9000, -9000)}
         onDrag={props.dragNote}
         onMouseDown={noteClickHandler}
         onDoubleClick={toggleUpdateMode}
-        style={noteStyle}
         contentEditable={noteData.isUpdate ? 'true' : 'false'}
         onBlur={(e) => updateNote(e)}
         suppressContentEditableWarning
         >
         {noteData.noteText}
       </div>
+
       <div
         className={`note-tray ${
           noteData.isTrayDisplay ? 'slide-out' : 'slide-in'
@@ -163,22 +167,26 @@ const Note = (props: any) => {
         onDrag={(e) => e.preventDefault()}
         id={`tray-${noteData.id}`}
         >
+          
         <textarea
           className={`tray-text ${
             noteData.isTrayDisplay ? 'slide-out' : 'slide-in'
           }`}
-          ref={currentTray}
           style={{
             width: noteData.trayWidth,
             height: noteData.trayHeight,
             display: `${noteData.isTrayDisplay ? 'block' : 'none'}`,
           }}
-          suppressContentEditableWarning
-          contentEditable='true'
+          ref={currentTray}
           onMouseUp={(e) => resizeTray(e)}
           onChange={(e) => updateTray(e)}
-          value={noteData.trayText}></textarea>
+          suppressContentEditableWarning
+          contentEditable='true'
+          value={noteData.trayText}>
+          </textarea>
+
       </div>
+
     </div>
   )
 }

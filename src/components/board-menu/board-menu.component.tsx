@@ -1,4 +1,5 @@
 // board-menu.component.tsx
+// NEEDS ATTN - general cleanup and potential minor refactor
 
 import { useContext, useEffect, useRef } from 'react'
 import { MainContext } from '../../context/main/MainState'
