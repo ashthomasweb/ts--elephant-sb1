@@ -11,6 +11,10 @@ import './note.styles.scss'
 const Note = (props: any) => {
   const { state: { notes }, dispatch } = useContext(MainContext)
 
+  // Begin David Edits
+    const { drawArrow } = props
+  // End David Edits
+
   const currentNote: any = useRef(null)
   const currentTray: any = useRef(null)
 
@@ -186,7 +190,9 @@ const Note = (props: any) => {
           </textarea>
 
       </div>
-
+      {/* Begin David Edits */}
+          <button onClick={() => drawArrow(notePosition)}>Arrow</button>
+          {/* // End David Edits */}
     </div>
   )
 }

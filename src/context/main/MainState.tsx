@@ -33,7 +33,8 @@ interface initialStateType {
   boardObj: any
   menuIsOpen: boolean
   drawModeActive: boolean
-  notes: any
+  notes: any[]
+  arrowArray: any[]
   display: any
 }
 
@@ -76,6 +77,7 @@ const initialState = {
   menuIsOpen: false,
   drawModeActive: true,
   notes: initialArray,
+  arrowArray: [],
   display: {
     uiZoom: 1.1,
   }

@@ -1,14 +1,15 @@
 // main-board.component.tsx
 
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
 import { trashBoxDisplay, trashHandler } from '../../methods/trashHandlers'
-import { indexFinder, zIndexDrag } from '../../methods/num-finders'
+import { indexFinder, zIndexDrag, newIdFinder } from '../../methods/num-finders'
 
 import '../main-board/main-board.styles.scss'
 import { firstDragHandler } from '../../methods/new-note'
+import Arrow from '../graphics/arrow/arrow.component'
 
 type Props = {
   currentUser: any
@@ -16,7 +17,7 @@ type Props = {
 
 const MainBoard = (props: Props): JSX.Element => {
   const {
-    state: { mouseOffset, notes, boardObj },
+    state: { mouseOffset, notes, boardObj, arrowArray },
     dispatch,
   } = useContext(MainContext)
 
@@ -54,6 +55,24 @@ const MainBoard = (props: Props): JSX.Element => {
     dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes} })
   }
 
+  // Begin David Edits
+
+  const [newArrow, setNewArrow] = useState({})
+  const drawArrow = (notePosition: any) => {
+    let newArrowArray
+
+    if (newArrow.first) {
+      newArrowArray = [...arrowArray, {...newArrow, second: notePosition, id: newIdFinder(arrowArray)}]
+      dispatch({type: "SET_ARROW_ARRAY", payload: {arrowArray: newArrowArray}})
+      setNewArrow({})
+
+    } else {
+      setNewArrow({first: notePosition})
+    }
+
+  }
+  // End David Edits
+
   return (
       <div
         id='backing'
@@ -64,15 +83,17 @@ const MainBoard = (props: Props): JSX.Element => {
 
         <UserInterface currentUser={props.currentUser} />
 
-        <svg 
+        <svg
           width="10000px"
           height="8000px"
-          // viewBox="-1000 -1000 14000 11000"
           style={{backgroundColor: '#ffffff00', pointerEvents: 'none'}}
         >
-          <line x1='625px' y1='880px' x2='225px' y2='280px' stroke='blue' strokeWidth='40' />
-          <line style={{pointerEvents: 'all'}} onClick={() => console.log('hidave')} x1='225px' y1='480px' x2='5325px' y2='5380px' stroke='red' strokeWidth='40' />
-
+          {arrowArray.map(({id, ...arrowProps}) => (
+            <Arrow
+              id={id}
+              key={id}
+              arrowData={arrowProps} />
+          ))}
         </svg>
 
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: any[] }) => (
@@ -83,6 +104,9 @@ const MainBoard = (props: Props): JSX.Element => {
             getMousePos={getMousePos}
             noteData={noteProps}
             autofocus='true'
+            // DAvid edit
+            drawArrow={drawArrow}
+            // End DAvid Edit
           />
         ))}
 

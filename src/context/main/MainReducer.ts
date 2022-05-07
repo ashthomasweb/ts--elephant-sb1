@@ -237,6 +237,15 @@ export const mainReducer = (state: any, action: any) => {
       }
     }
 
+    case 'SET_ARROW_ARRAY': {
+      let data = action.payload.arrowArray
+      let arrowArray = data
+      return {
+        ...state,
+        arrowArray: arrowArray
+      }
+    }
+
     default: {
       return state
     }
