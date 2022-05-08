@@ -120,33 +120,58 @@ const Note = (props: any) => {
   }
 
   function drawArrow(e: any) {
+    
     if (!drawModeActive) return
     let noteId = e.target.parentElement.id
 
     let arrowId = newIdFinder(arrowArray)
 
-    function notePositionFinder() {
-      let posX = notes[indexFinder(notes, noteId)].left
-      let posY = notes[indexFinder(notes, noteId)].top
-      return [posX, posY]
+    function notePositionFinder(final: boolean = false) {
+      // set the basic corner the first time, to the first note
+      let posX, posY
+      if (!final) {
+        posX = notes[indexFinder(notes, noteId)].left
+        posY = notes[indexFinder(notes, noteId)].top
+        return [posX, posY]
+      } else {
+        // get rect
+        // let endId: any = tempArrow.endNoteId
+        let endNote = notes[indexFinder(notes, e.target.parentElement.id)]
+        const { height: endHeight, width: endWidth, left: endLeft, top: endTop} = endNote
+        // get origin rect
+        let origId: any = tempArrow.originNoteId
+        let origNote = notes[indexFinder(notes, origId)]
+        const { height: origHeight, width: origWidth, left: origLeft, top: origTop} = origNote
+        console.log(origHeight)
+        // compare
+        const endMiddle = {y: endTop + (endHeight / 2), x: endLeft + (endWidth / 2)}
+        const origMiddle = {y: origTop + (origHeight / 2), x: origLeft + (origWidth / 2)}
+        return [origMiddle, endMiddle]
+      }
     }
 
     if (tempArrow.originNoteId === undefined) { // first click
-      console.log('first')
       let [posX, posY] = notePositionFinder()
-
       let newArrowInstance: any = { ...newArrow, id: arrowId, originNoteId: noteId, originPos: {x: posX, y: posY} }
       dispatch({ type: 'SET_ARROW_ORIGIN', payload: { arrowData: newArrowInstance, id: noteId } })
     } else if (tempArrow.originNoteId !== undefined) { // second click
-      console.log('sec')
-      let [posX, posY] = notePositionFinder()
-
+      // let [posX, posY] = notePositionFinder(true)
+      let [origMiddle, endMiddle] = notePositionFinder(true)
       let newArrowArray: any[] = [...arrowArray]
-      let completedArrowInstance: any = { ...tempArrow, endNoteId: noteId, endPos: {x: posX, y: posY} }
+      // let completedArrowInstance: any = { ...tempArrow, endNoteId: noteId, endPos: {x: posX, y: posY} }
+      let completedArrowInstance: any = { ...tempArrow, endNoteId: noteId, endPos: endMiddle, originPos: origMiddle }
       newArrowArray.push(completedArrowInstance)
       dispatch({ type: 'SET_ARROW_END', payload: { arrowData: completedArrowInstance, id: noteId } })
       dispatch({type: "SET_ARROW_ARRAY", payload: { arrowArray: newArrowArray }})
     }
+
+    // access the arrowArray
+
+    // look at appropriate origin and end notes
+
+    // calculate from there
+
+    // set each attachmentsGroup
 
   }
 

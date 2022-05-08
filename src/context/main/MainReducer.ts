@@ -126,8 +126,6 @@ export const mainReducer = (state: any, action: any) => {
     // PAD ACTIONS AND HANDLING //
 
     case 'ONCHANGE_PAD_TEXT': {
-      console.log('hi5')
-
       let data = action.payload.noteText
       let newNote = { ...state.newNote, noteText: data }
       return {
@@ -137,8 +135,6 @@ export const mainReducer = (state: any, action: any) => {
     }
 
     case 'ONCHANGE_PAD_NOTECOLOR': {
-      console.log('hi4')
-
       let data = action.payload.noteBColor
       let newNote = { ...state.newNote, noteBColor: data }
       return {
@@ -148,7 +144,6 @@ export const mainReducer = (state: any, action: any) => {
     }
 
     case 'ONRESIZE_PAD': {
-      console.log('hi3')
       let data = action.payload.dimensions
       let newNote = {
         ...state.newNote,
@@ -162,8 +157,6 @@ export const mainReducer = (state: any, action: any) => {
     }
 
     case 'DRAG_NOTE_FROM_PAD': {
-      console.log('hi2')
-
       let data = action.payload.noteData
       let notes = [...state.notes]
       let newNote = { ...state.newNote, noteText: '' }
@@ -256,27 +249,12 @@ export const mainReducer = (state: any, action: any) => {
     case 'SET_ARROW_ORIGIN': {
       var data = action.payload.arrowData
       let [note, notes] = noteSetup()
-      let attachmentsGroup = [...note.attachmentsGroup, data] // seemingly works!
+      let attachmentsGroup = [...note.attachmentsGroup, data]
       note = {
         ...note,
         attachmentsGroup: attachmentsGroup
-      } // end new solution
-
-      // var notes = [...state.notes]
-      // var newId = indexFinder([...state.notes], data.originNoteId)
-      // var note = notes[newId]
-      // // note.attachmentsGroup.push(data) // produces artifact in all instances of attachmentsGroup
-      // note.attachmentsGroup = [...note.attachmentsGroup, data] // produces duplicate in correct note
-      // let test = note.noteText
-      // console.log(test)
-      // console.log(data)
-      // console.log(note)
-
-      // let index = group.length === 0 ? 0 : group.length - 1
-      // group[index] = {...group[index], ...data}
+      }
       notes[indexFinder(notes,note.id)] = note
-      // console.log(notes)
-      
       var tempArrow = { ...data }
       return {
         ...state,
@@ -287,19 +265,15 @@ export const mainReducer = (state: any, action: any) => {
 
     case 'SET_ARROW_END': {
       let data = action.payload.arrowData
-
       let [note, notes] = noteSetup()
-      let attachmentsGroup = [...note.attachmentsGroup, data] // seemingly works!
+      let attachmentsGroup = [...note.attachmentsGroup, data]
       note = {
         ...note,
         attachmentsGroup: attachmentsGroup
-      } // end new solution
-
-
-      // let group = note.attachmentsGroup
-      // group[group.length-1] = {...group[group.length-1], ...data}
-      notes[indexFinder(notes,note.id)] = note
-
+      }
+      notes[indexFinder(notes, note.id)] = note
+      let oldGroup = notes[indexFinder(notes, data.originNoteId)].attachmentsGroup
+      oldGroup[oldGroup.length-1] = data
       let tempArrow = {}
       return {
         ...state,
@@ -307,26 +281,6 @@ export const mainReducer = (state: any, action: any) => {
         notes: notes
       }
     }
-
-    // case 'SET_ARROWS_TO_NOTES': {
-    //   let data = action.payload.arrowData
-    //   let notes = [...state.notes]
-    //   console.log(data.firstNote)
-    //   console.log(notes[indexFinder(notes, data.firstNote)])
-    //   let firstNote = notes[indexFinder(notes, data.firstNote)]
-    //   let secondNote = notes[indexFinder(notes, data.secondNote)]
-    //   // [data.firstNote, data.secondNote, data.arrowId]
-    //   console.log(firstNote)
-    //   firstNote.attachmentsGroup.push('hi')
-    //   console.log(firstNote.attachmentsGroup)
-    //   secondNote.attachmentsGroup.push('data')
-    //   notes[indexFinder(notes, firstNote.id)] = firstNote
-    //   notes[indexFinder(notes, secondNote.id)] = secondNote
-    //   return {
-    //     ...state,
-    //     notes: notes
-    //   }
-    // }
 
     default: {
       return state
