@@ -272,6 +272,7 @@ export const mainReducer = (state: any, action: any) => {
       // console.log(data)
       // console.log(note)
 
+      
       // let index = group.length === 0 ? 0 : group.length - 1
       // group[index] = {...group[index], ...data}
       notes[indexFinder(notes,note.id)] = note
