@@ -2,17 +2,16 @@
 
 import { useContext, useRef } from 'react'
 import { MainContext } from '../../context/main/MainState'
-import { indexFinder } from '../../methods/num-finders'
+import { indexFinder, newIdFinder } from '../../methods/num-finders'
 import { getGroupIds } from '../../methods/find-group'
 
 import check from '../../assets/check.png'
 import './note.styles.scss'
 
 const Note = (props: any) => {
-  const { state: { notes }, dispatch } = useContext(MainContext)
+  const { state: { notes, tempArrow, newArrow, arrowArray, drawModeActive }, dispatch } = useContext(MainContext)
 
   // Begin David Edits
-    const { drawArrow } = props
   // End David Edits
 
   const currentNote: any = useRef(null)
@@ -34,6 +33,7 @@ const Note = (props: any) => {
   }
 
   function noteClickHandler(e: any) {
+
     noteData.isMatBoard && !noteData.isNew && findMatGroup(e.target.parentElement.id)
     props.getMousePos(e)
   }
@@ -75,7 +75,7 @@ const Note = (props: any) => {
   }
 
   function resizeHandler(e: any) {
-    if (e.target.id !> 0) return // word clause: do not continue if event listener originates from tray
+    if (e.target.id !instanceof Number) return // type clause: do not continue if event listener originates from tray
     let dimensions = currentNote.current.getBoundingClientRect()
     dispatch({
       type: 'ONRESIZE_NOTE',
@@ -97,6 +97,7 @@ const Note = (props: any) => {
   }
 
   function resizeTray(e: any) {
+    
     let dimensions = currentTray.current.getBoundingClientRect()
     dispatch({
       type: 'ONRESIZE_TRAY',
@@ -111,11 +112,44 @@ const Note = (props: any) => {
   }
 
   function clickHandler(e: any) {
+    console.log('hi0')
     dispatch({
       type: 'TOG_TRAY',
       payload: { id: e.target.parentElement.id, isTrayDisplay: noteData.isTrayDisplay },
     })
   }
+
+  function drawArrow(e: any) {
+    if (!drawModeActive) return
+    let noteId = e.target.parentElement.id
+
+    let arrowId = newIdFinder(arrowArray)
+
+    function notePositionFinder() {
+      let posX = notes[indexFinder(notes, noteId)].left
+      let posY = notes[indexFinder(notes, noteId)].top
+      return [posX, posY]
+    }
+
+    if (tempArrow.originNoteId === undefined) { // first click
+      console.log('first')
+      let [posX, posY] = notePositionFinder()
+
+      let newArrowInstance: any = { ...newArrow, id: arrowId, originNoteId: noteId, originPos: {x: posX, y: posY} }
+      dispatch({ type: 'SET_ARROW_ORIGIN', payload: { arrowData: newArrowInstance, id: noteId } })
+    } else if (tempArrow.originNoteId !== undefined) { // second click
+      console.log('sec')
+      let [posX, posY] = notePositionFinder()
+
+      let newArrowArray: any[] = [...arrowArray]
+      let completedArrowInstance: any = { ...tempArrow, endNoteId: noteId, endPos: {x: posX, y: posY} }
+      newArrowArray.push(completedArrowInstance)
+      dispatch({ type: 'SET_ARROW_END', payload: { arrowData: completedArrowInstance, id: noteId } })
+      dispatch({type: "SET_ARROW_ARRAY", payload: { arrowArray: newArrowArray }})
+    }
+
+  }
+
 
   return (
     <div
@@ -123,6 +157,7 @@ const Note = (props: any) => {
       id={props.id}
       style={notePosition}
       onMouseUp={resizeHandler}
+      onClick={(e) => drawArrow(e)}
       >
 
       <img
@@ -191,7 +226,7 @@ const Note = (props: any) => {
 
       </div>
       {/* Begin David Edits */}
-          <button onClick={() => drawArrow(notePosition)}>Arrow</button>
+          {/* <button type='button' >Arrow</button> */}
           {/* // End David Edits */}
     </div>
   )

@@ -4,7 +4,7 @@
 const Arrow = (props: any) => {
     console.log(props)
     return (
-    <line style={{pointerEvents: 'all'}} x1={props.arrowData.first.left} y1={props.arrowData.first.top} x2={props.arrowData.second.left} y2={props.arrowData.second.top} stroke='black' strokeWidth='10' />
+    <line style={{pointerEvents: 'all'}} x1={props.arrowData.originPos.x} y1={props.arrowData.originPos.y} x2={props.arrowData.endPos.x} y2={props.arrowData.endPos.y} stroke='black' strokeWidth='10' />
   )
     }
   export default Arrow

@@ -26,9 +26,24 @@ interface initialStateType {
     isNew: boolean
     isFirstDrag: boolean
     noteGroup: any[]
+    attachmentsGroup: any[]
     matOffsetX: number
     matOffsetY: number
     // iframe: false
+  }
+  newArrow: {
+    id: number
+    originNoteId: number | undefined
+    originPos: {x: number, y: number}
+    endNoteId: number | undefined
+    endPos: {x: number, y: number}
+  }
+  tempArrow: {
+    id: number
+    originNoteId: number | undefined
+    originPos: {x: number, y: number}
+    endNoteId: number | undefined
+    endPos: {x: number, y: number}
   }
   boardObj: any
   menuIsOpen: boolean
@@ -65,9 +80,24 @@ const initialState = {
     isNew: true,
     isFirstDrag: true,
     noteGroup: [],
+    attachmentsGroup: [],
     matOffsetX: 0,
     matOffsetY: 0,
     // iframe: false
+  },
+  newArrow: {
+    id: 0,
+    originNoteId: undefined,
+    originPos: {x: 0, y: 0},
+    endNoteId: undefined,
+    endPos: {x: 0, y: 0}
+  },
+  tempArrow: {
+    id: 0,
+    originNoteId: undefined,
+    originPos: {x: 0, y: 0},
+    endNoteId: undefined,
+    endPos: {x: 0, y: 0}
   },
   boardObj: {
     name: '',

@@ -1,6 +1,6 @@
 // main-board.component.tsx
 
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
@@ -17,7 +17,7 @@ type Props = {
 
 const MainBoard = (props: Props): JSX.Element => {
   const {
-    state: { mouseOffset, notes, boardObj, arrowArray },
+    state: { mouseOffset, notes, boardObj, arrowArray, newArrow, tempArrow },
     dispatch,
   } = useContext(MainContext)
 
@@ -57,20 +57,25 @@ const MainBoard = (props: Props): JSX.Element => {
 
   // Begin David Edits
 
-  const [newArrow, setNewArrow] = useState({})
-  const drawArrow = (notePosition: any) => {
-    let newArrowArray
+  // const drawArrow = (notePosition: any) => {
+    
+  //   let arrowId = newIdFinder(arrowArray)
 
-    if (newArrow.first) {
-      newArrowArray = [...arrowArray, {...newArrow, second: notePosition, id: newIdFinder(arrowArray)}]
-      dispatch({type: "SET_ARROW_ARRAY", payload: {arrowArray: newArrowArray}})
-      setNewArrow({})
+  //   if (tempArrow.originNoteId === undefined) { // first click
+  //     console.log('first')
+  //     let newArrowInstance: any = {...newArrow, id: arrowId, originNoteId: notePosition.id }
+  //     dispatch({ type: 'SET_ARROW_ORIGIN', payload: { arrowData: newArrowInstance} })
+  //   } else { // second click
+  //     console.log('sec')
 
-    } else {
-      setNewArrow({first: notePosition})
-    }
+  //     let newArrowArray: any[] = []
+  //     let completedArrowInstance: any = { ...tempArrow, endNoteId: notePosition.id}
+  //     newArrowArray.push(completedArrowInstance)
+  //     dispatch({ type: 'SET_ARROW_END', payload: { arrowData: completedArrowInstance} })
+  //     dispatch({type: "SET_ARROW_ARRAY", payload: {arrowArray: newArrowArray}})
+  //   }
 
-  }
+  // }
   // End David Edits
 
   return (
@@ -105,7 +110,7 @@ const MainBoard = (props: Props): JSX.Element => {
             noteData={noteProps}
             autofocus='true'
             // DAvid edit
-            drawArrow={drawArrow}
+            // drawArrow={drawArrow}
             // End DAvid Edit
           />
         ))}
