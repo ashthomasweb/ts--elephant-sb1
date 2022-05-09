@@ -97,7 +97,7 @@ const Note = (props: any) => {
   }
 
   function resizeTray(e: any) {
-    
+    if (e.target.id === '') return // type clause: do not continue if event listener originates from tray
     let dimensions = currentTray.current.getBoundingClientRect()
     dispatch({
       type: 'ONRESIZE_TRAY',
@@ -120,7 +120,9 @@ const Note = (props: any) => {
   }
 
   function drawArrow(e: any) {
-    
+    console.log(e.target.type)
+
+    if (e.target.type === 'textarea') return // type clause: do not continue if event listener originates from tray
     if (!drawModeActive) return
     let noteId = e.target.parentElement.id
 
@@ -128,24 +130,28 @@ const Note = (props: any) => {
 
     function notePositionFinder(final: boolean = false) {
       // set the basic corner the first time, to the first note
+      function pf(input: string) {
+        return parseFloat(input)
+      }
       let posX, posY
       if (!final) {
         posX = notes[indexFinder(notes, noteId)].left
         posY = notes[indexFinder(notes, noteId)].top
+        console.log(posX, posY)
         return [posX, posY]
       } else {
         // get rect
         // let endId: any = tempArrow.endNoteId
         let endNote = notes[indexFinder(notes, e.target.parentElement.id)]
         const { height: endHeight, width: endWidth, left: endLeft, top: endTop} = endNote
+        console.log(endLeft,endWidth,endLeft,endTop)
         // get origin rect
         let origId: any = tempArrow.originNoteId
         let origNote = notes[indexFinder(notes, origId)]
         const { height: origHeight, width: origWidth, left: origLeft, top: origTop} = origNote
-        console.log(origHeight)
         // compare
-        const endMiddle = {y: endTop + (endHeight / 2), x: endLeft + (endWidth / 2)}
-        const origMiddle = {y: origTop + (origHeight / 2), x: origLeft + (origWidth / 2)}
+        const endMiddle = {y: pf(endTop) + (pf(endHeight) / 2), x: pf(endLeft) + (pf(endWidth) / 2)}
+        const origMiddle = {y: pf(origTop) + (pf(origHeight) / 2), x: pf(origLeft) + (pf(origWidth) / 2)}
         return [origMiddle, endMiddle]
       }
     }
@@ -164,14 +170,6 @@ const Note = (props: any) => {
       dispatch({ type: 'SET_ARROW_END', payload: { arrowData: completedArrowInstance, id: noteId } })
       dispatch({type: "SET_ARROW_ARRAY", payload: { arrowArray: newArrowArray }})
     }
-
-    // access the arrowArray
-
-    // look at appropriate origin and end notes
-
-    // calculate from there
-
-    // set each attachmentsGroup
 
   }
 

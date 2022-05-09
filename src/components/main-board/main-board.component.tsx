@@ -65,18 +65,6 @@ const MainBoard = (props: Props): JSX.Element => {
 
         <UserInterface currentUser={props.currentUser} />
 
-        <svg
-          width="10000px"
-          height="8000px"
-          style={{backgroundColor: '#ffffff00', pointerEvents: 'none'}}
-        >
-          {arrowArray.map(({id, ...arrowProps}) => (
-            <Arrow
-              id={id}
-              key={id}
-              arrowData={arrowProps} />
-          ))}
-        </svg>
 
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: any[] }) => (
           <Note
@@ -89,6 +77,18 @@ const MainBoard = (props: Props): JSX.Element => {
           />
         ))}
 
+        <svg
+          width="10000px"
+          height="8000px"
+          style={{backgroundColor: '#ffffff00', pointerEvents: 'none', position: 'absolute', zIndex: '-2147483647'}}
+        >
+          {arrowArray.map(({id, ...arrowProps}) => (
+            <Arrow
+              id={id}
+              key={id}
+              arrowData={arrowProps} />
+          ))}
+        </svg>
       </div>
   )
 }
