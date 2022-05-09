@@ -14,7 +14,7 @@ type PropsType = {
 
 const OptionsFrame = (props: PropsType): JSX.Element => {
   const {
-    state: { notes, newNote, boardObj, menuIsOpen, display, updateActive, drawModeActive },
+    state: { notes, newNote, boardObj, arrowArray, menuIsOpen, display, updateActive, drawModeActive },
     dispatch,
   } = useContext(MainContext)
 
@@ -35,6 +35,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
     newBoardObj = {
       name: boardObj.name,
       notes: [...notes],
+      arrowArray: [...arrowArray],
       backgroundColor: boardObj.backgroundColor,
     }
     dispatch({ type: 'SET_BOARDOBJ', payload: {boardObj: newBoardObj} })
@@ -44,6 +45,7 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
   function saveBoardToDatabase(boardObj: {
     name: any
     notes: any[]
+    arrowArrow: any[]
     backgroundColor: string
   }) {
     if (props.currentUser === null) {
@@ -76,14 +78,17 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
   }
 
   function newBoard() {
-    let newNotes: any[] = [...newBoardArray]
+    let newNotes: any[] = [...newBoardArray] // exported object containing single anchor note. Possibly no longer needed with svg frame.
+    let arrowArray: any[] = []
     let newBoardObj = {
       name: '',
       notes: newNotes,
+      arrowArray: arrowArray,
       backgroundColor: '#1670d7'
     }
     dispatch({ type: 'SET_BOARDOBJ', payload: {boardObj: newBoardObj} })
-    dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes} })
+    dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes } })
+    dispatch({ type: 'SET_ALL_ARROWS', payload: {arrowArray: arrowArray } })
   }
 
   function userBoardDropDown() {

@@ -43,6 +43,15 @@ export const mainReducer = (state: any, action: any) => {
       }
     }
 
+    case 'SET_ALL_ARROWS': {
+      let data = [...action.payload.arrowArray]
+      let arrowArray = data
+      return {
+        ...state,
+        arrowArray: arrowArray,
+      }
+    }
+
     // DRAG HANDLING //
 
     case 'SET_NOTE_MOUSE_OFFSET': {

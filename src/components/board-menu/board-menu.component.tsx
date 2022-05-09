@@ -45,10 +45,15 @@ const BoardMenu = (props: PropsType): JSX.Element => {
     )
     button.addEventListener('click', async () => {
       let notes: any[] = []
-      await dispatch({ type: 'SET_ALL_NOTES', payload: {notes: notes} })
+      let arrowArray: any[] = []
+      await dispatch({ type: 'SET_ALL_NOTES', payload: { notes: notes } })
+      await dispatch({ type: 'SET_ALL_ARROWS', payload: { arrowArray: arrowArray } })
+
       notes = [...boardObj.notes]
+      arrowArray = [...boardObj.arrowArray]
       boardObj.backgroundColor ?? (boardObj.backgroundColor = '#1670d7')
       await dispatch({ type: 'SET_ALL_NOTES', payload: {notes: notes} })
+      await dispatch({ type: 'SET_ALL_ARROWS', payload: { arrowArray: arrowArray } })
       await dispatch({ type: 'SET_BOARDOBJ', payload: {boardObj: boardObj} })
       dispatch({ type: 'TOG_BOARD_MENU' })
     })

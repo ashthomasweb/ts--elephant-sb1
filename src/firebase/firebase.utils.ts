@@ -56,21 +56,23 @@ export const saveUserBoard = async (userAuth: any, boardObj: {[key: string]: any
   const snapShot = await boardRef.get()
 
   if (!snapShot.exists) {
-    const { name, notes, backgroundColor } = boardObj
+    const { name, notes, arrowArray, backgroundColor } = boardObj
     try {
       await boardRef.set({
         name,
         notes,
+        arrowArray,
         backgroundColor
       })
     } catch (error: any) {
       console.log('error creating board', error.message)
     }
   } else if (snapShot.exists) {
-    const { notes, backgroundColor } = boardObj
+    const { notes, arrowArray, backgroundColor } = boardObj
     try {
       await boardRef.update({
         notes,
+        arrowArray,
         backgroundColor
       })
     } catch (error: any) {

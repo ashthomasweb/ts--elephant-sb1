@@ -120,31 +120,27 @@ const Note = (props: any) => {
   }
 
   function drawArrow(e: any) {
-    console.log(e.target.type)
-
     if (e.target.type === 'textarea') return // type clause: do not continue if event listener originates from tray
     if (!drawModeActive) return
-    let noteId = e.target.parentElement.id
 
+    let noteId = e.target.parentElement.id
     let arrowId = newIdFinder(arrowArray)
 
+    function pf(input: string) {
+      return parseFloat(input)
+    }
+
     function notePositionFinder(final: boolean = false) {
-      // set the basic corner the first time, to the first note
-      function pf(input: string) {
-        return parseFloat(input)
-      }
       let posX, posY
+      // set the basic corner the first time, to the first note
       if (!final) {
         posX = notes[indexFinder(notes, noteId)].left
         posY = notes[indexFinder(notes, noteId)].top
-        console.log(posX, posY)
         return [posX, posY]
       } else {
         // get rect
-        // let endId: any = tempArrow.endNoteId
         let endNote = notes[indexFinder(notes, e.target.parentElement.id)]
         const { height: endHeight, width: endWidth, left: endLeft, top: endTop} = endNote
-        console.log(endLeft,endWidth,endLeft,endTop)
         // get origin rect
         let origId: any = tempArrow.originNoteId
         let origNote = notes[indexFinder(notes, origId)]
@@ -161,10 +157,8 @@ const Note = (props: any) => {
       let newArrowInstance: any = { ...newArrow, id: arrowId, originNoteId: noteId, originPos: {x: posX, y: posY} }
       dispatch({ type: 'SET_ARROW_ORIGIN', payload: { arrowData: newArrowInstance, id: noteId } })
     } else if (tempArrow.originNoteId !== undefined) { // second click
-      // let [posX, posY] = notePositionFinder(true)
       let [origMiddle, endMiddle] = notePositionFinder(true)
       let newArrowArray: any[] = [...arrowArray]
-      // let completedArrowInstance: any = { ...tempArrow, endNoteId: noteId, endPos: {x: posX, y: posY} }
       let completedArrowInstance: any = { ...tempArrow, endNoteId: noteId, endPos: endMiddle, originPos: origMiddle }
       newArrowArray.push(completedArrowInstance)
       dispatch({ type: 'SET_ARROW_END', payload: { arrowData: completedArrowInstance, id: noteId } })
@@ -172,7 +166,6 @@ const Note = (props: any) => {
     }
 
   }
-
 
   return (
     <div

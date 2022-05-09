@@ -102,6 +102,7 @@ const initialState = {
   boardObj: {
     name: '',
     notes: [],
+    arrowArray: [],
     backgroundColor: '#1670d7',
   },
   menuIsOpen: false,
