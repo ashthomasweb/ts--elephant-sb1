@@ -155,13 +155,13 @@ const Note = (props: any) => {
     if (tempArrow.originNoteId === undefined) { // first click
       let [posX, posY] = notePositionFinder()
       let newArrowInstance: any = { ...newArrow, id: arrowId, originNoteId: noteId, originPos: {x: posX, y: posY} }
-      dispatch({ type: 'SET_ARROW_ORIGIN', payload: { arrowData: newArrowInstance, id: noteId } })
+      dispatch({ type: 'SET_ARROW_ORIGIN', payload: { arrowData: {tempArrow: newArrowInstance, arrowId: arrowId}, id: noteId } }) // NEEDS DATA RESTRUCTURE
     } else if (tempArrow.originNoteId !== undefined) { // second click
       let [origMiddle, endMiddle] = notePositionFinder(true)
       let newArrowArray: any[] = [...arrowArray]
       let completedArrowInstance: any = { ...tempArrow, endNoteId: noteId, endPos: endMiddle, originPos: origMiddle }
       newArrowArray.push(completedArrowInstance)
-      dispatch({ type: 'SET_ARROW_END', payload: { arrowData: completedArrowInstance, id: noteId } })
+      dispatch({ type: 'SET_ARROW_END', payload: { arrowData: {arrowId: arrowId}, id: noteId } })
       dispatch({type: "SET_ARROW_ARRAY", payload: { arrowArray: newArrowArray }})
     }
 

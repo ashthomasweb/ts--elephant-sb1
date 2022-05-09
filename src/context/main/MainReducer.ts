@@ -258,13 +258,13 @@ export const mainReducer = (state: any, action: any) => {
     case 'SET_ARROW_ORIGIN': {
       var data = action.payload.arrowData
       let [note, notes] = noteSetup()
-      let attachmentsGroup = [...note.attachmentsGroup, data]
+      let attachmentsGroup = [...note.attachmentsGroup, data.arrowId]
       note = {
         ...note,
         attachmentsGroup: attachmentsGroup
       }
       notes[indexFinder(notes,note.id)] = note
-      var tempArrow = { ...data }
+      var tempArrow = { ...data.tempArrow }
       return {
         ...state,
         tempArrow: tempArrow,
@@ -275,14 +275,14 @@ export const mainReducer = (state: any, action: any) => {
     case 'SET_ARROW_END': {
       let data = action.payload.arrowData
       let [note, notes] = noteSetup()
-      let attachmentsGroup = [...note.attachmentsGroup, data]
+      let attachmentsGroup = [...note.attachmentsGroup, data.arrowId]
       note = {
         ...note,
         attachmentsGroup: attachmentsGroup
       }
       notes[indexFinder(notes, note.id)] = note
-      let oldGroup = notes[indexFinder(notes, data.originNoteId)].attachmentsGroup
-      oldGroup[oldGroup.length-1] = data
+      // let oldGroup = notes[indexFinder(notes, data.originNoteId)].attachmentsGroup
+      // oldGroup[oldGroup.length-1] = data
       let tempArrow = {}
       return {
         ...state,

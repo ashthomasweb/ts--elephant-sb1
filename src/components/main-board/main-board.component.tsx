@@ -35,7 +35,8 @@ const MainBoard = (props: Props): JSX.Element => {
 
   const dragNote = (e: any): void => {
     let noteId = e.target.parentElement.id
-    let isMat = notes[indexFinder(notes, noteId)].isMatBoard
+    let note = notes[indexFinder(notes, noteId)]
+    let isMat = note.isMatBoard
     let newLeft: number = getPosition('left', e.clientX)
     let newTop: number = getPosition('top', e.clientY)
     let noteData: { [key: string]: string | number } = {
@@ -44,7 +45,40 @@ const MainBoard = (props: Props): JSX.Element => {
       zIndex: zIndexDrag(notes, isMat),
       isMat: isMat,
     }
+    let associatedArrows = note.attachmentsGroup
+    let newArrowArray = [...arrowArray]
+
+    function pf(input: string) {
+      return parseFloat(input)
+    }
+
+    function centerPointFinder() {
+      let x
+      let y
+      x = pf(note.left) + (pf(note.width) / 2)
+      y = pf(note.top) + (pf(note.height) / 2)
+      return [x,y]
+    }
+    let [xCenter, yCenter] = centerPointFinder()
+
+    newArrowArray.forEach(arrow => {
+      if ( associatedArrows.includes(arrow.id)) {
+        if (arrow.originNoteId === noteId) {
+          arrow.originPos = {
+            x: xCenter,
+            y: yCenter
+          }
+        } else if (arrow.endNoteId === noteId) {
+          arrow.endPos = {
+            x: xCenter,
+            y: yCenter
+          }
+        }
+      }
+    })
+
     e.clientX !== 0 && dispatch({ type: 'ONDRAG_NOTE_DATA', payload: {noteData: noteData, id: noteId} })
+    dispatch({ type: 'SET_ALL_ARROWS', payload: { arrowArray: newArrowArray} })
     trashBoxDisplay(e)
   }
   
@@ -64,7 +98,6 @@ const MainBoard = (props: Props): JSX.Element => {
       >
 
         <UserInterface currentUser={props.currentUser} />
-
 
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: any[] }) => (
           <Note

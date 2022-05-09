@@ -452,6 +452,130 @@ export const initialArray = [{
         trayText: "12/23/21\nWelcome to version 2.0, and the re-brand to Elephant Chart!\n\nThis version starts the beginning of user convenience features.\n\nThe Interface will no longer scale with the rest of the chart, encouraging use of the zoom function for larger charts.\n\nThe chart can be navigated by dragging the backboard with the mouse.\n\nEach note or mat now has a tray pop-out that can hold additional information.\n\n",
         isTrayDisplay: true,
         noteText: "V 2.0"
+    },
+    {
+      id: 19,
+      left: "3434px",
+      top: "1984px",
+      width: 140,
+      height: 105.5625,
+      noteText: "Toggle the 'Line' Mode...",
+      noteBColor: "#dfb5f2",
+      border: "none",
+      isUpdate: false,
+      zIndex: 15584,
+      isChecked: false,
+      trayText: "",
+      isTrayDisplay: false,
+      trayWidth: "150px",
+      trayHeight: "200px",
+      isMatBoard: false,
+      isNew: false,
+      isFirstDrag: false,
+      noteGroup: [],
+      attachmentsGroup: [
+            1,
+            3
+        ],
+      matOffsetX: 0,
+      matOffsetY: 0
+    },
+    {
+      id: 20,
+      left: "3736px",
+      top: "1984px",
+      width: 140,
+      height: 105.5625,
+      noteText: "to connect your notes and mats!",
+      noteBColor: "#dfb5f2",
+      border: "none",
+      isUpdate: false,
+      zIndex: 15704,
+      isChecked: false,
+      trayText: "",
+      isTrayDisplay: false,
+      trayWidth: "150px",
+      trayHeight: "200px",
+      isMatBoard: false,
+      isNew: false,
+      isFirstDrag: false,
+      noteGroup: [],
+      attachmentsGroup: [
+            1,
+            2
+        ],
+      matOffsetX: 0,
+      matOffsetY: 0
+    },
+    {
+      id: 21,
+      left: "3562px",
+      top: "2180px",
+      width: 180,
+      height: 130.75,
+      noteText: "Double-click the line to delete.\n\nLines currently sit behind all mats.\n\nCheck back soon for more visual tools!",
+      noteBColor: "#dfb5f2",
+      border: "none",
+      isUpdate: false,
+      zIndex: 15785,
+      isChecked: false,
+      trayText: "",
+      isTrayDisplay: false,
+      trayWidth: "150px",
+      trayHeight: "200px",
+      isMatBoard: false,
+      isNew: false,
+      isFirstDrag: false,
+      noteGroup: [],
+      attachmentsGroup: [
+            2,
+            3
+        ],
+      matOffsetX: 0,
+      matOffsetY: 0
+    }
+]
+
+
+export const initialArrowArray = [
+    {
+      id: 1,
+      originNoteId: "19",
+      originPos: {
+          x: 3504,
+          y: 2036.78125
+        },
+      endNoteId: "20",
+      endPos: {
+          x: 3806,
+          y: 2036.78125
+        }
+    },
+    {
+      id: 2,
+      originNoteId: "20",
+      originPos: {
+          x: 3806,
+          y: 2036.78125
+        },
+      endNoteId: "21",
+      endPos: {
+          x: 3652,
+          y: 2245.375
+        }
+    },
+    {
+      id: 3,
+      originNoteId: "21",
+      originPos: {
+          x: 3652,
+          y: 2245.375
+        },
+      endNoteId: "19",
+      endPos: {
+          x: 3504,
+          y: 2036.78125
+        }
     }
 ]
 

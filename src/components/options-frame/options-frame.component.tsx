@@ -194,17 +194,17 @@ const OptionsFrame = (props: PropsType): JSX.Element => {
       />
       <button
         type='button'
-        style={{ width: '80px', marginRight: '7px', backgroundColor: `${drawModeActive ? 'lightgreen' : 'whitesmoke'}` }}
+        style={{ width: '75px', marginRight: '7px', backgroundColor: `${drawModeActive ? 'lightgreen' : 'whitesmoke'}`, height: '22px' }}
         className='color-elements'
         onClick={toggleDrawMode}>
-        Draw
+        Line
       </button>
       <button
         type='button'
-        style={{ width: '80px', backgroundColor: `${updateActive ? 'lightgreen' : 'whitesmoke'}` }}
+        style={{ width: '80px', backgroundColor: `${updateActive ? 'lightgreen' : 'whitesmoke'}`, padding: '0', height: '22px' }}
         className='color-elements'
         onClick={cancelUpdateMode}>
-        Update
+        Update Off
       </button>
     </div>
   )

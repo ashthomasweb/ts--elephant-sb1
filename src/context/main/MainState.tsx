@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react'
 import { mainReducer } from './MainReducer'
-import { initialArray } from '../../assets/initial-array'
+import { initialArray, initialArrowArray } from '../../assets/initial-array'
 
 interface initialStateType {
   user: string
@@ -106,9 +106,9 @@ const initialState = {
     backgroundColor: '#1670d7',
   },
   menuIsOpen: false,
-  drawModeActive: true,
+  drawModeActive: false,
   notes: initialArray,
-  arrowArray: [],
+  arrowArray: initialArrowArray,
   display: {
     uiZoom: 1.1,
   }
