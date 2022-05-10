@@ -4,12 +4,14 @@ import { useContext, useRef } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import { indexFinder, newIdFinder } from '../../methods/num-finders'
 import { getGroupIds } from '../../methods/find-group'
+import { trashBoxDisplay } from '../../methods/trashHandlers'
+import { zIndexDrag } from '../../methods/num-finders'
 
 import check from '../../assets/check.png'
 import './note.styles.scss'
 
 const Note = (props: any) => {
-  const { state: { notes, tempArrow, newArrow, arrowArray, drawModeActive }, dispatch } = useContext(MainContext)
+  const { state: { notes, tempArrow, newArrow, arrowArray, drawModeActive, mouseOffset }, dispatch } = useContext(MainContext)
 
   // Begin David Edits
   // End David Edits
@@ -33,9 +35,8 @@ const Note = (props: any) => {
   }
 
   function noteClickHandler(e: any) {
-
     noteData.isMatBoard && !noteData.isNew && findMatGroup(e.target.parentElement.id)
-    props.getMousePos(e)
+    getMousePos(e)
   }
 
   async function findMatGroup(id: string) {
@@ -167,14 +168,71 @@ const Note = (props: any) => {
 
   }
 
-  var img = document.createElement("img");
-  img.src =
-    "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+  var img = document.createElement("img")
+  img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+  
+  const getMousePos = (e: any): void => {
+    const mouseOffset: object = {
+      left: e.clientX - parseFloat(getComputedStyle(e.target.parentNode).left),
+      top: e.clientY - parseFloat(getComputedStyle(e.target.parentNode).top),
+    }
+    dispatch({ type: 'SET_NOTE_MOUSE_OFFSET', payload: {mouseOffset: mouseOffset} })
+  }
 
-  function firefoxFix(e: any) {
-    // console.log('hi')
-    // e.dataTransfer.setData('text/html', 'anything')
-    e.dataTransfer.setDragImage(img, 0, 0)
+  const getPosition = (position: string, mousePos: number): number => {
+    return mousePos - mouseOffset[position]
+  }
+  
+  const dragNote = (e: any): void => {
+    let noteId = e.target.parentElement.id
+    let note = notes[indexFinder(notes, noteId)]
+    let isMat = note.isMatBoard
+    let newLeft: number = getPosition('left', e.clientX)
+    let newTop: number = getPosition('top', e.clientY)
+    let noteData: { [key: string]: string | number } = {
+      left: `${newLeft}px`,
+      top: `${newTop}px`,
+      zIndex: zIndexDrag(notes, isMat),
+      isMat: isMat,
+    }
+    let associatedArrows = note.attachmentsGroup
+    let newArrowArray = [...arrowArray]
+
+    function pf(input: string) {
+      return parseFloat(input)
+    }
+    function centerPointFinder() {
+      let x
+      let y
+      x = pf(note.left) + (pf(note.width) / 2)
+      y = pf(note.top) + (pf(note.height) / 2)
+      return [x,y]
+    }
+
+    if (newArrowArray.length > 0) {
+
+      let [xCenter, yCenter] = centerPointFinder()
+
+      newArrowArray.forEach(arrow => {
+        if ( associatedArrows.includes(arrow.id)) {
+          if (arrow.originNoteId === noteId) {
+            arrow.originPos = {
+              x: xCenter,
+              y: yCenter
+            }
+          } else if (arrow.endNoteId === noteId) {
+            arrow.endPos = {
+              x: xCenter,
+              y: yCenter
+            }
+          }
+        }
+      })
+    }
+
+    e.clientX !== 0 && dispatch({ type: 'ONDRAG_NOTE_DATA', payload: {noteData: noteData, id: noteId} })
+    dispatch({ type: 'SET_ALL_ARROWS', payload: { arrowArray: newArrowArray} })
+    trashBoxDisplay(e)
   }
 
   return (
@@ -184,7 +242,7 @@ const Note = (props: any) => {
       style={notePosition}
       onMouseUp={resizeHandler}
       onClick={(e) => drawArrow(e)}
-      onDragOver={props.dragNote}
+      onDragOver={dragNote}
       onDrop={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -215,7 +273,7 @@ const Note = (props: any) => {
         ref={currentNote}
         style={noteStyle}
         draggable
-        onDragStart={firefoxFix}
+        onDragStart={(e) => e.dataTransfer.setDragImage(img, 0, 0)}
         onMouseDown={noteClickHandler}
         onDoubleClick={toggleUpdateMode}
         contentEditable={noteData.isUpdate ? 'true' : 'false'}
