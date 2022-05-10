@@ -83,6 +83,7 @@ const MainBoard = (props: Props): JSX.Element => {
   }
   
   const onDrop = async (e: any) => {
+    e.preventDefault()
     let newNotes: any[]
     newNotes = await firstDragHandler(notes)
     newNotes = await trashHandler(e, [...newNotes], dispatch)

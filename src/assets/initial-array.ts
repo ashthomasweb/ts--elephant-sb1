@@ -272,6 +272,8 @@ export const initialArray = [{
         trayHeight: "273.975px",
         top: "1725px",
         height: "93px",
+        attachmentsGroup: [],
+        iframe: false,
         id: 10
     },
     {

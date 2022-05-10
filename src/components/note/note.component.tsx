@@ -167,6 +167,16 @@ const Note = (props: any) => {
 
   }
 
+  var img = document.createElement("img");
+  img.src =
+    "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+  function firefoxFix(e: any) {
+    // console.log('hi')
+    // e.dataTransfer.setData('text/html', 'anything')
+    e.dataTransfer.setDragImage(img, 0, 0)
+  }
+
   return (
     <div
       className='note-wrapper'
@@ -174,6 +184,11 @@ const Note = (props: any) => {
       style={notePosition}
       onMouseUp={resizeHandler}
       onClick={(e) => drawArrow(e)}
+      onDragOver={props.dragNote}
+      onDrop={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
       >
 
       <img
@@ -200,8 +215,7 @@ const Note = (props: any) => {
         ref={currentNote}
         style={noteStyle}
         draggable
-        onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), -9000, -9000)}
-        onDrag={props.dragNote}
+        onDragStart={firefoxFix}
         onMouseDown={noteClickHandler}
         onDoubleClick={toggleUpdateMode}
         contentEditable={noteData.isUpdate ? 'true' : 'false'}
