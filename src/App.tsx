@@ -72,10 +72,17 @@ class App extends Component<MyProps, MyState> {
       })
     }
     window.addEventListener('DOMContentLoaded', () => setZoom() )
+    // potential 'jump to corner' bug solution point
     // window.addEventListener('dragover', (e) => e.preventDefault(), false)
     // window.addEventListener('dragend', (e) => e.preventDefault(), false)
-    window.addEventListener('mousemove', (e) => console.log(e))
-    document.querySelector('#backing')?.scrollTo(3500, 1150) // needs ref
+
+    // non html drag experiments, courtesy of firefox not handling clientX value on 'ondrag'
+    // window.addEventListener('mousemove', (e) => console.log(e))
+    if (navigator.userAgent.includes('Gecko/')) {
+      console.log('firefox')
+      // run logic handling to correct FF errors
+    }
+    document.querySelector('#backing')?.scrollTo(3500, 1150) // needs ref, doesn't work every time...
   }
 
   componentWillUnmount() {

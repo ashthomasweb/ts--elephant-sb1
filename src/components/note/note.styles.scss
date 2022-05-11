@@ -6,8 +6,8 @@
   width: fit-content;
   height: fit-content;
   cursor: pointer;
-  -moz-user-select: none;
-    user-select: none;
+  // resize: both!important;
+
 
   .note-base {
     outline: 1px solid black;
@@ -31,8 +31,6 @@
     display: table-cell;
     vertical-align: middle;
     padding: 15px;
-    -moz-user-select: none;
-    user-select: none;
 
     &.isMat-true {
       align-items: flex-start;

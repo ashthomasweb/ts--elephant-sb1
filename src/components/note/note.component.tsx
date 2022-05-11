@@ -168,9 +168,18 @@ const Note = (props: any) => {
 
   }
 
+
+  // ***** Safari pain point
+  // actually the whole issue!
+  // although the onDragOver IS a secondary event, when this isn't being re-rendered on every
+  // pixel dragged the sluggishness and potential dropped note does not occur, meaning the 
+  // FF event workaround can stay in place
   var img = document.createElement("img")
   img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-  
+  // **END Safari pain point
+
+
+
   const getMousePos = (e: any): void => {
     const mouseOffset: object = {
       left: e.clientX - parseFloat(getComputedStyle(e.target.parentNode).left),
@@ -242,11 +251,15 @@ const Note = (props: any) => {
       style={notePosition}
       onMouseUp={resizeHandler}
       onClick={(e) => drawArrow(e)}
+
+      // ***** FF pain point
       onDragOver={dragNote}
       onDrop={(e) => {
         e.preventDefault();
         e.stopPropagation();
       }}
+      // **END FF pain point
+
       >
 
       <img
@@ -273,7 +286,11 @@ const Note = (props: any) => {
         ref={currentNote}
         style={noteStyle}
         draggable
-        onDragStart={(e) => e.dataTransfer.setDragImage(img, 0, 0)}
+
+        // ***** Safari pain point
+        onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), 0, 0)}
+        // **END Safari pain point
+
         onMouseDown={noteClickHandler}
         onDoubleClick={toggleUpdateMode}
         contentEditable={noteData.isUpdate ? 'true' : 'false'}
