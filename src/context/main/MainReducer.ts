@@ -300,6 +300,15 @@ export const mainReducer = (state: any, action: any) => {
       }
     }
 
+    case 'CHECK_FIREFOX': {
+      let data = action.payload.isFireFox
+      let isFireFox = data
+      return {
+        ...state,
+        isFireFox: isFireFox
+      }
+    }
+
     default: {
       return state
     }

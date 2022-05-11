@@ -78,10 +78,8 @@ class App extends Component<MyProps, MyState> {
 
     // non html drag experiments, courtesy of firefox not handling clientX value on 'ondrag'
     // window.addEventListener('mousemove', (e) => console.log(e))
-    if (navigator.userAgent.includes('Gecko/')) {
-      console.log('firefox')
-      // run logic handling to correct FF errors
-    }
+    
+
     document.querySelector('#backing')?.scrollTo(3500, 1150) // needs ref, doesn't work every time...
   }
 

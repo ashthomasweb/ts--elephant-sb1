@@ -12,10 +12,7 @@ import check from '../../assets/check.png'
 import './note.styles.scss'
 
 const Note = (props: any) => {
-  const { state: { notes, tempArrow, newArrow, arrowArray, drawModeActive, mouseOffset, dragMouseDown }, dispatch } = useContext(MainContext)
-
-  // Begin David Edits
-  // End David Edits
+  const { state: { notes, tempArrow, newArrow, arrowArray, drawModeActive, mouseOffset, isFireFox, dragMouseDown }, dispatch } = useContext(MainContext)
 
   const currentNote: any = useRef(null)
   const currentTray: any = useRef(null)
@@ -175,8 +172,10 @@ const Note = (props: any) => {
   // although the onDragOver IS a secondary event, when this isn't being re-rendered on every
   // pixel dragged the sluggishness and potential dropped note does not occur, meaning the 
   // FF event workaround can stay in place
+
   // var img = document.createElement("img")
   // img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+  
   // **END Safari pain point
 
 
@@ -191,6 +190,22 @@ const Note = (props: any) => {
 
   const getPosition = (position: string, mousePos: number): number => {
     return mousePos - mouseOffset[position]
+  }
+
+  const fireFoxDragHandler = (e: any) => { // coming from onDragOver for Gecko rendered browsers (FireFox)
+    if (isFireFox) {
+      dragNote(e)
+    } else {
+      return
+    }
+  }
+
+  const nonFFDragHandler = (e: any) => { // coming from onDrag for non-Gecko rendered browsers (Chrome, Safari, Opera)
+    if (!isFireFox) {
+      dragNote(e)
+    } else {
+      return
+    }
   }
   
   const dragNote = (e: any): void => {
@@ -254,7 +269,7 @@ const Note = (props: any) => {
       onClick={(e) => drawArrow(e)}
 
       // ***** FF pain point
-      onDragOver={dragNote}
+      onDragOver={(e) => fireFoxDragHandler(e)}
       onDrop={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -293,9 +308,10 @@ const Note = (props: any) => {
         // onDragStart={(e) => e.dataTransfer.setDragImage(img, 0, 0)}
         // onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), 0, 0)}
 
-
         // **END Safari pain point
 
+        onDrag={(e) => nonFFDragHandler(e)}
+        
         onMouseDown={noteClickHandler}
         onDoubleClick={toggleUpdateMode}
         contentEditable={noteData.isUpdate ? 'true' : 'false'}

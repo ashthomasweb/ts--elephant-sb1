@@ -52,6 +52,7 @@ interface initialStateType {
   arrowArray: any[]
   display: any
   dragMouseDown: boolean
+  isFireFox: boolean
 }
 
 const initialState = {
@@ -113,7 +114,8 @@ const initialState = {
   display: {
     uiZoom: 1.1,
   },
-  dragMouseDown: false
+  dragMouseDown: false,
+  isFireFox: false,
 }
 
 export const MainContext = createContext< {state: initialStateType, dispatch: React.Dispatch<any>} >({ state: initialState, dispatch: () => null })

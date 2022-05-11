@@ -1,6 +1,6 @@
 // main-board.component.tsx
 
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
@@ -17,7 +17,7 @@ type Props = {
 
 const MainBoard = (props: Props): JSX.Element => {
   const {
-    state: { mouseOffset, notes, boardObj, arrowArray },
+    state: { mouseOffset, notes, isFireFox, boardObj, arrowArray },
     dispatch,
   } = useContext(MainContext)
 
@@ -89,6 +89,14 @@ const MainBoard = (props: Props): JSX.Element => {
     newNotes = await trashHandler(e, [...newNotes], dispatch)
     dispatch({ type: 'SET_ALL_NOTES', payload: {notes: newNotes} })
   }
+
+  useEffect(() => {
+    if (navigator.userAgent.includes('Gecko/')) {
+      dispatch({ type: 'CHECK_FIREFOX', payload: { isFireFox: true }})
+    } else {
+      dispatch({ type: 'CHECK_FIREFOX', payload: { isFireFox: false }})
+    }
+  }, [dispatch, isFireFox])
 
   return (
       <div
