@@ -291,6 +291,15 @@ export const mainReducer = (state: any, action: any) => {
       }
     }
 
+    case 'TOG_MOUSE_DOWN': {
+      let data = action.payload.dragMouseDown
+      let dragMouseDown = !data
+      return {
+        ...state,
+        dragMouseDown: dragMouseDown
+      }
+    }
+
     default: {
       return state
     }

@@ -51,6 +51,7 @@ interface initialStateType {
   notes: any[]
   arrowArray: any[]
   display: any
+  dragMouseDown: boolean
 }
 
 const initialState = {
@@ -111,7 +112,8 @@ const initialState = {
   arrowArray: initialArrowArray,
   display: {
     uiZoom: 1.1,
-  }
+  },
+  dragMouseDown: false
 }
 
 export const MainContext = createContext< {state: initialStateType, dispatch: React.Dispatch<any>} >({ state: initialState, dispatch: () => null })

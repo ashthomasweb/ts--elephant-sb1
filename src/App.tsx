@@ -72,6 +72,9 @@ class App extends Component<MyProps, MyState> {
       })
     }
     window.addEventListener('DOMContentLoaded', () => setZoom() )
+    // window.addEventListener('dragover', (e) => e.preventDefault(), false)
+    // window.addEventListener('dragend', (e) => e.preventDefault(), false)
+    window.addEventListener('mousemove', (e) => console.log(e))
     document.querySelector('#backing')?.scrollTo(3500, 1150) // needs ref
   }
 
@@ -81,7 +84,7 @@ class App extends Component<MyProps, MyState> {
 
   render() {
     return (
-      <div>
+      <div >
         <MainBoard currentUser={this.state?.currentUser}/>
       </div>
     )

@@ -11,7 +11,7 @@ import check from '../../assets/check.png'
 import './note.styles.scss'
 
 const Note = (props: any) => {
-  const { state: { notes, tempArrow, newArrow, arrowArray, drawModeActive, mouseOffset }, dispatch } = useContext(MainContext)
+  const { state: { notes, tempArrow, newArrow, arrowArray, drawModeActive, mouseOffset, dragMouseDown }, dispatch } = useContext(MainContext)
 
   // Begin David Edits
   // End David Edits
@@ -35,6 +35,7 @@ const Note = (props: any) => {
   }
 
   function noteClickHandler(e: any) {
+    dispatch({ type: 'TOG_MOUSE_DOWN', payload: { dragMouseDown: dragMouseDown}})
     noteData.isMatBoard && !noteData.isNew && findMatGroup(e.target.parentElement.id)
     getMousePos(e)
   }
@@ -112,8 +113,7 @@ const Note = (props: any) => {
     })
   }
 
-  function clickHandler(e: any) {
-    console.log('hi0')
+  function trayClickHandler(e: any) {
     dispatch({
       type: 'TOG_TRAY',
       payload: { id: e.target.parentElement.id, isTrayDisplay: noteData.isTrayDisplay },
@@ -265,7 +265,7 @@ const Note = (props: any) => {
       <div
         className='note-menu'
         data-tray={`tray-${noteData.id}`}
-        onMouseDown={clickHandler}
+        onMouseDown={trayClickHandler}
       />
 
       <div
