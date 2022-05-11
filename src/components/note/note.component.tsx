@@ -6,6 +6,7 @@ import { indexFinder, newIdFinder } from '../../methods/num-finders'
 import { getGroupIds } from '../../methods/find-group'
 import { trashBoxDisplay } from '../../methods/trashHandlers'
 import { zIndexDrag } from '../../methods/num-finders'
+import { blankImage } from '../../assets/initial-array'
 
 import check from '../../assets/check.png'
 import './note.styles.scss'
@@ -174,8 +175,8 @@ const Note = (props: any) => {
   // although the onDragOver IS a secondary event, when this isn't being re-rendered on every
   // pixel dragged the sluggishness and potential dropped note does not occur, meaning the 
   // FF event workaround can stay in place
-  var img = document.createElement("img")
-  img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+  // var img = document.createElement("img")
+  // img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
   // **END Safari pain point
 
 
@@ -288,7 +289,11 @@ const Note = (props: any) => {
         draggable
 
         // ***** Safari pain point
-        onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), 0, 0)}
+        onDragStart={(e) => e.dataTransfer.setDragImage(blankImage, 0, 0)}
+        // onDragStart={(e) => e.dataTransfer.setDragImage(img, 0, 0)}
+        // onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), 0, 0)}
+
+
         // **END Safari pain point
 
         onMouseDown={noteClickHandler}

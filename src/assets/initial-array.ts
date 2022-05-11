@@ -605,4 +605,9 @@ export const newBoardArray = [{
     id: 0,
 }]
 
+var img = document.createElement("img")
+img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+
+export const blankImage = img
+
 // END of document
