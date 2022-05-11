@@ -272,7 +272,7 @@ const Note = (props: any) => {
       onDragOver={(e) => fireFoxDragHandler(e)}
       onDrop={(e) => {
         e.preventDefault();
-        e.stopPropagation();
+        // e.stopPropagation();
       }}
       // **END FF pain point
 
