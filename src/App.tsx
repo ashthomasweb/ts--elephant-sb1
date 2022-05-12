@@ -76,7 +76,7 @@ class App extends Component<MyProps, MyState> {
     // window.addEventListener('dragover', (e) => e.preventDefault(), false)
     // window.addEventListener('dragend', (e) => e.preventDefault(), false)
 
-    // non html drag experiments, courtesy of firefox not handling clientX value on 'ondrag'
+    // non html drag experiments, firefox not handling clientX value on 'ondrag'
     // window.addEventListener('mousemove', (e) => console.log(e))
     
 

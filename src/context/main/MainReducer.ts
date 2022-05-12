@@ -281,8 +281,6 @@ export const mainReducer = (state: any, action: any) => {
         attachmentsGroup: attachmentsGroup
       }
       notes[indexFinder(notes, note.id)] = note
-      // let oldGroup = notes[indexFinder(notes, data.originNoteId)].attachmentsGroup
-      // oldGroup[oldGroup.length-1] = data
       let tempArrow = {}
       return {
         ...state,
@@ -291,14 +289,14 @@ export const mainReducer = (state: any, action: any) => {
       }
     }
 
-    case 'TOG_MOUSE_DOWN': {
-      let data = action.payload.dragMouseDown
-      let dragMouseDown = !data
-      return {
-        ...state,
-        dragMouseDown: dragMouseDown
-      }
-    }
+    // case 'TOG_MOUSE_DOWN': {
+    //   let data = action.payload.dragMouseDown
+    //   let dragMouseDown = !data
+    //   return {
+    //     ...state,
+    //     dragMouseDown: dragMouseDown
+    //   }
+    // }
 
     case 'CHECK_FIREFOX': {
       let data = action.payload.isFireFox

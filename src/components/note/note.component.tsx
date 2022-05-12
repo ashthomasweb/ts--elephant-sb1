@@ -166,20 +166,6 @@ const Note = (props: any) => {
 
   }
 
-
-  // ***** Safari pain point
-  // actually the whole issue!
-  // although the onDragOver IS a secondary event, when this isn't being re-rendered on every
-  // pixel dragged the sluggishness and potential dropped note does not occur, meaning the 
-  // FF event workaround can stay in place
-
-  // var img = document.createElement("img")
-  // img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-  
-  // **END Safari pain point
-
-
-
   const getMousePos = (e: any): void => {
     const mouseOffset: object = {
       left: e.clientX - parseFloat(getComputedStyle(e.target.parentNode).left),
@@ -226,6 +212,7 @@ const Note = (props: any) => {
     function pf(input: string) {
       return parseFloat(input)
     }
+
     function centerPointFinder() {
       let x
       let y
@@ -267,16 +254,8 @@ const Note = (props: any) => {
       style={notePosition}
       onMouseUp={resizeHandler}
       onClick={(e) => drawArrow(e)}
-
-      // ***** FF pain point
-      onDragOver={(e) => fireFoxDragHandler(e)}
-      // onDrop={(e) => {
-      //   e.preventDefault();
-      //   // e.stopPropagation();
-      // }}
-      // **END FF pain point
-
-      >
+      onDragOver={(e) => fireFoxDragHandler(e)} // FF pain point
+    >
 
       <img
         className='note-check'
@@ -302,16 +281,8 @@ const Note = (props: any) => {
         ref={currentNote}
         style={noteStyle}
         draggable
-
-        // ***** Safari pain point
-        onDragStart={(e) => e.dataTransfer.setDragImage(blankImage, 0, 0)}
-        // onDragStart={(e) => e.dataTransfer.setDragImage(img, 0, 0)}
-        // onDragStart={(e) => e.dataTransfer.setDragImage(new Image(), 0, 0)}
-
-        // **END Safari pain point
-
-        onDrag={(e) => nonFFDragHandler(e)}
-        
+        onDragStart={(e) => e.dataTransfer.setDragImage(blankImage, 0, 0)} // Safari pain point
+        onDrag={(e) => nonFFDragHandler(e)} // standard drag event listening
         onMouseDown={noteClickHandler}
         onDoubleClick={toggleUpdateMode}
         contentEditable={noteData.isUpdate ? 'true' : 'false'}
@@ -322,21 +293,14 @@ const Note = (props: any) => {
       </div>
 
       <div
-        className={`note-tray ${
-          noteData.isTrayDisplay ? 'slide-out' : 'slide-in'
-        }`}
-        style={{
-          backgroundColor: `${noteData.noteBColor}`,
-          display: `${noteData.isTrayDisplay ? 'block' : 'none'}`,
-        }}
+        className={`note-tray ${noteData.isTrayDisplay ? 'slide-out' : 'slide-in'}`}
+        style={{backgroundColor: `${noteData.noteBColor}`, display: `${noteData.isTrayDisplay ? 'block' : 'none'}`}}
         onDrag={(e) => e.preventDefault()}
         id={`tray-${noteData.id}`}
         >
-          
+
         <textarea
-          className={`tray-text ${
-            noteData.isTrayDisplay ? 'slide-out' : 'slide-in'
-          }`}
+          className={`tray-text ${noteData.isTrayDisplay ? 'slide-out' : 'slide-in'}`}
           style={{
             width: noteData.trayWidth,
             height: noteData.trayHeight,
@@ -351,9 +315,6 @@ const Note = (props: any) => {
           </textarea>
 
       </div>
-      {/* Begin David Edits */}
-          {/* <button type='button' >Arrow</button> */}
-          {/* // End David Edits */}
     </div>
   )
 }

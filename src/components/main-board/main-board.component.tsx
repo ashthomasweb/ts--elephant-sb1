@@ -6,11 +6,10 @@ import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
 import { trashBoxDisplay, trashHandler } from '../../methods/trashHandlers'
 import { indexFinder, zIndexDrag } from '../../methods/num-finders'
-
-import '../main-board/main-board.styles.scss'
 import { firstDragHandler } from '../../methods/new-note'
 import Arrow from '../graphics/arrow/arrow.component'
 
+import '../main-board/main-board.styles.scss'
 type Props = {
   currentUser: any
 }
@@ -102,7 +101,6 @@ const MainBoard = (props: Props): JSX.Element => {
       <div
         id='backing'
         className='board-backing'
-
         style={{ backgroundColor: boardObj.backgroundColor }}
         onDrop={onDrop}
       >
