@@ -41,24 +41,27 @@ class App extends Component<MyProps, MyState> {
       }
       getUserBoards(userAuth)
     })
-
+    // This is the listener for moving the entire backing
     window.addEventListener('mousedown', (e: any) => {
       if (e.target.id === 'backing') {
-        let board = e.target
+        let board: any = document.getElementsByTagName('html')[0]
         let initialClientX = e.clientX
         let initialClientY = e.clientY
         let initialScrollX = board.scrollLeft
         let initialScrollY = board.scrollTop
-        let logPosition = (e: any) => {
+        const logPosition = (e: any) => {
           let xFromOrigin = e.clientX - initialClientX
           let yFromOrigin = e.clientY - initialClientY
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore - what error?
           board.scrollTo(
             initialScrollX - xFromOrigin,
             initialScrollY - yFromOrigin
-            )
+          )
         }
         window.addEventListener('mousemove', logPosition)
         window.addEventListener('mouseup', (e) => {
+          // NOT BEING REMOVED!
           window.removeEventListener('mousemove', logPosition)
         })
       }

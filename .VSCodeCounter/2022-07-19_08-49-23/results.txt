@@ -1,0 +1,96 @@
+Date : 2022-07-19 08:49:23
+Directory : c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src
+Total : 47 files,  2974 codes, 130 comments, 456 blanks, all 3560 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| TypeScript React |         18 |      1,234 |         59 |        219 |      1,512 |
+| TypeScript       |         12 |      1,111 |         53 |        117 |      1,281 |
+| SCSS             |         14 |        602 |         18 |        116 |        736 |
+| CSS              |          2 |         26 |          0 |          4 |         30 |
+| XML              |          1 |          1 |          0 |          0 |          1 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                        | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                           |         47 |      2,974 |        130 |        456 |      3,560 |
+| assets                                                                                                      |          1 |        604 |          2 |          8 |        614 |
+| components                                                                                                  |         28 |      1,611 |         61 |        304 |      1,976 |
+| components\board-menu                                                                                       |          2 |         87 |          4 |         18 |        109 |
+| components\custom-button                                                                                    |          2 |         46 |          2 |         13 |         61 |
+| components\form-input                                                                                       |          2 |         69 |          2 |         15 |         86 |
+| components\graphics                                                                                         |          2 |         42 |          3 |         10 |         55 |
+| components\graphics\arrow                                                                                   |          2 |         42 |          3 |         10 |         55 |
+| components\main-board                                                                                       |          2 |         88 |         10 |         16 |        114 |
+| components\note                                                                                             |          2 |        374 |          9 |         57 |        440 |
+| components\options-frame                                                                                    |          2 |        381 |          6 |         59 |        446 |
+| components\pad-frame                                                                                        |          2 |         79 |          4 |         17 |        100 |
+| components\sign-in                                                                                          |          2 |         84 |          2 |         18 |        104 |
+| components\sign-up                                                                                          |          2 |        112 |          2 |         25 |        139 |
+| components\signinupmodal                                                                                    |          2 |         30 |          4 |          8 |         42 |
+| components\trash-frame                                                                                      |          2 |         69 |          3 |         16 |         88 |
+| components\user-interface                                                                                   |          2 |         24 |          4 |          9 |         37 |
+| components\user-options                                                                                     |          2 |        126 |          6 |         23 |        155 |
+| context                                                                                                     |          2 |        381 |         22 |         50 |        453 |
+| context\main                                                                                                |          2 |        381 |         22 |         50 |        453 |
+| firebase                                                                                                    |          1 |        106 |          5 |         23 |        134 |
+| methods                                                                                                     |          6 |        130 |         22 |         40 |        192 |
++-------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                                    | language         | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\App.css                                                | CSS              |          4 |          0 |          0 |          4 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\App.test.tsx                                           | TypeScript React |          3 |          5 |          2 |         10 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\App.tsx                                                | TypeScript React |         81 |          6 |         15 |        102 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\assets\initial-array.ts                                | TypeScript       |        604 |          2 |          8 |        614 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\board-menu\board-menu.component.tsx         | TypeScript React |         65 |          4 |         13 |         82 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\board-menu\board-menu.styles.scss           | SCSS             |         22 |          0 |          5 |         27 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\custom-button\custom-button.component.tsx   | TypeScript React |         11 |          2 |          6 |         19 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\custom-button\custom-button.styles.scss     | SCSS             |         35 |          0 |          7 |         42 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\form-input\form-input.component.tsx         | TypeScript React |         23 |          2 |          6 |         31 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\form-input\form-input.styles.scss           | SCSS             |         46 |          0 |          9 |         55 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\graphics\arrow\arrow.component.scss         | SCSS             |          0 |          0 |          1 |          1 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\graphics\arrow\arrow.component.tsx          | TypeScript React |         42 |          3 |          9 |         54 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\main-board\main-board.component.tsx         | TypeScript React |         63 |          2 |         12 |         77 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\main-board\main-board.styles.scss           | SCSS             |         25 |          8 |          4 |         37 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\note\note.component.tsx                     | TypeScript React |        276 |          6 |         43 |        325 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\note\note.styles.scss                       | SCSS             |         98 |          3 |         14 |        115 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\options-frame\options-frame.component.tsx   | TypeScript React |        188 |          5 |         23 |        216 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\options-frame\options-frame.styles.scss     | SCSS             |        193 |          1 |         36 |        230 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\pad-frame\pad-frame.component.tsx           | TypeScript React |         47 |          3 |         11 |         61 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\pad-frame\pad-frame.styles.scss             | SCSS             |         32 |          1 |          6 |         39 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\sign-in\sign-in.component.tsx               | TypeScript React |         72 |          2 |         15 |         89 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\sign-in\sign-in.styles.scss                 | SCSS             |         12 |          0 |          3 |         15 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\sign-up\sign-up.component.tsx               | TypeScript React |         99 |          2 |         22 |        123 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\sign-up\sign-up.styles.scss                 | SCSS             |         13 |          0 |          3 |         16 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\signinupmodal\signinupmodal.component.tsx   | TypeScript React |         22 |          4 |          7 |         33 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\signinupmodal\signinupmodal.styles.scss     | SCSS             |          8 |          0 |          1 |          9 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\trash-frame\trash-frame.component.tsx       | TypeScript React |         27 |          2 |          6 |         35 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\trash-frame\trash-frame.styles.scss         | SCSS             |         42 |          1 |         10 |         53 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\user-interface\user-interface.component.tsx | TypeScript React |         19 |          2 |          6 |         27 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\user-interface\user-interface.styles.scss   | SCSS             |          5 |          2 |          3 |         10 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\user-options\user-options.component.tsx     | TypeScript React |         55 |          4 |          9 |         68 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\components\user-options\user-options.styles.scss       | SCSS             |         71 |          2 |         14 |         87 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\context\main\MainReducer.ts                            | TypeScript       |        257 |         19 |         41 |        317 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\context\main\MainState.tsx                             | TypeScript React |        124 |          3 |          9 |        136 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\firebase\firebase.utils.ts                             | TypeScript       |        106 |          5 |         23 |        134 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\index.css                                              | CSS              |         22 |          0 |          4 |         26 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\index.tsx                                              | TypeScript React |         17 |          2 |          5 |         24 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\logo.svg                                               | XML              |          1 |          0 |          0 |          1 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\methods\drop-helper.ts                                 | TypeScript       |         12 |          0 |          2 |         14 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\methods\find-group.ts                                  | TypeScript       |         36 |          6 |         14 |         56 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\methods\new-note.ts                                    | TypeScript       |         25 |          2 |          8 |         35 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\methods\num-finders.ts                                 | TypeScript       |         29 |          4 |          7 |         40 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\methods\trashHandlers.ts                               | TypeScript       |         23 |          8 |          6 |         37 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\methods\update-helper.ts                               | TypeScript       |          5 |          2 |          3 |         10 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\react-app-env.d.ts                                     | TypeScript       |          0 |          1 |          1 |          2 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\reportWebVitals.ts                                     | TypeScript       |         13 |          0 |          3 |         16 |
+| c:\Users\rideo\Dropbox\Code\projects\elephant-ts\src\setupTests.ts                                          | TypeScript       |          1 |          4 |          1 |          6 |
+| Total                                                                                                       |                  |      2,974 |        130 |        456 |      3,560 |
++-------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

@@ -4,8 +4,7 @@ import { useContext, useEffect } from 'react'
 import { MainContext } from '../../context/main/MainState'
 import Note from '../../components/note/note.component'
 import UserInterface from '../user-interface/user-interface.component'
-import { trashBoxDisplay, trashHandler } from '../../methods/trashHandlers'
-import { indexFinder, zIndexDrag } from '../../methods/num-finders'
+import { trashHandler } from '../../methods/trashHandlers'
 import { firstDragHandler } from '../../methods/new-note'
 import Arrow from '../graphics/arrow/arrow.component'
 
@@ -16,70 +15,9 @@ type Props = {
 
 const MainBoard = (props: Props): JSX.Element => {
   const {
-    state: { mouseOffset, notes, isFireFox, boardObj, arrowArray },
+    state: { notes, isFireFox, boardObj, arrowArray },
     dispatch,
   } = useContext(MainContext)
-
-  const getMousePos = (e: any): void => {
-    const mouseOffset: object = {
-      left: e.clientX - parseFloat(getComputedStyle(e.target.parentNode).left),
-      top: e.clientY - parseFloat(getComputedStyle(e.target.parentNode).top),
-    }
-    dispatch({ type: 'SET_NOTE_MOUSE_OFFSET', payload: {mouseOffset: mouseOffset} })
-  }
-
-  const getPosition = (position: string, mousePos: number): number => {
-    return mousePos - mouseOffset[position]
-  }
-
-  const dragNote = (e: any): void => {
-    let noteId = e.target.parentElement.id
-    let note = notes[indexFinder(notes, noteId)]
-    let isMat = note.isMatBoard
-    let newLeft: number = getPosition('left', e.clientX)
-    let newTop: number = getPosition('top', e.clientY)
-    let noteData: { [key: string]: string | number } = {
-      left: `${newLeft}px`,
-      top: `${newTop}px`,
-      zIndex: zIndexDrag(notes, isMat),
-      isMat: isMat,
-    }
-    let associatedArrows = note.attachmentsGroup
-    let newArrowArray = [...arrowArray]
-
-    function pf(input: string) {
-      return parseFloat(input)
-    }
-
-    function centerPointFinder() {
-      let x
-      let y
-      x = pf(note.left) + (pf(note.width) / 2)
-      y = pf(note.top) + (pf(note.height) / 2)
-      return [x,y]
-    }
-    let [xCenter, yCenter] = centerPointFinder()
-
-    newArrowArray.forEach(arrow => {
-      if ( associatedArrows.includes(arrow.id)) {
-        if (arrow.originNoteId === noteId) {
-          arrow.originPos = {
-            x: xCenter,
-            y: yCenter
-          }
-        } else if (arrow.endNoteId === noteId) {
-          arrow.endPos = {
-            x: xCenter,
-            y: yCenter
-          }
-        }
-      }
-    })
-
-    e.clientX !== 0 && dispatch({ type: 'ONDRAG_NOTE_DATA', payload: {noteData: noteData, id: noteId} })
-    dispatch({ type: 'SET_ALL_ARROWS', payload: { arrowArray: newArrowArray} })
-    trashBoxDisplay(e)
-  }
   
   const onDrop = async (e: any) => {
     e.preventDefault()
@@ -106,13 +44,12 @@ const MainBoard = (props: Props): JSX.Element => {
       >
 
         <UserInterface currentUser={props.currentUser} />
+        <button type="button" style={{position: 'fixed', top: '450px', left: '20px', zIndex: '1000000000'}} onClick={() => console.log(notes)}>Log Notes</button>
 
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: any[] }) => (
           <Note
             id={id}
             key={id}
-            dragNote={dragNote}
-            getMousePos={getMousePos}
             noteData={noteProps}
             autofocus='true'
           />
