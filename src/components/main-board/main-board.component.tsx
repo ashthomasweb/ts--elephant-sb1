@@ -44,7 +44,6 @@ const MainBoard = (props: Props): JSX.Element => {
       >
 
         <UserInterface currentUser={props.currentUser} />
-        <button type="button" style={{position: 'fixed', top: '450px', left: '20px', zIndex: '1000000000'}} onClick={() => console.log(notes)}>Log Notes</button>
 
         {notes.map(({ id, ...noteProps }: { id: number; noteProps: any[] }) => (
           <Note

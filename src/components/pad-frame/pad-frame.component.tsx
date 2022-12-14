@@ -29,9 +29,10 @@ const PadFrame = (): JSX.Element => {
   }
 
   function newDragHandler(e: any) {
+    let board: any = document.getElementsByTagName('html')[0]
     let noteData: { [key: string]: string | number } = {
-      left: e.clientX + e.target.parentElement.parentElement.scrollLeft,
-      top: e.clientY + e.target.parentElement.parentElement.scrollTop,
+      left: e.clientX + board.scrollLeft,
+      top: e.clientY + board.scrollTop,
       zIndex: 2147483647 // temp set while first drag is active, displays above interface, reset onDrop
     }
     dispatch({ type: "DRAG_NOTE_FROM_PAD", payload: {noteData: noteData} })
